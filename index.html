@@ -1,20 +1,174 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>DJ Sir Gay — Music Without Limits</title>
-  <meta name="description" content="DJ Sir Gay — queer Eastern European sound, narrative DJ sets and mashups from Los Angeles." />
-  <link rel="canonical" href="https://djsirgay.com/" />
-  <style>
-    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow:hidden}
-    .frame{position:fixed;inset:0;width:100%;height:100%;border:0;background:#050505}
-    .fallback{position:fixed;inset:0;display:grid;place-items:center;padding:32px;text-align:center;background:#050505;z-index:-1}
-    .fallback a{display:inline-block;margin-top:18px;padding:14px 22px;border-radius:999px;background:#c7ff00;color:#050505;text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-  </style>
+  <meta name="description" content="DJ Sir Gay — queer Eastern European sound, narrative DJ sets and mashups from Los Angeles.">
+  <link rel="canonical" href="https://djsirgay.com/">
+  <link rel="icon" href="assets/logo-square.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="fallback"><div><h1>DJ SIR GAY</h1><p>Music without limits.</p><a href="https://djsirgay.lovable.app">Open the site</a></div></div>
-  <iframe class="frame" src="https://djsirgay.lovable.app" title="DJ Sir Gay website" allow="fullscreen" loading="eager"></iframe>
+  <header class="site-header">
+    <a class="logo" href="#top" aria-label="DJ Sir Gay home">
+      <img src="assets/logo-square.svg" alt="DJ Sir Gay logo">
+      <span><strong>DJ SIR GAY</strong><small>LOS ANGELES · MASHUP</small></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#fresh">Fresh Works</a>
+      <a href="#projects">Projects</a>
+      <a href="#mission">Mission</a>
+      <a href="#services">For Events</a>
+      <a class="book-button" href="#booking">Book</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section-red">
+      <div class="section-stripe" aria-hidden="true"></div>
+      <img class="hero-image" src="https://img.youtube.com/vi/5QEXd8XTPM0/maxresdefault.jpg" alt="DJ Sir Gay project visual" fetchpriority="high">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">QUEER EASTERN EUROPEAN SOUND · LOS ANGELES</p>
+        <h1>MUSIC<br>WITHOUT <span>LIMITS.</span></h1>
+        <p class="hero-copy">Narrative DJ sets, high-impact mashups and pop memories rebuilt for people who refuse to disappear.</p>
+        <div class="hero-actions">
+          <a class="cta primary" href="#fresh">Fresh Works</a>
+          <a class="cta secondary" href="#booking">Book DJ Sir Gay</a>
+        </div>
+      </div>
+      <aside class="led" aria-label="Stay strong message">
+        <small>LED SIGNAL</small>
+        <div class="led-window">
+          <div class="led-track">
+            <div>STAY F*CKING</div>
+            <div class="strong"><span>S</span><span>T</span><span>R</span><span>O</span><span>N</span><span>G</span></div>
+          </div>
+        </div>
+      </aside>
+      <div class="identity-mark">
+        <img src="assets/logo-square.svg" alt="">
+        <span>FREE MUSIC<br>FREE MINDS</span>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <span>FREE MUSIC · FREE MINDS · NO GENRE BORDERS · FROM DICTATORSHIP TO THE DANCEFLOOR ·</span>
+      <span>FREE MUSIC · FREE MINDS · NO GENRE BORDERS · FROM DICTATORSHIP TO THE DANCEFLOOR ·</span>
+    </div>
+
+    <section class="section section-orange" id="fresh">
+      <div class="section-stripe" aria-hidden="true"></div>
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <div class="mini-pride" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="eyebrow">02 · FRESH WORKS</p>
+            <h2>THE NEWEST<br>WORK COMES FIRST.</h2>
+          </div>
+          <p>The living release desk: recent mashups, new experiments and current output — before the archive and before the biography.</p>
+        </div>
+        <div class="fresh-rail" id="fresh-rail"></div>
+        <div class="section-cta"><a class="cta secondary" href="#booking">Bring this energy to your event</a></div>
+      </div>
+    </section>
+
+    <section class="section section-yellow" id="projects">
+      <div class="section-stripe" aria-hidden="true"></div>
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <div class="mini-pride" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="eyebrow">03 · FLAGSHIP PROJECTS</p>
+            <h2>NOT A PLAYLIST.<br>A POINT OF VIEW.</h2>
+          </div>
+          <p>Four projects, each with a direct listen and a story behind the sound.</p>
+        </div>
+        <div class="project-grid" id="project-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section-green" id="mission">
+      <div class="section-stripe" aria-hidden="true"></div>
+      <div class="section-inner mission-grid">
+        <div class="mission-image">
+          <img src="https://img.youtube.com/vi/5QEXd8XTPM0/maxresdefault.jpg" alt="Belarus in Exile visual" loading="lazy" decoding="async">
+        </div>
+        <div class="mission-copy">
+          <div class="mini-pride" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="eyebrow">04 · MISSION</p>
+          <h2>TURN THE WORD<br>AGAINST THEM.</h2>
+          <p class="lead">“DJ Sir Gay” reclaims an insult built around Sergey / Sir Gay and turns it into identity, authorship and signal.</p>
+          <p>Queer freedom, Eastern European pop memory and Los Angeles nightlife meet in one voice. The past is not preserved like a museum object — it is made to dance differently.</p>
+          <div class="section-cta"><a class="cta secondary" href="#booking">Book the concept</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-blue" id="services">
+      <div class="section-stripe" aria-hidden="true"></div>
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <div class="mini-pride" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="eyebrow">05 · FOR EVENTS</p>
+            <h2>NOT BACKGROUND MUSIC.<br>A ROOM WITH INTENTION.</h2>
+          </div>
+          <p>Booking DJ Sir Gay means booking atmosphere, a point of view and a narrative arc — not somebody pressing play.</p>
+        </div>
+        <div class="service-grid">
+          <article><span>01</span><h3>Private Events</h3><p>Tailored energy for guests, space and occasion — without generic event filler.</p></article>
+          <article><span>02</span><h3>Clubs & Festivals</h3><p>Narrative peak-building, queer classics, pop memory and hard-impact mashups.</p></article>
+          <article><span>03</span><h3>Cultural Programs</h3><p>A performative bridge between exile, identity, memory and contemporary nightlife.</p></article>
+          <article><span>04</span><h3>Brand Activations</h3><p>Concept-led music direction for launches, fashion, hospitality and campaigns.</p></article>
+        </div>
+        <div class="section-cta"><a class="cta secondary" href="#booking">Request a date</a></div>
+      </div>
+    </section>
+
+    <section class="section section-violet" id="booking">
+      <div class="section-stripe" aria-hidden="true"></div>
+      <div class="section-inner booking-grid">
+        <div>
+          <div class="mini-pride" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="eyebrow">06 · BOOKING</p>
+          <h2>REQUEST A DATE.<br><span>UNLOCK YOUR PRIVATE RATE.</span></h2>
+          <p>Tell me how the room should feel — liberated, glamorous, dangerous, tender or unforgettable. The brief matters more than a list of tracks.</p>
+        </div>
+        <form id="booking-form">
+          <div class="form-row">
+            <label>Name<input required name="name" autocomplete="name"></label>
+            <label>Email<input required type="email" name="email" autocomplete="email"></label>
+          </div>
+          <div class="form-row">
+            <label>Event date<input type="date" name="date"></label>
+            <label>Event type<select name="type"><option>Private event</option><option>Club night</option><option>Festival</option><option>Cultural program</option><option>Brand activation</option><option>Other</option></select></label>
+          </div>
+          <div class="form-row">
+            <label>City / venue<input name="venue"></label>
+            <label>Audience size<input name="audience"></label>
+          </div>
+          <label>Budget range<input name="budget"></label>
+          <label>Desired feeling / energy<textarea required name="message"></textarea></label>
+          <button class="cta primary" type="submit">Send request</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><img src="assets/logo-square.svg" alt="DJ Sir Gay logo"><strong>DJ SIR GAY</strong></div>
+    <div class="footer-links">
+      <a href="https://soundcloud.com/djsirgay" target="_blank" rel="noreferrer">SoundCloud</a>
+      <a href="https://www.youtube.com/@NostalgAiRec" target="_blank" rel="noreferrer">YouTube</a>
+      <a href="https://djsirgay.bandcamp.com" target="_blank" rel="noreferrer">Bandcamp</a>
+      <a href="https://t.me/djsirgay" target="_blank" rel="noreferrer">Telegram</a>
+    </div>
+    <p>© <span id="year"></span> DJ Sir Gay · Los Angeles · Free music / free minds.</p>
+  </footer>
+
+  <a class="mobile-book" href="#booking">Request a Date</a>
+  <script src="script.js" defer></script>
 </body>
 </html>
