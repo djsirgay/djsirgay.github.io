@@ -21,12 +21,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Mirror published site
+      - name: Mirror published site and add independent preview
         run: |
           mkdir -p _site
           wget --mirror --convert-links --adjust-extension --page-requisites --no-parent \
             --directory-prefix=_mirror https://djsirgay.lovable.app/
           cp -a _mirror/djsirgay.lovable.app/. _site/
+
+          # Keep the current Lovable site at the root, but publish the
+          # independent GitHub-hosted build at /preview/ for approval.
+          mkdir -p _site/preview _site/assets
+          cp -a preview/. _site/preview/
+          cp -a assets/. _site/assets/
+          cp project.html _site/project.html
+
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
 
