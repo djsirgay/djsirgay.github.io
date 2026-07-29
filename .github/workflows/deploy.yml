@@ -35,6 +35,9 @@ jobs:
           cp -a assets/. _site/assets/
           cp project.html _site/project.html
 
+          # Load the independent hero visual after the original stylesheet.
+          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/preview/hero.css?v=1" />\n</head>#' _site/preview/index.html
+
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
 
