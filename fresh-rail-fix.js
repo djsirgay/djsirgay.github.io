@@ -5,6 +5,8 @@
   const playlistId = 'PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU';
 
   // Keep the rail useful even when YouTube metadata is temporarily unavailable.
+  // Gesture handling is intentionally left entirely to the browser so this rail
+  // has the same momentum, axis detection and snap behaviour as the other rails.
   if (rail.children.length < 2) {
     rail.innerHTML = `
       <a class="fresh-card" href="https://www.youtube.com/watch?v=24_RoSB5I1w&list=${playlistId}" data-video="24_RoSB5I1w">
@@ -24,61 +26,6 @@
         <div class="fresh-meta"><small>Full feed / YouTube</small><h3>Continue through the complete Fresh Releases playlist</h3></div>
       </a>`;
   }
-
-  let gesture = null;
-  let suppressClickUntil = 0;
-
-  rail.addEventListener('pointerdown', event => {
-    if (!event.isPrimary || event.pointerType === 'mouse') return;
-    gesture = {
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      startY: event.clientY,
-      startScroll: rail.scrollLeft,
-      axis: null,
-      moved: false,
-    };
-  });
-
-  rail.addEventListener('pointermove', event => {
-    if (!gesture || event.pointerId !== gesture.pointerId) return;
-
-    const dx = event.clientX - gesture.startX;
-    const dy = event.clientY - gesture.startY;
-
-    if (!gesture.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) {
-      gesture.axis = Math.abs(dx) > Math.abs(dy) * 1.05 ? 'x' : 'y';
-      if (gesture.axis === 'x') {
-        rail.classList.add('fresh-pointer-dragging');
-        try { rail.setPointerCapture(event.pointerId); } catch (_) {}
-      }
-    }
-
-    if (gesture.axis !== 'x') return;
-
-    event.preventDefault();
-    gesture.moved = gesture.moved || Math.abs(dx) > 9;
-    rail.scrollLeft = gesture.startScroll - dx;
-  }, { passive: false });
-
-  const finishGesture = event => {
-    if (!gesture || (event && event.pointerId !== gesture.pointerId)) return;
-    if (gesture.axis === 'x' && gesture.moved) {
-      suppressClickUntil = performance.now() + 450;
-    }
-    rail.classList.remove('fresh-pointer-dragging');
-    gesture = null;
-  };
-
-  rail.addEventListener('pointerup', finishGesture);
-  rail.addEventListener('pointercancel', finishGesture);
-  rail.addEventListener('lostpointercapture', finishGesture);
-
-  rail.addEventListener('click', event => {
-    if (performance.now() >= suppressClickUntil) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }, true);
 
   const prepareCards = () => {
     rail.querySelectorAll('img').forEach(image => {
