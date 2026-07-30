@@ -1,0 +1,363 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400;1,7..72,600&family=Unbounded:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#080806;
+  --paper:#e9e1d4;
+  --paper-2:#d8cec0;
+  --ink:#0b0a08;
+  --muted:#aaa195;
+  --panel:#10100d;
+  --panel-2:#171611;
+  --line:rgba(233,225,212,.18);
+  --signal:#c72b1b;
+  --signal-soft:rgba(199,43,27,.12);
+  --display:"Unbounded",system-ui,sans-serif;
+  --serif:"Literata",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --body:"Literata",Georgia,serif;
+}
+
+html{background:var(--bg)}
+body{
+  background:
+    radial-gradient(circle at 78% 5%,rgba(199,43,27,.07),transparent 25rem),
+    linear-gradient(180deg,#080806,#0b0a08 54%,#080806);
+  color:var(--paper);
+  font-family:var(--serif);
+}
+body:before{
+  opacity:.11;
+  background-image:
+    repeating-radial-gradient(circle at 20% 30%,rgba(255,255,255,.08) 0 1px,transparent 1px 4px),
+    linear-gradient(90deg,transparent 0 49.85%,rgba(255,255,255,.05) 50%,transparent 50.15%);
+  background-size:7px 7px,100% 100%;
+  mix-blend-mode:soft-light;
+}
+::selection{background:var(--signal);color:var(--paper)}
+
+/* The top edge is the theatre's cue light. */
+.signal-progress{height:4px;background:#181510}
+.signal-progress i{background:var(--signal);box-shadow:0 0 20px rgba(199,43,27,.65)}
+.topbar{
+  height:70px;
+  padding:0 26px;
+  border-top:3px solid var(--signal);
+  border-bottom:1px solid rgba(233,225,212,.12);
+  background:rgba(8,8,6,.93);
+  backdrop-filter:blur(18px);
+}
+.topbar.scrolled{background:rgba(8,8,6,.96);border-color:rgba(233,225,212,.18)}
+.brand{font:700 15px/1 var(--display);letter-spacing:-.035em}
+.brand img{width:32px;height:32px;border-radius:0;border:1px solid rgba(233,225,212,.3)}
+.live-dot{border-radius:0;width:7px;height:7px;background:var(--signal);box-shadow:0 0 14px var(--signal)}
+.nav{font-family:var(--mono);color:var(--paper)}
+.nav a{position:relative}
+.nav a:not(.book-link):after{content:"";position:absolute;left:0;right:100%;bottom:-8px;height:2px;background:var(--signal);transition:right .2s}
+.nav a:not(.book-link):hover:after{right:0}
+.nav a:hover{color:var(--paper)}
+.censor-toggle,.book-link,.menu-toggle{
+  border:1px solid rgba(233,225,212,.28);
+  background:transparent;
+  color:var(--paper);
+  clip-path:none;
+}
+.book-link{background:var(--paper);border-color:var(--paper);color:var(--ink);position:relative}
+.book-link:before{content:"REC";margin-right:8px;color:var(--signal);font-weight:700}
+.menu-toggle:before{content:"PROGRAMME";color:var(--signal);font-size:7px;margin-right:3px}
+
+/* Opening image: a stage, not a nightclub template. */
+.hero{min-height:100svh;padding-top:145px;padding-bottom:82px;background:#080806}
+.hero-overlay{
+  background:
+    radial-gradient(ellipse at 76% 42%,rgba(233,225,212,.12),transparent 27%),
+    linear-gradient(90deg,rgba(6,6,5,.98) 0%,rgba(6,6,5,.88) 36%,rgba(6,6,5,.42) 68%,rgba(6,6,5,.16) 100%),
+    linear-gradient(0deg,rgba(6,6,5,.96),transparent 62%);
+}
+.hero-copy{position:relative}
+.hero-copy:before{
+  content:"[ house lights down / transmission begins ]";
+  display:block;
+  margin-bottom:23px;
+  color:var(--paper-2);
+  font:italic 500 14px/1.4 var(--serif);
+  letter-spacing:.01em;
+  text-transform:none;
+}
+.eyebrow,.channel{color:var(--signal);font-family:var(--mono);font-weight:600}
+.hero h1{
+  max-width:930px;
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(61px,9.2vw,142px);
+  line-height:.82;
+  letter-spacing:-.072em;
+}
+.reclaim-word{
+  color:var(--paper);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:500;
+  text-transform:none;
+  letter-spacing:-.06em;
+}
+.reclaim-word:before{left:0;right:0;bottom:.01em;height:.065em;background:var(--signal);opacity:1;transform:rotate(-1deg)}
+.hero-text{
+  max-width:700px;
+  color:#d4ccbf;
+  font:400 clamp(18px,1.7vw,23px)/1.55 var(--serif);
+}
+.hero-actions{gap:11px}
+.button{
+  min-height:49px;
+  border:1px solid rgba(233,225,212,.28);
+  background:transparent;
+  color:var(--paper);
+  font-family:var(--mono);
+  clip-path:none;
+  position:relative;
+}
+.button:before{content:"";width:6px;height:6px;background:var(--signal);flex:0 0 auto}
+.button:hover{border-color:var(--paper);color:var(--paper);background:rgba(233,225,212,.06);transform:none}
+.button.primary{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.button.primary:hover{background:#fff8ec;color:var(--ink)}
+.signal-card{
+  position:relative;
+  padding:26px 21px 20px;
+  border:1px solid var(--signal);
+  background:var(--paper);
+  color:var(--ink);
+  backdrop-filter:none;
+  clip-path:none;
+  transform:rotate(-1deg);
+  box-shadow:12px 14px 0 rgba(0,0,0,.26);
+}
+.signal-card:before{
+  content:"STAGE MANAGER / LIVE CUE";
+  position:absolute;left:17px;top:-10px;
+  padding:5px 7px;
+  background:var(--signal);color:var(--paper);
+  font:700 7px/1 var(--mono);letter-spacing:.11em;
+}
+.signal-card p{color:#514a42;font-family:var(--mono)}
+.signal-card strong{font-family:var(--display);font-weight:700}
+.signal-card strong span{color:var(--signal);font-family:var(--serif);font-style:italic;text-transform:none}
+.signal-card footer{border-color:rgba(11,10,8,.22);color:var(--signal);font-family:var(--mono)}
+
+.signal-boot{background:#080806}
+.boot-card{border-color:rgba(233,225,212,.25);background:#0e0d0a;clip-path:none}
+.boot-card h2{font-family:var(--display);font-weight:700}
+.boot-card h2 span{font-family:var(--serif);font-style:italic;text-transform:none;color:var(--paper)}
+.boot-line i{background:var(--signal)}
+
+.micro-ticker{border-block:1px solid var(--ink);background:var(--paper);color:var(--ink)}
+.micro-track span{padding-block:16px;color:var(--ink);font-family:var(--mono)}
+.micro-track b{color:var(--signal)}
+
+/* Four acts. The labels are stage directions rather than decoration. */
+.section,.booking{position:relative}
+.section:before,.booking:before{
+  position:absolute;top:28px;left:max(24px,calc((100vw - var(--max))/2));
+  color:var(--signal);
+  font:italic 500 14px/1.3 var(--serif);
+  letter-spacing:.01em;
+  text-transform:none;
+}
+#fresh:before{content:"[ act I — sound enters through the wrong door ]"}
+#projects:before{content:"[ act II — four worlds / no intermission ]"}
+#voice:before{content:"[ act III — the performer breaks character ]"}
+.booking:before{content:"[ act IV — the room opens ]"}
+.section{padding-top:128px}
+.section-head{align-items:start;margin-bottom:42px}
+.section-id{color:var(--muted);font-family:var(--mono)}
+.section-id strong{color:var(--signal);font-family:var(--display);font-weight:600}
+.section-title h2,.voice-intro h2,.booking h2{
+  font-family:var(--display);
+  font-weight:650;
+  letter-spacing:-.061em;
+  line-height:.87;
+}
+.section-title p,.voice-copy,.booking-side p,.project-copy p,.article-body p,.footer-identity>p{
+  font-family:var(--serif);
+}
+.section-title p{color:var(--muted);font-size:17px;line-height:1.62}
+.swipe-hint{
+  border:0;border-bottom:1px solid var(--signal);
+  padding:8px 0;background:transparent;color:var(--paper);
+  font-family:var(--mono);
+}
+.swipe-hint i{background:var(--signal)}
+.edge-arrow{border:1px solid var(--paper);background:var(--paper);color:var(--ink);backdrop-filter:none}
+.arrow{border:1px solid rgba(233,225,212,.28);background:transparent;color:var(--paper);font-family:var(--mono)}
+.arrow:hover{border-color:var(--paper);color:var(--signal)}
+.rail-status{color:#81796f;font-family:var(--mono)}
+.rail-status strong{color:var(--signal)}
+
+/* Playbills rather than SaaS cards. */
+.fresh-card,.article-card{
+  border:1px solid rgba(233,225,212,.25);
+  background:var(--paper);
+  color:var(--ink);
+  clip-path:none;
+  box-shadow:none;
+}
+.fresh-card:hover,.article-card:hover{transform:none;border-color:var(--signal)}
+.fresh-thumb,.article-image{background:#171511;border-bottom:1px solid var(--ink)}
+.fresh-thumb img,.article-image img{filter:grayscale(1) contrast(1.12) brightness(.88)}
+.fresh-card:hover img,.article-card:hover img{transform:scale(1.018);filter:grayscale(.15) contrast(1.05)}
+.fresh-thumb:after,.article-image:after,.project-visual:after{
+  content:"ARCHIVE STILL / DJSG";
+  background:var(--paper);color:var(--ink);
+  border:1px solid var(--ink);
+  font-family:var(--mono);
+}
+.fresh-thumb span,.play-chip{
+  min-width:auto;height:auto;padding:9px 11px;
+  border:1px solid var(--paper);
+  background:var(--ink);color:var(--paper);
+  font-family:var(--mono);
+}
+.fresh-meta small,.fresh-card>p,.article-source{color:var(--signal);font-family:var(--mono)}
+.fresh-meta h3,.fresh-card>h3{font-family:var(--display);font-weight:600;letter-spacing:-.045em}
+
+/* Act II turns into the printed programme: the archive is exposed in daylight. */
+#projects{background:var(--paper);color:var(--ink);border-color:var(--ink)}
+#projects .section-title p,#projects .section-id,#projects .rail-status{color:#5f574e}
+#projects .swipe-hint{color:var(--ink)}
+#projects .edge-arrow{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#projects .arrow{border-color:rgba(11,10,8,.35);color:var(--ink)}
+#projects .arrow:hover{border-color:var(--ink);color:var(--signal)}
+.project-card{
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  clip-path:none;
+  box-shadow:11px 11px 0 rgba(11,10,8,.13);
+}
+.project-visual{background:#171511}
+.project-visual img{filter:grayscale(1) contrast(1.12) brightness(.82)}
+.project-card:hover .project-visual img{transform:scale(1.012);filter:grayscale(.15) contrast(1.05)}
+.project-number{
+  color:var(--paper);
+  font-family:var(--display);
+  font-weight:500;
+  text-shadow:none;
+  -webkit-text-stroke:1px var(--ink);
+}
+.project-copy small{color:#e35748;font-family:var(--mono)}
+.project-copy h3{font-family:var(--display);font-weight:600;letter-spacing:-.057em}
+.project-copy h4{color:var(--paper-2);font:italic 500 23px/1.15 var(--serif)}
+.project-copy p{color:#bdb4a8;font-size:17px}
+#projects .project-actions .button{color:var(--paper);border-color:rgba(233,225,212,.32)}
+#projects .project-actions .button.primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+/* Public voice becomes a press table, not a promotional card wall. */
+.voice-section{background:#0b0a08}
+.voice-intro h2 span{
+  color:var(--paper);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:500;
+  text-transform:none;
+  letter-spacing:-.055em;
+}
+.voice-copy{color:#d0c7ba;font-size:19px}
+.voice-copy em{color:var(--signal);font-family:var(--serif);font-style:italic;font-weight:600}
+.article-image:before{
+  content:"PUBLIC RECORD";
+  top:0;left:0;
+  padding:8px 10px;
+  border:0;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  background:var(--paper);color:var(--signal);
+  font-family:var(--mono);
+}
+.article-body h3{font:600 27px/1.03 var(--serif);letter-spacing:-.035em}
+.article-body p{color:#544d45}
+.article-body strong{font-family:var(--mono);color:var(--ink)}
+
+/* Booking is the moment the audience enters the scene. */
+.booking{padding-top:128px;background:var(--paper);color:var(--ink)}
+.booking-card{
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  clip-path:none;
+  box-shadow:14px 14px 0 rgba(11,10,8,.13);
+}
+.booking h2 span{
+  color:var(--paper);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:500;
+  text-transform:none;
+}
+.booking-side p{color:#cfc5b8}
+.booking-notes span{border-color:rgba(233,225,212,.23);color:#9e9589;font-family:var(--mono)}
+
+/* Programme menu. */
+.mobile-menu{background:rgba(8,8,6,.73)}
+.mobile-menu-panel{
+  border:1px solid var(--ink);
+  background:var(--paper);color:var(--ink);
+  clip-path:none;
+  box-shadow:12px 12px 0 rgba(199,43,27,.35);
+}
+.mobile-menu-kicker{color:var(--signal);font-family:var(--mono)}
+.mobile-menu-nav a{border-color:rgba(11,10,8,.24);font-family:var(--display);font-weight:600}
+.mobile-menu-nav small,.mobile-menu-nav b{color:var(--signal);font-family:var(--mono)}
+.mobile-menu-social{font-family:var(--mono);color:var(--ink)}
+.mobile-menu-social a{border-color:rgba(11,10,8,.28)}
+
+/* Curtain call. */
+footer.site-footer{background:#080806;border-color:rgba(233,225,212,.18)}
+.footer-signal{border-color:rgba(233,225,212,.18)}
+.footer-signal p{color:var(--signal);font-family:var(--mono)}
+.footer-signal h2{font-family:var(--display);font-weight:650}
+.footer-signal h2 span{color:var(--paper);font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none}
+.footer-brand{font-family:var(--display);font-weight:650}
+.footer-brand img{border-radius:0;border:1px solid rgba(233,225,212,.28)}
+.footer-col h3{color:var(--signal);font-family:var(--mono)}
+.footer-col a,.footer-col span,.footer-bottom{font-family:var(--mono)}
+.footer-bottom{border-color:rgba(233,225,212,.18)}
+.mobile-book{background:var(--paper);color:var(--ink);border-top:3px solid var(--signal);font-family:var(--mono)}
+
+.player-shell{border-color:var(--paper);clip-path:none}
+.player-shell:before{background:var(--signal);color:var(--paper);font-family:var(--mono)}
+.player-close{border-color:var(--paper);font-family:var(--mono)}
+
+/* Preserve the gesture model already approved. */
+.projects-rail,.article-rail{touch-action:auto!important}
+#fresh-rail{touch-action:pan-y pinch-zoom!important}
+
+@media(max-width:950px){
+  .hero{min-height:860px}
+  .hero-overlay{background:linear-gradient(90deg,rgba(6,6,5,.95),rgba(6,6,5,.62) 64%,rgba(6,6,5,.2)),linear-gradient(0deg,rgba(6,6,5,.97),transparent 66%)}
+  .section:before,.booking:before{left:18px}
+  #projects .project-card{box-shadow:7px 7px 0 rgba(11,10,8,.13)}
+}
+
+@media(max-width:640px){
+  .topbar{height:62px;padding-inline:13px}
+  .menu-toggle:before{display:none}
+  .hero{min-height:780px;padding:108px 15px 88px}
+  .hero-copy:before{font-size:12px;margin-bottom:18px}
+  .hero h1{font-size:clamp(43px,13.1vw,63px);line-height:.86;letter-spacing:-.064em}
+  .reclaim-word{display:inline;font-size:1.02em}
+  .hero-text{max-width:96%;font-size:16px;line-height:1.55}
+  .section,.booking{padding-top:105px}
+  .section:before,.booking:before{top:23px;left:15px;right:15px;font-size:12px}
+  .section-title h2,.voice-intro h2,.booking h2{font-size:clamp(34px,10.4vw,50px);line-height:.91;letter-spacing:-.052em}
+  .section-id strong{font-size:31px}
+  .fresh-meta h3,.fresh-card>h3{font-size:18px;line-height:1.08}
+  .project-copy h3{font-size:clamp(31px,9.6vw,43px);line-height:.91}
+  .project-copy h4{font-size:18px}
+  .project-copy p{font-size:14px;line-height:1.58}
+  .voice-copy{font-size:16px}
+  .article-body h3{font-size:22px}
+  .booking-card{box-shadow:7px 7px 0 rgba(11,10,8,.13)}
+  .footer-signal h2{font-size:clamp(38px,11.8vw,56px);line-height:.88}
+  .mobile-menu-nav a{font-size:clamp(23px,7.3vw,34px)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .signal-card{transform:none}
+}
