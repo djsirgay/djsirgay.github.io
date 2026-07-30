@@ -71,7 +71,7 @@ jobs:
           fi
 
           # Load the generated playlist renderer after the page's main script.
-          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260729"></script>\n</body>#' _site/index.html
+          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260729-2"></script>\n</body>#' _site/index.html
 
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
