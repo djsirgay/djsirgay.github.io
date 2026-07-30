@@ -4,9 +4,7 @@
 
   const playlistId = 'PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU';
 
-  // The live playlist feed normally replaces this immediately. Keeping several
-  // honest fallback cards means the rail is still scrollable when YouTube
-  // temporarily blocks metadata during a Pages build.
+  // Keep the rail useful even when YouTube metadata is temporarily unavailable.
   if (rail.children.length < 2) {
     rail.innerHTML = `
       <a class="fresh-card" href="https://www.youtube.com/watch?v=24_RoSB5I1w&list=${playlistId}" data-video="24_RoSB5I1w">
@@ -27,55 +25,59 @@
       </a>`;
   }
 
-  // Direction lock for iOS/Safari: vertical movement remains native page
-  // scrolling; a clearly horizontal movement scrolls this rail manually.
-  let tracking = false;
-  let horizontal = null;
-  let startX = 0;
-  let startY = 0;
-  let startScroll = 0;
-  let moved = false;
+  let gesture = null;
+  let suppressClickUntil = 0;
 
-  rail.addEventListener('touchstart', event => {
-    if (event.touches.length !== 1) return;
-    const touch = event.touches[0];
-    tracking = true;
-    horizontal = null;
-    moved = false;
-    startX = touch.clientX;
-    startY = touch.clientY;
-    startScroll = rail.scrollLeft;
-  }, { passive: true });
+  rail.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.pointerType === 'mouse') return;
+    gesture = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startScroll: rail.scrollLeft,
+      axis: null,
+      moved: false,
+    };
+  });
 
-  rail.addEventListener('touchmove', event => {
-    if (!tracking || event.touches.length !== 1) return;
-    const touch = event.touches[0];
-    const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
+  rail.addEventListener('pointermove', event => {
+    if (!gesture || event.pointerId !== gesture.pointerId) return;
 
-    if (horizontal === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-      horizontal = Math.abs(dx) > Math.abs(dy) * 1.12;
+    const dx = event.clientX - gesture.startX;
+    const dy = event.clientY - gesture.startY;
+
+    if (!gesture.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) {
+      gesture.axis = Math.abs(dx) > Math.abs(dy) * 1.05 ? 'x' : 'y';
+      if (gesture.axis === 'x') {
+        rail.classList.add('fresh-pointer-dragging');
+        try { rail.setPointerCapture(event.pointerId); } catch (_) {}
+      }
     }
 
-    if (!horizontal) return;
-    moved = moved || Math.abs(dx) > 8;
+    if (gesture.axis !== 'x') return;
+
     event.preventDefault();
-    rail.scrollLeft = startScroll - dx;
+    gesture.moved = gesture.moved || Math.abs(dx) > 9;
+    rail.scrollLeft = gesture.startScroll - dx;
   }, { passive: false });
 
-  const finish = () => {
-    tracking = false;
-    horizontal = null;
+  const finishGesture = event => {
+    if (!gesture || (event && event.pointerId !== gesture.pointerId)) return;
+    if (gesture.axis === 'x' && gesture.moved) {
+      suppressClickUntil = performance.now() + 450;
+    }
+    rail.classList.remove('fresh-pointer-dragging');
+    gesture = null;
   };
-  rail.addEventListener('touchend', finish, { passive: true });
-  rail.addEventListener('touchcancel', finish, { passive: true });
 
-  // A swipe that starts on an <a> must not accidentally open the video.
+  rail.addEventListener('pointerup', finishGesture);
+  rail.addEventListener('pointercancel', finishGesture);
+  rail.addEventListener('lostpointercapture', finishGesture);
+
   rail.addEventListener('click', event => {
-    if (!moved) return;
+    if (performance.now() >= suppressClickUntil) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    moved = false;
   }, true);
 
   const prepareCards = () => {
@@ -83,6 +85,7 @@
       image.draggable = false;
     });
   };
+
   prepareCards();
   new MutationObserver(prepareCards).observe(rail, { childList: true, subtree: true });
 })();
