@@ -38,7 +38,7 @@ jobs:
             ./ _site/
 
           # Playlist enrichment is optional. A temporary pip or YouTube failure
-          # must never prevent the visual site from reaching GitHub Pages.
+          # must never prevent the site from reaching GitHub Pages.
           if python -m pip install --quiet yt-dlp && \
              yt-dlp --flat-playlist --dump-single-json \
              'https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU' \
@@ -83,14 +83,8 @@ jobs:
             echo 'Playlist enrichment unavailable; publishing curated fallback cards.'
           fi
 
-          # Interaction scripts stay unchanged.
-          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260730-2"></script>\n</body>#' _site/index.html
-          perl -0pi -e 's#</body>#  <script src="/fresh-rail-fix.js?v=20260730-2"></script>\n</body>#' _site/index.html
-
-          # Functional layers first; the dramaturgical skin is deliberately last.
-          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/interaction-fixes.css?v=20260730-2" />\n  <link rel="stylesheet" href="/fresh-rail-fix.css?v=20260730-2" />\n  <link rel="stylesheet" href="/mobile-overflow.css?v=20260730-2" />\n  <link rel="stylesheet" href="/dramaturgy.css?v=20260730-2" />\n</head>#' _site/index.html
-          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260730-2" />\n  <link rel="stylesheet" href="/project-extras.css?v=20260730-2" />\n  <link rel="stylesheet" href="/project-dramaturgy.css?v=20260730-2" />\n</head>#' _site/project.html
-
+          # All scripts and styles are linked directly in the source HTML.
+          # The build must not inject duplicate interaction handlers.
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
 
