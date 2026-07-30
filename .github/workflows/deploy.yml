@@ -37,13 +37,12 @@ jobs:
             --exclude='_site/' \
             ./ _site/
 
-          # Read the current YouTube playlist so the live site uses the exact
-          # published titles, order, thumbnails and durations rather than
-          # manually maintained labels.
-          python -m pip install --quiet yt-dlp
-          if yt-dlp --flat-playlist --dump-single-json \
-            'https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU' \
-            > /tmp/dj-playlist.json; then
+          # Playlist enrichment is optional. A temporary pip or YouTube failure
+          # must never prevent the visual site from reaching GitHub Pages.
+          if python -m pip install --quiet yt-dlp && \
+             yt-dlp --flat-playlist --dump-single-json \
+             'https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU' \
+             > /tmp/dj-playlist.json; then
             python - <<'PY'
           import json
           from pathlib import Path
@@ -81,16 +80,16 @@ jobs:
           )
           PY
           else
-            echo 'YouTube playlist sync failed; keeping the playlist fallback card.'
+            echo 'Playlist enrichment unavailable; publishing curated fallback cards.'
           fi
 
           # Interaction scripts stay unchanged.
-          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260730-1"></script>\n</body>#' _site/index.html
-          perl -0pi -e 's#</body>#  <script src="/fresh-rail-fix.js?v=20260730-1"></script>\n</body>#' _site/index.html
+          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260730-2"></script>\n</body>#' _site/index.html
+          perl -0pi -e 's#</body>#  <script src="/fresh-rail-fix.js?v=20260730-2"></script>\n</body>#' _site/index.html
 
           # Functional layers first; the dramaturgical skin is deliberately last.
-          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/interaction-fixes.css?v=20260730-1" />\n  <link rel="stylesheet" href="/fresh-rail-fix.css?v=20260730-1" />\n  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n  <link rel="stylesheet" href="/dramaturgy.css?v=20260730-1" />\n</head>#' _site/index.html
-          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n  <link rel="stylesheet" href="/project-extras.css?v=20260730-1" />\n  <link rel="stylesheet" href="/project-dramaturgy.css?v=20260730-1" />\n</head>#' _site/project.html
+          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/interaction-fixes.css?v=20260730-2" />\n  <link rel="stylesheet" href="/fresh-rail-fix.css?v=20260730-2" />\n  <link rel="stylesheet" href="/mobile-overflow.css?v=20260730-2" />\n  <link rel="stylesheet" href="/dramaturgy.css?v=20260730-2" />\n</head>#' _site/index.html
+          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260730-2" />\n  <link rel="stylesheet" href="/project-extras.css?v=20260730-2" />\n  <link rel="stylesheet" href="/project-dramaturgy.css?v=20260730-2" />\n</head>#' _site/project.html
 
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
