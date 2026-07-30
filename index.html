@@ -3,28 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#060606" />
+  <meta name="theme-color" content="#050505" />
   <meta name="description" content="DJ Sir Gay — queer Eastern European mashups, narrative DJ sets, public voice and bookings in Los Angeles." />
-  <meta property="og:title" content="DJ Sir Gay — Music Without Limits" />
-  <meta property="og:description" content="New releases, flagship projects, public voice and booking." />
+  <meta property="og:title" content="DJ Sir Gay — The Reclaimed Signal" />
+  <meta property="og:description" content="Music without limits. Broadcasting without permission." />
   <meta property="og:image" content="https://img.youtube.com/vi/24_RoSB5I1w/maxresdefault.jpg" />
   <link rel="canonical" href="https://djsirgay.com/" />
-  <title>DJ Sir Gay — Music Without Limits</title>
+  <title>DJ Sir Gay — The Reclaimed Signal</title>
   <link rel="icon" href="/assets/logo-square.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260729-1" />
-  <link rel="stylesheet" href="/preview/hero.css?v=20260729-1" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/signal.css?v=20260729-1" />
+  <link rel="stylesheet" href="/preview/hero.css?v=20260729-2" />
 </head>
 <body>
+  <div class="signal-progress" aria-hidden="true"><i id="signal-progress"></i></div>
+  <div class="signal-boot" id="signal-boot" aria-hidden="true"><div class="boot-card"><p>Acquiring unauthorized transmission<br>Los Angeles / 34.0522° N / 118.2437° W</p><h2>Signal <span>reclaimed.</span></h2><div class="boot-line"><i></i></div></div></div>
+
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="DJ Sir Gay home"><span class="brand-dot"></span><img src="/assets/logo-square.svg" alt="" />DJ SIR GAY</a>
+    <a class="brand" href="#top" aria-label="DJ Sir Gay home"><span class="live-dot"></span><img src="/assets/logo-square.svg" alt="" />DJ SIR GAY</a>
     <nav class="nav" aria-label="Main navigation">
       <a href="#fresh">New</a>
       <a href="#projects">Projects</a>
-      <a href="#voice">Public voice</a>
-      <a class="book-pill" href="#booking">Book me</a>
+      <a href="#voice">Public record</a>
+      <button class="censor-toggle" id="censor-toggle" type="button" aria-pressed="false">Censorship: off</button>
+      <a class="book-link" href="#booking">Book signal</a>
     </nav>
   </header>
 
@@ -32,105 +36,90 @@
     <section class="hero">
       <div class="hero-poster" aria-hidden="true"></div>
       <div class="hero-overlay" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="eyebrow">Queer Eastern European sound / Los Angeles</p>
-        <h1>Music without <span>limits.</span></h1>
-        <p class="hero-text">Mashups, narrative DJ sets and pop memories rebuilt with good taste, bad ideas and very serious transitions.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#fresh">Play the new stuff ↘</a>
-          <a class="button" href="#booking">Book me before I get expensive</a>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Transmission 001 / Queer Eastern European sound / Los Angeles</p>
+          <h1>Music without <span class="reclaim-word">limits.</span></h1>
+          <p class="hero-text">Mashups, narrative DJ sets and pop memories rebuilt by a former target of censorship with good taste, bad ideas and extremely serious transitions.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#fresh">Intercept the new stuff ↘</a>
+            <a class="button" href="#booking">Book me before I become difficult</a>
+          </div>
         </div>
+        <aside class="signal-card" aria-label="Live signal status">
+          <p>Signal type<br>Reclaimed identity<br>Broadcast status<br>Unapproved</p>
+          <strong>Stay f*cking <span>strong.</span></strong>
+          <footer><span id="timecode">00:00:00</span> / Live / LA</footer>
+        </aside>
       </div>
-      <div class="hero-sticker">STAY F*CKING STRONG<small>Live signal / Los Angeles</small></div>
     </section>
 
-    <div class="micro-ticker" aria-label="DJ Sir Gay statement"><div class="micro-track"><span><b>GOOD TASTE.</b> BAD IDEAS. VERY GOOD TRANSITIONS. / NO GENRE BORDERS. / FROM DICTATORSHIP TO THE DANCEFLOOR. / </span><span aria-hidden="true"><b>GOOD TASTE.</b> BAD IDEAS. VERY GOOD TRANSITIONS. / NO GENRE BORDERS. / FROM DICTATORSHIP TO THE DANCEFLOOR. / </span></div></div>
+    <div class="micro-ticker" aria-label="DJ Sir Gay statement"><div class="micro-track"><span><b>This signal was not approved by any government.</b> / Good taste. Bad ideas. Very good transitions. / No genre borders. / From dictatorship to the dancefloor. / </span><span aria-hidden="true"><b>This signal was not approved by any government.</b> / Good taste. Bad ideas. Very good transitions. / No genre borders. / From dictatorship to the dancefloor. / </span></div></div>
 
     <section class="section" id="fresh">
       <header class="section-head">
-        <div class="section-index">01</div>
-        <div class="section-title"><h2>New & questionable.</h2><p>Fresh edits and mashups in playlist order. The next card is deliberately peeking out — swipe it.</p></div>
-        <div class="swipe-hint"><i></i> Swipe / drag →</div>
+        <div class="section-id">Channel<br>Unauthorized releases<strong>01</strong></div>
+        <div class="section-title"><h2>New & questionable.</h2><p>The release feed follows the YouTube playlist. The next transmission deliberately remains visible — swipe toward it.</p></div>
+        <div class="swipe-hint"><i></i> Swipe / drag</div>
       </header>
       <div class="carousel-shell">
         <div class="carousel fresh-rail" id="fresh-rail" data-rail="fresh">
-          <a class="fresh-card carousel-card" href="https://www.youtube.com/watch?v=24_RoSB5I1w&list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU" data-video="24_RoSB5I1w">
-            <div class="fresh-thumb"><img src="https://i.ytimg.com/vi/24_RoSB5I1w/hqdefault.jpg" alt="SEREBRO and Peggy Gou mashup" /><span>PLAY ▶</span></div>
-            <div class="fresh-meta"><small>01 / Playlist</small><h3>SEREBRO × Peggy Gou — Mama Lover</h3></div>
-          </a>
-          <a class="fresh-card carousel-card" href="https://youtu.be/0x5QZhKwQPg" data-video="0x5QZhKwQPg">
-            <div class="fresh-thumb"><img src="https://i.ytimg.com/vi/0x5QZhKwQPg/hqdefault.jpg" alt="t.A.T.u. Waste Management rework" /><span>PLAY ▶</span></div>
-            <div class="fresh-meta"><small>02 / Rework</small><h3>t.A.T.u. — Waste Management Anniversary Version</h3></div>
-          </a>
-          <a class="fresh-card carousel-card" href="https://www.youtube.com/watch?v=tlzmzhLpfMI" data-video="tlzmzhLpfMI">
-            <div class="fresh-thumb"><img src="https://i.ytimg.com/vi/tlzmzhLpfMI/hqdefault.jpg" alt="SEREBRO Song Number Two version" /><span>PLAY ▶</span></div>
-            <div class="fresh-meta"><small>03 / Version</small><h3>SEREBRO — Song #2: DJ Sir Gay Version</h3></div>
-          </a>
-          <a class="fresh-card carousel-card" href="https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU" target="_blank" rel="noreferrer">
-            <div class="fresh-thumb"><img src="https://i.ytimg.com/vi/24_RoSB5I1w/hqdefault.jpg" alt="DJ Sir Gay playlist" /><span>OPEN ↗</span></div>
-            <div class="fresh-meta"><small>Full feed</small><h3>Open the complete playlist on YouTube</h3></div>
-          </a>
+          <a class="fresh-card" href="https://www.youtube.com/watch?v=24_RoSB5I1w&list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU" data-video="24_RoSB5I1w"><div class="fresh-thumb"><img src="https://i.ytimg.com/vi/24_RoSB5I1w/hqdefault.jpg" alt="SEREBRO and Peggy Gou mashup" /><span>PLAY ▶</span></div><div class="fresh-meta"><small>01 / Playlist</small><h3>SEREBRO × Peggy Gou — Mama Lover</h3></div></a>
+          <a class="fresh-card" href="https://youtu.be/0x5QZhKwQPg" data-video="0x5QZhKwQPg"><div class="fresh-thumb"><img src="https://i.ytimg.com/vi/0x5QZhKwQPg/hqdefault.jpg" alt="t.A.T.u. Waste Management rework" /><span>PLAY ▶</span></div><div class="fresh-meta"><small>02 / Rework</small><h3>t.A.T.u. — Waste Management Anniversary Version</h3></div></a>
+          <a class="fresh-card" href="https://www.youtube.com/watch?v=tlzmzhLpfMI" data-video="tlzmzhLpfMI"><div class="fresh-thumb"><img src="https://i.ytimg.com/vi/tlzmzhLpfMI/hqdefault.jpg" alt="SEREBRO Song Number Two version" /><span>PLAY ▶</span></div><div class="fresh-meta"><small>03 / Version</small><h3>SEREBRO — Song #2: DJ Sir Gay Version</h3></div></a>
+          <a class="fresh-card" href="https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU" target="_blank" rel="noreferrer"><div class="fresh-thumb"><img src="https://i.ytimg.com/vi/24_RoSB5I1w/hqdefault.jpg" alt="DJ Sir Gay playlist" /><span>OPEN ↗</span></div><div class="fresh-meta"><small>Full feed</small><h3>Open the complete playlist on YouTube</h3></div></a>
         </div>
-        <div class="edge-fade" aria-hidden="true"></div>
+        <div class="edge-arrow" aria-hidden="true">→</div>
       </div>
-      <div class="rail-controls"><div class="rail-status"><strong data-current="fresh">01</strong> / <span>04</span> — swipe, drag or use arrows</div><div class="arrows"><button class="arrow" data-prev="fresh" aria-label="Previous release">←</button><button class="arrow" data-next="fresh" aria-label="Next release">→</button></div></div>
+      <div class="rail-controls"><div class="rail-status"><strong data-current="fresh">01</strong> / <span>04</span> — intercepted releases</div><div class="arrows"><button class="arrow" data-prev="fresh" aria-label="Previous release">←</button><button class="arrow" data-next="fresh" aria-label="Next release">→</button></div></div>
     </section>
 
     <section class="section" id="projects">
       <header class="section-head">
-        <div class="section-index">02</div>
-        <div class="section-title"><h2>Not just playlists.</h2><p>Four larger worlds. Play immediately or open the story behind each one.</p></div>
-        <div class="swipe-hint"><i></i> 4 projects →</div>
+        <div class="section-id">Channel<br>Long-form worlds<strong>02</strong></div>
+        <div class="section-title"><h2>Four worlds. Zero supervision.</h2><p>Each project is one continuous argument made with pop music. Play immediately or open the file behind it.</p></div>
+        <div class="swipe-hint"><i></i> 4 project files</div>
       </header>
       <div class="carousel-shell">
         <div class="carousel projects-rail" id="project-grid" data-rail="projects">
-          <article class="project-card carousel-card">
-            <div class="project-visual"><img src="https://img.youtube.com/vi/5QEXd8XTPM0/maxresdefault.jpg" alt="Belarus in Exile" /><span class="project-number">01</span></div>
-            <div class="project-copy"><div><small>Burning Man 2025 / Narrative set</small><h3>Belarus in Exile</h3><h4>From Dictatorship to the Dancefloor</h4><p>Fifty-five Belarusian-language tracks turned into one two-hour statement about memory, pressure, escape, exile and release.</p></div><div class="project-actions"><a class="button primary" href="https://youtu.be/5QEXd8XTPM0" data-video="5QEXd8XTPM0">Play now ▶</a><a class="button" href="/project.html?slug=belarus-in-exile">Read story →</a></div></div>
-          </article>
-          <article class="project-card carousel-card">
-            <div class="project-visual"><img src="https://img.youtube.com/vi/24_RoSB5I1w/maxresdefault.jpg" alt="Fresh Mashups" /><span class="project-number">02</span></div>
-            <div class="project-copy"><div><small>Continuously updated</small><h3>Fresh Mashups</h3><h4>New collisions. No genre borders.</h4><p>Global pop, queer classics and Eastern European memory placed into new, occasionally irresponsible combinations.</p></div><div class="project-actions"><a class="button primary" href="https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU" data-video="videoseries?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU">Play playlist ▶</a><a class="button" href="/project.html?slug=fresh-mashups">Read story →</a></div></div>
-          </article>
-          <article class="project-card carousel-card">
-            <div class="project-visual"><img src="https://img.youtube.com/vi/Mc3C-jRqcP8/maxresdefault.jpg" alt="SEREBRO 925" /><span class="project-number">03</span></div>
-            <div class="project-copy"><div><small>Live album / Part I</small><h3>SEREBRO — 925</h3><h4>DJ Sir Gay MixTape</h4><p>A continuous high-gloss mixtape rebuilding the catalog through mashups, re-edits, hard cuts and club transitions.</p></div><div class="project-actions"><a class="button primary" href="https://youtu.be/Mc3C-jRqcP8" data-video="Mc3C-jRqcP8">Play now ▶</a><a class="button" href="/project.html?slug=serebro-925">Read story →</a></div></div>
-          </article>
-          <article class="project-card carousel-card">
-            <div class="project-visual"><img src="https://img.youtube.com/vi/0x5QZhKwQPg/maxresdefault.jpg" alt="t.A.T.u. Waste Management" /><span class="project-number">04</span></div>
-            <div class="project-copy"><div><small>Anniversary rework</small><h3>t.A.T.u. — WM</h3><h4>10th Anniversary Version</h4><p>A darker, cinematic continuous rework of the Waste Management universe, treated like one changing night.</p></div><div class="project-actions"><a class="button primary" href="https://youtu.be/0x5QZhKwQPg" data-video="0x5QZhKwQPg">Play now ▶</a><a class="button" href="/project.html?slug=tatu-wm">Read story →</a></div></div>
-          </article>
+          <article class="project-card"><div class="project-visual"><img src="https://img.youtube.com/vi/5QEXd8XTPM0/maxresdefault.jpg" alt="Belarus in Exile" /><span class="project-number">01</span></div><div class="project-copy"><div><small>Burning Man 2025 / Narrative set</small><h3>Belarus in Exile</h3><h4>From Dictatorship to the Dancefloor</h4><p>Fifty-five Belarusian-language tracks turned into one two-hour statement about memory, pressure, escape, exile and release.</p></div><div class="project-actions"><a class="button primary" href="https://youtu.be/5QEXd8XTPM0" data-video="5QEXd8XTPM0">Play now ▶</a><a class="button" href="/project.html?slug=belarus-in-exile">Open file →</a></div></div></article>
+          <article class="project-card"><div class="project-visual"><img src="https://img.youtube.com/vi/24_RoSB5I1w/maxresdefault.jpg" alt="Fresh Mashups" /><span class="project-number">02</span></div><div class="project-copy"><div><small>Continuously updated</small><h3>Fresh Mashups</h3><h4>New collisions. No genre borders.</h4><p>Global pop, queer classics and Eastern European memory placed into new, occasionally irresponsible combinations.</p></div><div class="project-actions"><a class="button primary" href="https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU" data-video="videoseries?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU">Play playlist ▶</a><a class="button" href="/project.html?slug=fresh-mashups">Open file →</a></div></div></article>
+          <article class="project-card"><div class="project-visual"><img src="https://img.youtube.com/vi/Mc3C-jRqcP8/maxresdefault.jpg" alt="SEREBRO 925" /><span class="project-number">03</span></div><div class="project-copy"><div><small>Live album / Part I</small><h3>SEREBRO — 925</h3><h4>DJ Sir Gay MixTape</h4><p>A continuous high-gloss mixtape rebuilding the catalog through mashups, re-edits, hard cuts and club transitions.</p></div><div class="project-actions"><a class="button primary" href="https://youtu.be/Mc3C-jRqcP8" data-video="Mc3C-jRqcP8">Play now ▶</a><a class="button" href="/project.html?slug=serebro-925">Open file →</a></div></div></article>
+          <article class="project-card"><div class="project-visual"><img src="https://img.youtube.com/vi/0x5QZhKwQPg/maxresdefault.jpg" alt="t.A.T.u. Waste Management" /><span class="project-number">04</span></div><div class="project-copy"><div><small>Anniversary rework</small><h3>t.A.T.u. — WM</h3><h4>10th Anniversary Version</h4><p>A darker, cinematic continuous rework of the Waste Management universe, treated like one changing night.</p></div><div class="project-actions"><a class="button primary" href="https://youtu.be/0x5QZhKwQPg" data-video="0x5QZhKwQPg">Play now ▶</a><a class="button" href="/project.html?slug=tatu-wm">Open file →</a></div></div></article>
         </div>
-        <div class="edge-fade" aria-hidden="true"></div>
+        <div class="edge-arrow" aria-hidden="true">→</div>
       </div>
-      <div class="rail-controls"><div class="rail-status"><strong data-current="projects">01</strong> / <span>04</span> — yes, this section moves</div><div class="arrows"><button class="arrow" data-prev="projects" aria-label="Previous project">←</button><button class="arrow" data-next="projects" aria-label="Next project">→</button></div></div>
+      <div class="rail-controls"><div class="rail-status"><strong data-current="projects">01</strong> / <span>04</span> — this channel moves horizontally</div><div class="arrows"><button class="arrow" data-prev="projects" aria-label="Previous project">←</button><button class="arrow" data-next="projects" aria-label="Next project">→</button></div></div>
     </section>
 
     <section class="section voice-section" id="voice">
       <div class="voice-intro">
-        <h2>More than a DJ.<br><span>Unfortunately.</span></h2>
-        <div class="voice-copy"><p>Music is not separate from identity, memory or freedom. DJ Sir Gay turns an insult into authorship and exile into something audible.</p><p><em>Queer visibility. Belarusian culture. Refugee resilience. Music as public speech.</em></p><a class="button" href="https://sergey-ulyanov.pro/#recognition" target="_blank" rel="noreferrer">Open the full public record ↗</a></div>
+        <div><p class="channel">Channel 03 / Public record</p><h2>More than a DJ.<br><span>Unfortunately.</span></h2></div>
+        <div class="voice-copy"><p>Music is not separate from identity, memory or freedom. DJ Sir Gay turns an insult into authorship and exile into something audible.</p><p><em><span class="sensitive">Queer visibility</span>. Belarusian culture. Refugee resilience. Music as public speech.</em></p><a class="button" href="https://sergey-ulyanov.pro/#recognition" target="_blank" rel="noreferrer">Open the full public record ↗</a></div>
       </div>
       <div class="carousel-shell">
         <div class="carousel article-rail" id="article-rail" data-rail="articles">
-          <a class="article-card carousel-card" href="https://docs.google.com/document/d/141f_OhF4vgDPJbuJtR28bVcr5T3fiQoIOrAL4fjBgRs" target="_blank" rel="noreferrer"><div class="article-image"><img src="https://sergey-ulyanov.pro/assets/sergey-headshot.webp" alt="Sergey Ulyanov portrait" /></div><div class="article-body"><span class="article-source">Human Rights First · USA</span><h3>Never Lose Yourself: How Music Helped Sergey Reclaim His Future</h3><p>Persecution, displacement, rebuilding — and music as a way to preserve identity.</p><strong>Read article ↗</strong></div></a>
-          <a class="article-card carousel-card" href="https://docs.google.com/document/d/141f_OhF4vgDPJbuJtR28bVcr5T3fiQoIOrAL4fjBgRs" target="_blank" rel="noreferrer"><div class="article-image"><img src="https://i1.sndcdn.com/artworks-1OMNtfFEwWn6Eazf-AQVVBQ-t1080x1080.jpg" alt="DJ Sir Gay visual" /></div><div class="article-body"><span class="article-source">Unfiltered Stories · USA</span><h3>Targeted in His Country for Being Gay</h3><p>Why public visibility can be dangerous — and why reclaiming the word “gay” matters.</p><strong>Read article ↗</strong></div></a>
-          <a class="article-card carousel-card" href="https://docs.google.com/document/d/141f_OhF4vgDPJbuJtR28bVcr5T3fiQoIOrAL4fjBgRs" target="_blank" rel="noreferrer"><div class="article-image"><img src="https://img.youtube.com/vi/5QEXd8XTPM0/maxresdefault.jpg" alt="Belarus in Exile set" /></div><div class="article-body"><span class="article-source">SlavicSac · Los Angeles</span><h3>An Openly Gay Refugee from Belarus Is Building a Career in the U.S.</h3><p>A Los Angeles chapter about asylum, culture and refusing to become invisible.</p><strong>Read article ↗</strong></div></a>
+          <a class="article-card" href="https://docs.google.com/document/d/141f_OhF4vgDPJbuJtR28bVcr5T3fiQoIOrAL4fjBgRs" target="_blank" rel="noreferrer"><div class="article-image"><img src="https://sergey-ulyanov.pro/assets/sergey-headshot.webp" alt="Sergey Ulyanov portrait" /></div><div class="article-body"><span class="article-source">Human Rights First · USA</span><h3>Never Lose Yourself: How Music Helped Sergey Reclaim His Future</h3><p>Persecution, displacement, rebuilding — and music as a way to preserve identity.</p><strong>Open article ↗</strong></div></a>
+          <a class="article-card" href="https://docs.google.com/document/d/141f_OhF4vgDPJbuJtR28bVcr5T3fiQoIOrAL4fjBgRs" target="_blank" rel="noreferrer"><div class="article-image"><img src="https://i1.sndcdn.com/artworks-1OMNtfFEwWn6Eazf-AQVVBQ-t1080x1080.jpg" alt="DJ Sir Gay visual" /></div><div class="article-body"><span class="article-source">Unfiltered Stories · USA</span><h3>Targeted in His Country for Being Gay</h3><p>Why public visibility can be dangerous — and why reclaiming the word “gay” matters.</p><strong>Open article ↗</strong></div></a>
+          <a class="article-card" href="https://docs.google.com/document/d/141f_OhF4vgDPJbuJtR28bVcr5T3fiQoIOrAL4fjBgRs" target="_blank" rel="noreferrer"><div class="article-image"><img src="https://img.youtube.com/vi/5QEXd8XTPM0/maxresdefault.jpg" alt="Belarus in Exile set" /></div><div class="article-body"><span class="article-source">SlavicSac · Los Angeles</span><h3>An Openly Gay Refugee from Belarus Is Building a Career in the U.S.</h3><p>A Los Angeles chapter about asylum, culture and refusing to become invisible.</p><strong>Open article ↗</strong></div></a>
         </div>
-        <div class="edge-fade" aria-hidden="true"></div>
+        <div class="edge-arrow" aria-hidden="true">→</div>
       </div>
-      <div class="rail-controls"><div class="rail-status"><strong data-current="articles">01</strong> / <span>03</span> — selected stories</div><div class="arrows"><button class="arrow" data-prev="articles" aria-label="Previous article">←</button><button class="arrow" data-next="articles" aria-label="Next article">→</button></div></div>
+      <div class="rail-controls"><div class="rail-status"><strong data-current="articles">01</strong> / <span>03</span> — selected public evidence</div><div class="arrows"><button class="arrow" data-prev="articles" aria-label="Previous article">←</button><button class="arrow" data-next="articles" aria-label="Next article">→</button></div></div>
     </section>
 
     <section class="booking" id="booking">
-      <div class="booking-card"><h2>Book the <span>chaos.</span></h2><div class="booking-side"><p>Private parties, clubs, cultural programs and brand activations. Tell me the date, city, crowd and the feeling the room needs.</p><a class="button primary" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20booking%20request">Request a date ↗</a><div class="booking-notes"><span>Los Angeles based</span><span>Custom concept available</span><span>Reply by email</span></div></div></div>
+      <div class="booking-card">
+        <div><p class="channel">Channel 04 / Incoming transmission</p><h2>Put me in <span>the room.</span></h2></div>
+        <div class="booking-side"><p>Private parties, clubs, cultural programs and brand activations. Tell me the date, city, crowd and what the room should feel like.</p><a class="button primary" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20booking%20request">Request a date ↗</a><div class="booking-notes"><span>Los Angeles based</span><span>Custom concept available</span><span>Reply by email</span></div></div>
+      </div>
     </section>
   </main>
 
-  <footer><div class="footer-inner"><div><div class="footer-name">DJ SIR GAY</div><p style="color:#77756f;font-size:11px">© <span id="year"></span> · Los Angeles · Music without limits.</p></div><div class="footer-links"><a href="https://soundcloud.com/djsirgay" target="_blank" rel="noreferrer">SoundCloud ↗</a><a href="https://www.youtube.com/@NostalgAiRec" target="_blank" rel="noreferrer">YouTube ↗</a><a href="https://djsirgay.bandcamp.com" target="_blank" rel="noreferrer">Bandcamp ↗</a><a href="https://t.me/djsirgay" target="_blank" rel="noreferrer">Telegram ↗</a></div></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div><div class="footer-name">DJ SIR GAY</div><p class="footer-sub">© <span id="year"></span> / Los Angeles / Music without limits / Signal still unapproved</p></div><div class="footer-links"><a href="https://soundcloud.com/djsirgay" target="_blank" rel="noreferrer">SoundCloud ↗</a><a href="https://www.youtube.com/@NostalgAiRec" target="_blank" rel="noreferrer">YouTube ↗</a><a href="https://djsirgay.bandcamp.com" target="_blank" rel="noreferrer">Bandcamp ↗</a><a href="https://t.me/djsirgay" target="_blank" rel="noreferrer">Telegram ↗</a></div></div></footer>
 
-  <a class="mobile-book" href="#booking">Request a date</a>
+  <a class="mobile-book" href="#booking">Request transmission / booking</a>
   <div class="player-modal" id="player-modal" role="dialog" aria-modal="true" aria-label="Video player"><div class="player-shell"><button class="player-close" type="button" aria-label="Close player">×</button><iframe id="modal-player" title="DJ Sir Gay video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>
-  <script src="/site.js?v=20260729-1"></script>
+  <script src="/signal.js?v=20260729-1"></script>
 </body>
 </html>
