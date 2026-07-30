@@ -142,5 +142,14 @@
   modal?.addEventListener('click', event => { if (event.target === modal) closePlayer(); });
   addEventListener('keydown', event => { if (event.key === 'Escape') closePlayer(); });
 
+  const imageFallback = 'https://i.ytimg.com/vi/5QEXd8XTPM0/hqdefault.jpg';
+  document.querySelectorAll('img').forEach(image => {
+    image.addEventListener('error', () => {
+      if (image.dataset.fallbackApplied === '1') return;
+      image.dataset.fallbackApplied = '1';
+      image.src = imageFallback;
+    });
+  });
+
   document.getElementById('year')?.replaceChildren(String(new Date().getFullYear()));
 })();
