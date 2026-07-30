@@ -37,9 +37,9 @@ jobs:
             --exclude='_site/' \
             ./ _site/
 
-          # Build a small JSON feed in the exact order of the selected
-          # YouTube playlist. Failure is non-fatal: the page keeps its
-          # curated fallback release cards.
+          # Read the current YouTube playlist so the live site uses the exact
+          # published titles, order, thumbnails and durations rather than
+          # manually maintained labels.
           python -m pip install --quiet yt-dlp
           if yt-dlp --flat-playlist --dump-single-json \
             'https://www.youtube.com/playlist?list=PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU' \
@@ -50,6 +50,18 @@ jobs:
 
           playlist_id = 'PL0CwuGTt2ZV2v4CGRTtYyaWYyCEoC2vPU'
           data = json.loads(Path('/tmp/dj-playlist.json').read_text())
+
+          def format_duration(value):
+              if value in (None, ''):
+                  return ''
+              try:
+                  seconds = int(float(value))
+              except (TypeError, ValueError):
+                  return str(value)
+              hours, remainder = divmod(seconds, 3600)
+              minutes, secs = divmod(remainder, 60)
+              return f'{hours}:{minutes:02d}:{secs:02d}' if hours else f'{minutes}:{secs:02d}'
+
           items = []
           for entry in data.get('entries') or []:
               video_id = entry.get('id')
@@ -58,26 +70,24 @@ jobs:
               items.append({
                   'id': video_id,
                   'title': entry.get('title') or 'DJ Sir Gay release',
+                  'duration': format_duration(entry.get('duration')),
                   'url': f'https://www.youtube.com/watch?v={video_id}&list={playlist_id}',
                   'thumbnail': f'https://i.ytimg.com/vi/{video_id}/hqdefault.jpg',
               })
+
           Path('_site/fresh-releases.json').write_text(
               json.dumps({'playlist_id': playlist_id, 'items': items}, ensure_ascii=False),
               encoding='utf-8',
           )
           PY
           else
-            echo 'YouTube playlist sync failed; keeping embedded fallback cards.'
+            echo 'YouTube playlist sync failed; keeping the playlist fallback card.'
           fi
 
-          # Load the generated playlist renderer after the page's main script.
-          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260729-2"></script>\n</body>#' _site/index.html
-
-          # Final narrow-screen safety layer. Keeping it separate lets the
-          # visual system stay expressive without allowing display type to
-          # escape the phone viewport.
+          # Deployment-only enhancement layers.
+          perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260730-1"></script>\n</body>#' _site/index.html
           perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n</head>#' _site/index.html
-          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n</head>#' _site/project.html
+          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n  <link rel="stylesheet" href="/project-extras.css?v=20260730-1" />\n</head>#' _site/project.html
 
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
