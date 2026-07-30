@@ -73,6 +73,12 @@ jobs:
           # Load the generated playlist renderer after the page's main script.
           perl -0pi -e 's#</body>#  <script src="/fresh-sync.js?v=20260729-2"></script>\n</body>#' _site/index.html
 
+          # Final narrow-screen safety layer. Keeping it separate lets the
+          # visual system stay expressive without allowing display type to
+          # escape the phone viewport.
+          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n</head>#' _site/index.html
+          perl -0pi -e 's#</head>#  <link rel="stylesheet" href="/mobile-overflow.css?v=20260729-1" />\n</head>#' _site/project.html
+
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
 
