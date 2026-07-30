@@ -33,7 +33,9 @@
   const renderTimecode = () => {
     if (!timecode) return;
     const now = new Date();
-    timecode.textContent = [now.getHours(), now.getMinutes(), now.getSeconds()].map(value => String(value).padStart(2, '0')).join(':');
+    timecode.textContent = [now.getHours(), now.getMinutes(), now.getSeconds()]
+      .map(value => String(value).padStart(2, '0'))
+      .join(':');
   };
   renderTimecode();
   setInterval(renderTimecode, 1000);
@@ -44,6 +46,23 @@
     censorToggle.setAttribute('aria-pressed', String(active));
     censorToggle.textContent = active ? 'Censorship: on (bad idea)' : 'Censorship: off';
   });
+
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const setMenu = open => {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    mobileMenu.classList.toggle('open', open);
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    document.body.classList.toggle('menu-open', open);
+  };
+  menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+  mobileMenu?.addEventListener('click', event => {
+    if (event.target === mobileMenu || event.target.closest('a')) setMenu(false);
+  });
+  addEventListener('resize', () => {
+    if (innerWidth > 950) setMenu(false);
+  }, { passive: true });
 
   const rails = [...document.querySelectorAll('[data-rail]')];
   rails.forEach(rail => {
@@ -84,11 +103,13 @@
     new MutationObserver(updateCurrent).observe(rail, { childList: true });
     updateCurrent();
 
+    // Mouse drag remains horizontal. Touch and trackpad gestures stay native,
+    // so a vertical swipe or mouse wheel over a card continues down the page.
     let dragging = false;
     let startX = 0;
     let startScroll = 0;
     rail.addEventListener('pointerdown', event => {
-      if (event.pointerType !== 'mouse') return;
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
       dragging = true;
       startX = event.clientX;
       startScroll = rail.scrollLeft;
@@ -105,14 +126,6 @@
     };
     rail.addEventListener('pointerup', stopDrag);
     rail.addEventListener('pointercancel', stopDrag);
-    rail.addEventListener('wheel', event => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || rail.scrollWidth <= rail.clientWidth) return;
-      const atStart = rail.scrollLeft <= 1 && event.deltaY < 0;
-      const atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 1 && event.deltaY > 0;
-      if (atStart || atEnd) return;
-      event.preventDefault();
-      rail.scrollLeft += event.deltaY;
-    }, { passive: false });
   });
 
   const modal = document.getElementById('player-modal');
@@ -140,7 +153,12 @@
   });
   modal?.querySelector('.player-close')?.addEventListener('click', closePlayer);
   modal?.addEventListener('click', event => { if (event.target === modal) closePlayer(); });
-  addEventListener('keydown', event => { if (event.key === 'Escape') closePlayer(); });
+  addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closePlayer();
+      setMenu(false);
+    }
+  });
 
   const imageFallback = 'https://i.ytimg.com/vi/5QEXd8XTPM0/hqdefault.jpg';
   document.querySelectorAll('img').forEach(image => {
