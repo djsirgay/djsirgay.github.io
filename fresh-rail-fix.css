@@ -1,12 +1,21 @@
-/* Fresh Releases needs a direction lock because every card is a link. */
+/* Fresh Releases: vertical gestures belong to the page; horizontal gestures belong to the rail. */
 #fresh-rail{
   touch-action:pan-y pinch-zoom!important;
   overscroll-behavior-x:contain!important;
   overscroll-behavior-y:auto!important;
   -webkit-overflow-scrolling:touch!important;
 }
-#fresh-rail .fresh-card,
+#fresh-rail.fresh-pointer-dragging{
+  scroll-snap-type:none!important;
+  scroll-behavior:auto!important;
+}
+#fresh-rail .fresh-card{
+  touch-action:pan-y pinch-zoom;
+  -webkit-user-select:none;
+  user-select:none;
+}
 #fresh-rail img{
+  pointer-events:none;
   -webkit-user-select:none;
   user-select:none;
   -webkit-user-drag:none;
