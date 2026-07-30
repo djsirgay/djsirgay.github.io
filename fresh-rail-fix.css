@@ -1,0 +1,13 @@
+/* Fresh Releases needs a direction lock because every card is a link. */
+#fresh-rail{
+  touch-action:pan-y pinch-zoom!important;
+  overscroll-behavior-x:contain!important;
+  overscroll-behavior-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+#fresh-rail .fresh-card,
+#fresh-rail img{
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
