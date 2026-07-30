@@ -11,7 +11,7 @@
       return response.json();
     })
     .then(data => {
-      const items = Array.isArray(data.items) ? data.items.filter(item => item && item.id) : [];
+      const items = Array.isArray(data.items) ? data.items.filter(item => item && item.id).slice(0, 6) : [];
       if (!items.length) return;
 
       rail.innerHTML = items.map((item, index) => {
@@ -19,26 +19,13 @@
         const title = escapeHtml(item.title || 'DJ Sir Gay release');
         const url = escapeHtml(item.url || `https://www.youtube.com/watch?v=${id}&list=${playlistId}`);
         const thumb = escapeHtml(item.thumbnail || `https://i.ytimg.com/vi/${id}/hqdefault.jpg`);
-        return `<a class="fresh-card js-live-play" href="${url}" data-video="${id}">
+        return `<a class="fresh-card carousel-card" href="${url}" data-video="${id}">
           <div class="fresh-thumb"><img src="${thumb}" alt="${title}" loading="lazy"><span>PLAY ▶</span></div>
-          <p>${String(index + 1).padStart(2, '0')} / PLAYLIST</p>
-          <h3>${title}</h3>
+          <div class="fresh-meta"><small>${String(index + 1).padStart(2, '0')} / PLAYLIST</small><h3>${title}</h3></div>
         </a>`;
       }).join('');
     })
     .catch(() => {
       // Keep the curated fallback cards already embedded in the page.
     });
-
-  rail.addEventListener('click', event => {
-    const card = event.target.closest('.js-live-play');
-    if (!card) return;
-    const modal = document.getElementById('player-modal');
-    const player = document.getElementById('modal-player');
-    if (!modal || !player) return;
-    event.preventDefault();
-    player.src = `https://www.youtube.com/embed/${card.dataset.video}?autoplay=1&rel=0`;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
 })();
