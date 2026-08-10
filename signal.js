@@ -1,5 +1,28 @@
 (() => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // DJ Sir Gay.exe is the final visual layer. Loading it from the already-stable
+  // core runtime keeps the existing content, playlist sync and carousel behavior intact.
+  document.title = 'DJ Sir Gay.exe — Personal Operating System';
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) themeMeta.content = '#008080';
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.content = 'DJ Sir Gay.exe';
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription) ogDescription.content = 'A personal operating system built from queer memory, pop archaeology and unauthorized emotion.';
+  const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twitterTitle) twitterTitle.content = 'DJ Sir Gay.exe';
+  const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+  if (twitterDescription) twitterDescription.content = 'A personal operating system built from queer memory, pop archaeology and unauthorized emotion.';
+
+  if (!document.querySelector('link[data-djsg-os95]')) {
+    const osStyle = document.createElement('link');
+    osStyle.rel = 'stylesheet';
+    osStyle.href = '/os95.css?v=20260810-1';
+    osStyle.dataset.djsgOs95 = '1';
+    document.head.appendChild(osStyle);
+  }
+
   const topbar = document.querySelector('.topbar');
   const progress = document.getElementById('signal-progress');
 
@@ -170,4 +193,11 @@
   });
 
   document.getElementById('year')?.replaceChildren(String(new Date().getFullYear()));
+
+  if (!document.querySelector('script[data-djsg-os95]')) {
+    const osScript = document.createElement('script');
+    osScript.src = '/os95.js?v=20260810-1';
+    osScript.dataset.djsgOs95 = '1';
+    document.body.appendChild(osScript);
+  }
 })();
