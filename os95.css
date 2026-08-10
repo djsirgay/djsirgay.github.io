@@ -1,0 +1,525 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&display=swap');
+
+:root{
+  --win-desktop:#008080;
+  --win-gray:#c0c0c0;
+  --win-gray-light:#dfdfdf;
+  --win-gray-dark:#808080;
+  --win-navy:#000080;
+  --win-blue:#0000a8;
+  --win-black:#000;
+  --win-white:#fff;
+  --win-green:#00ff00;
+  --win-amber:#f6d365;
+  --win-red:#b40000;
+  --win-font:Tahoma,"MS Sans Serif",Arial,sans-serif;
+  --pixel:"Pixelify Sans",Tahoma,sans-serif;
+  --lcd:"VT323","Lucida Console",monospace;
+  --max:1280px;
+  --signal:var(--win-navy)!important;
+  --paper:var(--win-black)!important;
+  --bg:var(--win-desktop)!important;
+}
+
+*{box-sizing:border-box}
+html{background:var(--win-desktop)!important;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.025) 0 1px,transparent 1px),
+    var(--win-desktop)!important;
+  background-size:5px 5px;
+  color:#000!important;
+  font-family:var(--win-font)!important;
+  overflow-x:hidden;
+  padding-bottom:42px;
+}
+body:before{display:none!important}
+a{color:inherit}
+::selection{background:var(--win-navy)!important;color:#fff!important}
+
+/* Hide the previous theatrical shell; the content underneath remains intact. */
+.signal-progress,.signal-boot,.topbar,.mobile-menu,.mobile-book,.micro-ticker{display:none!important}
+
+/* ---------- shared Win95 chrome ---------- */
+.win95-raised,
+.button,.arrow,.censor-toggle,.book-link,.swipe-hint,
+.os95-start-btn,.os95-task-btn,.os95-window-btn,.os95-dialog-btn{
+  border:2px solid!important;
+  border-color:#fff #404040 #404040 #fff!important;
+  background:var(--win-gray)!important;
+  box-shadow:inset 1px 1px 0 var(--win-gray-light),inset -1px -1px 0 var(--win-gray-dark)!important;
+  color:#000!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  text-transform:none!important;
+  font-family:var(--win-font)!important;
+  letter-spacing:0!important;
+}
+.button:active,.arrow:active,.os95-start-btn:active,.os95-task-btn:active,.os95-window-btn:active,.os95-dialog-btn:active{
+  border-color:#404040 #fff #fff #404040!important;
+  box-shadow:inset 1px 1px 0 #808080!important;
+  transform:translate(1px,1px)!important;
+}
+.button:hover,.arrow:hover{filter:none!important;transform:none!important;color:#000!important}
+.button{min-height:30px!important;padding:5px 10px!important;font-size:12px!important;font-weight:500!important}
+.button.primary{background:var(--win-gray)!important;color:#000!important}
+.arrow{width:32px!important;height:28px!important;font-size:15px!important}
+
+/* ---------- desktop / hero ---------- */
+main#top{display:block!important}
+.hero{
+  min-height:100svh!important;
+  padding:76px 28px 78px!important;
+  display:grid!important;
+  align-items:center!important;
+  background:transparent!important;
+  overflow:visible!important;
+  isolation:auto!important;
+}
+.hero-poster,.hero-overlay{display:none!important}
+.hero-grid{
+  position:relative;
+  width:min(920px,calc(100vw - 56px))!important;
+  margin:0 auto!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+  align-items:stretch!important;
+  background:var(--win-gray);
+  border:2px solid;
+  border-color:#fff #303030 #303030 #fff;
+  box-shadow:4px 4px 0 rgba(0,0,0,.28);
+  padding:28px 18px 18px!important;
+}
+.hero-grid:before{
+  content:"DJ Sir Gay.exe";
+  position:absolute;
+  top:3px;left:3px;right:3px;height:22px;
+  display:flex;align-items:center;
+  padding:0 6px;
+  background:var(--win-navy);
+  color:#fff;
+  font:bold 12px/1 var(--win-font);
+}
+.hero-grid:after{
+  content:"_  □  ×";
+  position:absolute;
+  right:7px;top:5px;
+  color:#000;
+  background:var(--win-gray);
+  padding:2px 4px 1px;
+  font:bold 11px/1 var(--win-font);
+  border:1px solid;
+  border-color:#fff #303030 #303030 #fff;
+}
+.hero-copy{max-width:none!important;padding:28px 22px 22px!important;background:#fff;border:2px solid;border-color:#808080 #fff #fff #808080}
+.hero-copy:before{
+  content:"C:\\DJSG\\SYSTEM\\README.TXT"!important;
+  display:block!important;
+  margin:0 0 18px!important;
+  color:#000!important;
+  font:12px/1.3 "Courier New",monospace!important;
+  font-style:normal!important;
+}
+.eyebrow,.channel{
+  margin:0 0 9px!important;
+  color:var(--win-navy)!important;
+  font:bold 11px/1.4 var(--win-font)!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+.hero h1{
+  margin:0!important;
+  max-width:760px!important;
+  color:#000!important;
+  font:700 clamp(44px,8vw,94px)/.86 var(--pixel)!important;
+  letter-spacing:-.055em!important;
+  text-transform:none!important;
+  text-wrap:balance;
+}
+.reclaim-word{color:var(--win-navy)!important;font:inherit!important;font-style:normal!important;text-transform:none!important}
+.reclaim-word:before{display:none!important}
+.hero-text{
+  max-width:680px!important;
+  margin:22px 0 0!important;
+  color:#111!important;
+  font:15px/1.5 var(--win-font)!important;
+}
+.hero-actions{margin-top:22px!important}
+.hero-actions .button{font-weight:600!important}
+.signal-card{
+  margin-top:12px!important;
+  padding:9px 12px!important;
+  background:var(--win-gray)!important;
+  color:#000!important;
+  border:2px solid!important;
+  border-color:#fff #505050 #505050 #fff!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.signal-card:before{content:"System status"!important;position:static!important;display:block!important;padding:0 0 6px!important;background:none!important;color:var(--win-navy)!important;font:bold 11px var(--win-font)!important}
+.signal-card p{display:none!important}
+.signal-card strong{font:700 18px/1.1 var(--pixel)!important;text-transform:none!important;color:#000!important}
+.signal-card strong span{color:var(--win-red)!important;font:inherit!important;font-style:normal!important;text-transform:none!important}
+.signal-card footer{margin-top:8px!important;padding-top:7px!important;border-top:1px solid #808080!important;color:#000!important;font:11px var(--win-font)!important}
+
+/* desktop shortcuts injected by os95.js */
+.os95-shortcuts{
+  position:absolute;
+  z-index:20;
+  left:20px;top:22px;
+  display:grid;gap:15px;
+  width:92px;
+}
+.os95-shortcut{
+  display:grid;justify-items:center;gap:4px;
+  width:88px;padding:3px;
+  color:#fff;text-align:center;text-decoration:none;
+  font:11px/1.15 var(--win-font);
+  text-shadow:1px 1px #000;
+  cursor:default;
+}
+.os95-shortcut:hover,.os95-shortcut:focus{background:rgba(0,0,128,.58);outline:1px dotted #fff}
+.os95-shortcut svg{width:32px;height:32px;shape-rendering:crispEdges;image-rendering:pixelated;filter:drop-shadow(1px 1px 0 rgba(0,0,0,.45))}
+
+/* ---------- every main section is a program window ---------- */
+.section,.booking,.voice-section{
+  position:relative!important;
+  width:min(var(--max),calc(100% - 38px))!important;
+  margin:34px auto!important;
+  padding:42px 10px 12px!important;
+  background:var(--win-gray)!important;
+  color:#000!important;
+  border:2px solid!important;
+  border-color:#fff #303030 #303030 #fff!important;
+  box-shadow:4px 4px 0 rgba(0,0,0,.26)!important;
+  overflow:visible!important;
+}
+.section:before,.booking:before{
+  position:absolute!important;
+  inset:3px 3px auto 3px!important;
+  height:24px!important;
+  display:flex!important;
+  align-items:center!important;
+  padding:0 7px!important;
+  background:var(--win-navy)!important;
+  color:#fff!important;
+  font:bold 12px/1 var(--win-font)!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+.section:after,.booking:after{
+  content:"_  □  ×";
+  position:absolute;right:7px;top:6px;z-index:4;
+  padding:2px 4px 1px;
+  background:var(--win-gray);color:#000;
+  border:1px solid;border-color:#fff #333 #333 #fff;
+  font:bold 11px/1 var(--win-font);
+}
+#fresh:before{content:"DJSGAMP 2.95 — Fresh Releases"!important}
+#projects:before{content:"C:\\DJSG\\PROJECT FILES"!important}
+#voice:before{content:"C:\\DJSG\\DOCUMENTS\\PUBLIC RECORD"!important}
+.booking:before{content:"DJ Sir Gay Booking Wizard"!important}
+
+.section-head{
+  width:100%!important;
+  margin:0 0 10px!important;
+  padding:8px!important;
+  display:grid!important;
+  grid-template-columns:105px minmax(0,1fr) auto!important;
+  gap:12px!important;
+  align-items:end!important;
+  border:1px solid #808080;
+  background:#d7d7d7;
+}
+.section-id{color:#333!important;font:11px/1.3 var(--win-font)!important;letter-spacing:0!important;text-transform:none!important}
+.section-id strong{margin-top:4px!important;color:var(--win-navy)!important;font:700 28px/1 var(--pixel)!important;letter-spacing:-.04em!important}
+.section-title h2,.voice-intro h2,.booking h2{
+  color:#000!important;
+  font:700 clamp(28px,4vw,54px)/.94 var(--pixel)!important;
+  letter-spacing:-.04em!important;
+  text-transform:none!important;
+}
+.section-title p,.voice-copy,.booking-side p,.project-copy p,.article-body p,.footer-identity>p{
+  color:#111!important;
+  font:13px/1.45 var(--win-font)!important;
+}
+.section-title p{margin:7px 0 0!important}
+.swipe-hint{min-height:28px!important;padding:4px 7px!important;color:#000!important;font:11px var(--win-font)!important;border-bottom:2px solid #404040!important}
+.swipe-hint i{display:none!important}
+
+.carousel-shell{overflow:hidden!important;border:2px solid;border-color:#808080 #fff #fff #808080!important;background:#fff!important}
+.carousel{
+  padding:10px 10px 14px!important;
+  gap:8px!important;
+  background:#fff!important;
+  touch-action:auto!important;
+  overscroll-behavior:auto!important;
+  scroll-snap-type:x mandatory!important;
+  cursor:default!important;
+}
+.carousel>*{scroll-snap-align:start!important;scroll-snap-stop:normal!important}
+.edge-arrow{display:none!important}
+.rail-controls{width:100%!important;margin:7px 0 0!important;padding:4px 5px!important;border-top:1px solid #808080!important}
+.rail-status{color:#222!important;font:11px/1.4 var(--win-font)!important;letter-spacing:0!important;text-transform:none!important}
+.rail-status strong{color:var(--win-navy)!important}
+
+/* ---------- DJSGAMP / fresh releases ---------- */
+#fresh{background:#3a3a3a!important;border-color:#d8d8d8 #111 #111 #d8d8d8!important}
+#fresh:before{background:linear-gradient(90deg,#000080,#0000c8)!important}
+#fresh .section-head{
+  background:#1d1d1d!important;
+  border-color:#777 #000 #000 #777!important;
+  color:#9cff77!important;
+}
+#fresh .section-id,#fresh .section-title p{color:#9e9e9e!important}
+#fresh .section-id strong,#fresh .section-title h2{color:#00ff63!important;text-shadow:1px 1px #003a10!important}
+#fresh .section-title h2{font-family:var(--lcd)!important;font-size:clamp(34px,5vw,58px)!important;letter-spacing:.01em!important}
+#fresh .swipe-hint{background:#151515!important;color:#00ff63!important;border-color:#666 #000 #000 #666!important}
+#fresh .carousel-shell{background:#090909!important;border-color:#666 #000 #000 #666!important}
+#fresh .carousel{background:#090909!important;padding:8px!important}
+.fresh-rail{grid-auto-columns:min(74vw,410px)!important}
+.fresh-card{
+  min-height:132px!important;
+  display:grid!important;
+  grid-template-columns:116px minmax(0,1fr)!important;
+  overflow:hidden!important;
+  background:#050505!important;
+  border:1px solid #303030!important;
+  color:#00ff63!important;
+  clip-path:none!important;
+  box-shadow:none!important;
+}
+.fresh-card:hover{border-color:#00ff63!important;transform:none!important;background:#001d08!important}
+.fresh-thumb{aspect-ratio:auto!important;height:100%!important;min-height:130px!important;background:#000!important;border:0!important}
+.fresh-thumb img{width:100%!important;height:100%!important;object-fit:cover!important;filter:saturate(.7) contrast(1.15)!important}
+.fresh-thumb:after{content:"PLAY"!important;left:5px!important;bottom:5px!important;background:#000!important;color:#00ff63!important;border:1px solid #00ff63!important;font:13px var(--lcd)!important}
+.fresh-thumb span{right:5px!important;bottom:5px!important;min-width:0!important;height:auto!important;padding:3px 5px!important;background:#00ff63!important;color:#000!important;border:0!important;font:12px var(--lcd)!important}
+.fresh-meta{padding:10px!important;align-self:center!important}
+.fresh-meta small{color:#a7a7a7!important;font:14px/1 var(--lcd)!important;letter-spacing:.03em!important;text-transform:none!important}
+.fresh-meta h3{margin:7px 0 0!important;color:#00ff63!important;font:25px/1.02 var(--lcd)!important;letter-spacing:.01em!important}
+#fresh .rail-controls{border-color:#000!important;color:#00ff63!important}
+#fresh .rail-status{color:#aaa!important;font-family:var(--lcd)!important;font-size:15px!important}
+#fresh .rail-status strong{color:#00ff63!important}
+#fresh .arrow{background:#2b2b2b!important;color:#00ff63!important;border-color:#777 #000 #000 #777!important;box-shadow:none!important}
+
+/* ---------- Explorer project files ---------- */
+.projects-rail{grid-auto-columns:min(84vw,760px)!important}
+.project-card{
+  min-height:390px!important;
+  grid-template-columns:minmax(260px,.85fr) 1.15fr!important;
+  border:1px solid #808080!important;
+  background:#fff!important;
+  color:#000!important;
+  clip-path:none!important;
+  box-shadow:none!important;
+}
+.project-visual{min-height:390px!important;background:#000!important;border-right:1px solid #808080!important}
+.project-visual img{filter:none!important}
+.project-visual:after{content:"Preview.bmp"!important;background:var(--win-gray)!important;color:#000!important;border:1px solid #000!important;font:10px var(--win-font)!important}
+.project-number{color:#fff!important;font:700 54px var(--pixel)!important;text-shadow:2px 2px #000!important;-webkit-text-stroke:0!important}
+.project-copy{padding:20px!important;color:#000!important}
+.project-copy small{color:var(--win-navy)!important;font:bold 11px var(--win-font)!important}
+.project-copy h3{margin:9px 0 0!important;color:#000!important;font:700 32px/.95 var(--pixel)!important;letter-spacing:-.04em!important}
+.project-copy h4{margin:8px 0 0!important;color:#000080!important;font:bold 15px/1.2 var(--win-font)!important;font-style:normal!important}
+.project-copy p{color:#111!important}
+.project-actions{gap:6px!important}
+
+/* ---------- Public record = documents folder ---------- */
+.voice-section{background:var(--win-gray)!important}
+.voice-intro{
+  width:100%!important;
+  margin:0 0 10px!important;
+  padding:10px!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:18px!important;
+  background:#fff!important;
+  border:2px solid!important;border-color:#808080 #fff #fff #808080!important;
+}
+.voice-intro h2 span{color:var(--win-navy)!important;font:inherit!important;font-style:normal!important;text-transform:none!important}
+.voice-copy em{color:var(--win-navy)!important;font-style:normal!important;font-weight:700!important}
+.article-rail{grid-auto-columns:min(76vw,370px)!important}
+.article-card{
+  background:#fff!important;
+  color:#000!important;
+  border:1px solid #808080!important;
+  clip-path:none!important;
+  box-shadow:none!important;
+}
+.article-card:hover{transform:none!important;border-color:#000080!important;background:#f7f7ff!important}
+.article-image{aspect-ratio:16/9!important;border-bottom:1px solid #808080!important;background:#ddd!important}
+.article-image img{filter:none!important}
+.article-image:before{content:"Internet Shortcut"!important;background:var(--win-gray)!important;color:#000!important;border:1px solid #000!important;font:10px var(--win-font)!important}
+.article-image:after{display:none!important}
+.article-body{padding:13px!important}
+.article-source{color:var(--win-navy)!important;font:bold 10px var(--win-font)!important;letter-spacing:0!important;text-transform:none!important}
+.article-body h3{margin:7px 0!important;color:#000!important;font:700 22px/1 var(--pixel)!important}
+.article-body p{color:#222!important}
+.article-body strong{color:#000080!important;font:bold 11px var(--win-font)!important}
+
+/* ---------- booking wizard ---------- */
+.booking{background:var(--win-gray)!important}
+.booking-card{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:0!important;
+  border:2px solid!important;border-color:#808080 #fff #fff #808080!important;
+  background:#fff!important;
+  color:#000!important;
+  clip-path:none!important;
+  box-shadow:none!important;
+}
+.booking-card>div{padding:24px!important}
+.booking-card>div:first-child{background:linear-gradient(180deg,#000080,#07075f)!important;color:#fff!important}
+.booking h2{color:#fff!important}
+.booking h2 span{color:#fff!important;font:inherit!important;font-style:normal!important;text-transform:none!important}
+.booking .channel{color:#d6d6ff!important}
+.booking-side p{color:#111!important}
+.booking-notes{gap:4px!important}
+.booking-notes span{border:1px solid #aaa!important;color:#333!important;background:#eee!important;font:10px var(--win-font)!important}
+
+/* ---------- footer = system properties ---------- */
+footer.site-footer{
+  width:min(var(--max),calc(100% - 38px))!important;
+  margin:34px auto 62px!important;
+  padding:34px 12px 12px!important;
+  position:relative!important;
+  background:var(--win-gray)!important;
+  color:#000!important;
+  border:2px solid!important;border-color:#fff #303030 #303030 #fff!important;
+  box-shadow:4px 4px 0 rgba(0,0,0,.26)!important;
+}
+footer.site-footer:before{
+  content:"System Properties — DJ Sir Gay.exe";
+  position:absolute;left:3px;right:3px;top:3px;height:23px;
+  display:flex;align-items:center;padding:0 7px;
+  background:var(--win-navy);color:#fff;font:bold 12px var(--win-font);
+}
+.footer-signal{padding:12px!important;border:2px solid!important;border-color:#808080 #fff #fff #808080!important;background:#fff!important}
+.footer-signal p{color:#000080!important;font:bold 11px var(--win-font)!important}
+.footer-signal h2{color:#000!important;font:700 34px/.95 var(--pixel)!important}
+.footer-signal h2 span{color:var(--win-navy)!important;font:inherit!important;font-style:normal!important;text-transform:none!important}
+.footer-grid{padding:15px 4px!important}
+.footer-brand{font:700 18px var(--pixel)!important}
+.footer-brand img{border:0!important;border-radius:0!important}
+.footer-col h3{color:#000080!important;font:bold 11px var(--win-font)!important}
+.footer-col a,.footer-col span,.footer-bottom{color:#000!important;font:11px/1.45 var(--win-font)!important}
+.footer-bottom{border-color:#808080!important}
+
+/* ---------- fixed taskbar ---------- */
+.os95-taskbar{
+  position:fixed;z-index:5000;left:0;right:0;bottom:0;height:40px;
+  display:flex;align-items:center;gap:4px;padding:3px 4px;
+  background:var(--win-gray);
+  border-top:2px solid #fff;
+  box-shadow:0 -1px 0 #808080;
+  font-family:var(--win-font);
+}
+.os95-start-btn{height:32px;display:flex;align-items:center;gap:6px;padding:0 8px!important;font:bold 12px var(--win-font)!important;cursor:pointer}
+.os95-logo{display:grid;grid-template-columns:repeat(2,7px);grid-template-rows:repeat(2,7px);gap:1px;transform:skew(-5deg)}
+.os95-logo i:nth-child(1){background:#f23b2f}.os95-logo i:nth-child(2){background:#58b847}.os95-logo i:nth-child(3){background:#2e77d0}.os95-logo i:nth-child(4){background:#f6cf32}
+.os95-task-items{display:flex;gap:3px;min-width:0;flex:1;overflow:hidden}
+.os95-task-btn{height:31px;min-width:80px;max-width:180px;display:flex;align-items:center;padding:0 7px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:11px var(--win-font)!important;text-decoration:none}
+.os95-tray{height:31px;min-width:92px;display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:0 7px;border:2px solid;border-color:#808080 #fff #fff #808080;background:#c8c8c8;font:11px var(--win-font)}
+.os95-tray-dot{width:8px;height:8px;background:#00a000;border:1px solid #004500}
+
+.os95-start-menu{
+  position:fixed;z-index:5100;left:3px;bottom:40px;width:260px;
+  display:none;
+  background:var(--win-gray);
+  border:2px solid;border-color:#fff #303030 #303030 #fff;
+  box-shadow:3px 3px 0 rgba(0,0,0,.28);
+  font-family:var(--win-font);
+}
+.os95-start-menu.open{display:grid;grid-template-columns:28px 1fr}
+.os95-start-rail{display:flex;align-items:flex-end;justify-content:center;padding:8px 0;background:#808080;color:#ddd;font:bold 20px/1 var(--win-font);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:1px}
+.os95-start-links{padding:3px}
+.os95-start-links a,.os95-start-links button{width:100%;min-height:37px;display:flex;align-items:center;gap:10px;padding:6px 10px;border:0;background:transparent;color:#000;text-decoration:none;text-align:left;font:12px var(--win-font);cursor:default}
+.os95-start-links a:hover,.os95-start-links button:hover{background:var(--win-navy);color:#fff}
+.os95-start-links hr{border:0;border-top:1px solid #808080;border-bottom:1px solid #fff;margin:3px}
+.os95-menu-glyph{width:22px;text-align:center;font-size:17px}
+
+/* ---------- startup + error dialogs ---------- */
+.os95-startup,.os95-dialog-layer{
+  position:fixed;z-index:9000;inset:0;display:grid;place-items:center;padding:18px;background:rgba(0,0,0,.28)
+}
+.os95-startup.dismissed,.os95-dialog-layer.dismissed{display:none}
+.os95-dialog{
+  width:min(470px,calc(100vw - 28px));
+  background:var(--win-gray);
+  border:2px solid;border-color:#fff #303030 #303030 #fff;
+  box-shadow:5px 5px 0 rgba(0,0,0,.34);
+  padding:29px 9px 9px;position:relative;color:#000;font-family:var(--win-font)
+}
+.os95-dialog-title{position:absolute;top:3px;left:3px;right:3px;height:21px;display:flex;align-items:center;padding:0 5px;background:var(--win-navy);color:#fff;font:bold 12px var(--win-font)}
+.os95-dialog-title:after{content:"×";margin-left:auto;display:grid;place-items:center;width:17px;height:16px;background:var(--win-gray);color:#000;border:1px solid;border-color:#fff #333 #333 #fff}
+.os95-dialog-body{display:grid;grid-template-columns:42px 1fr;gap:12px;padding:14px 10px 18px;background:var(--win-gray)}
+.os95-warning-icon{width:34px;height:31px;display:grid;place-items:center;background:#ffd800;color:#000;font:bold 23px Georgia,serif;clip-path:polygon(50% 0,100% 100%,0 100%);padding-top:7px}
+.os95-dialog h2{margin:0 0 8px;font:bold 14px var(--win-font)}
+.os95-dialog p{margin:0 0 8px;font:12px/1.45 var(--win-font)}
+.os95-dialog ul{margin:8px 0 0;padding-left:18px;font:12px/1.45 var(--win-font)}
+.os95-dialog-actions{display:flex;justify-content:center;gap:8px;padding:5px 0}
+.os95-dialog-btn{min-width:100px;min-height:28px;padding:3px 12px!important;font:12px var(--win-font)!important;cursor:pointer}
+.os95-dialog-btn.default{outline:1px dotted #000;outline-offset:-5px}
+
+/* solitaire-style card trails */
+.os95-card-trail{position:fixed;z-index:8800;pointer-events:none;width:27px;height:36px;background:#fff;border:1px solid #000;box-shadow:2px 2px 0 rgba(0,0,0,.25);font:bold 12px Georgia,serif;display:flex;align-items:flex-start;justify-content:flex-start;padding:2px;animation:os95CardFall 1.15s cubic-bezier(.15,.65,.25,1) forwards}
+.os95-card-trail.red{color:#c00000}.os95-card-trail.black{color:#000}
+@keyframes os95CardFall{0%{opacity:1;transform:translate(0,0) rotate(0)}75%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot))}}
+
+/* fake scan / corruption moments */
+body.os95-glitch .hero-grid,body.os95-glitch .section:nth-of-type(odd){animation:os95Glitch .13s steps(2,end) 3}
+@keyframes os95Glitch{0%{transform:translate(0)}33%{transform:translate(3px,-1px)}66%{transform:translate(-2px,1px)}100%{transform:translate(0)}}
+
+/* player modal */
+.player-modal{background:rgba(0,0,0,.45)!important}
+.player-shell{background:var(--win-gray)!important;border:2px solid!important;border-color:#fff #303030 #303030 #fff!important;clip-path:none!important;padding:28px 7px 7px!important}
+.player-shell:before{content:"Media Player — DJ Sir Gay.exe"!important;position:absolute!important;top:3px!important;left:3px!important;right:3px!important;height:20px!important;background:var(--win-navy)!important;color:#fff!important;font:bold 11px var(--win-font)!important;padding:4px 5px!important}
+.player-close{top:5px!important;right:5px!important;width:18px!important;height:17px!important;background:var(--win-gray)!important;color:#000!important;border:1px solid!important;border-color:#fff #333 #333 #fff!important;font:bold 12px var(--win-font)!important}
+
+@media(max-width:900px){
+  .os95-shortcuts{position:relative;left:auto;top:auto;width:min(920px,calc(100% - 30px));margin:0 auto -44px;display:flex;gap:4px;overflow-x:auto;padding:7px 0 54px;z-index:5}
+  .os95-shortcut{flex:0 0 76px;width:76px;font-size:10px}
+  .hero{padding-top:26px!important}
+  .hero-grid{width:calc(100vw - 24px)!important}
+  .section,.booking,.voice-section,footer.site-footer{width:calc(100% - 16px)!important;margin:16px auto!important}
+  .section-head{grid-template-columns:78px minmax(0,1fr)!important}
+  .swipe-hint{grid-column:1/-1;justify-self:start!important}
+  .project-card{grid-template-columns:1fr!important;min-height:0!important}
+  .project-visual{min-height:300px!important;border-right:0!important;border-bottom:1px solid #808080!important}
+  .voice-intro,.booking-card{grid-template-columns:1fr!important}
+  .os95-task-btn:nth-child(n+4){display:none}
+}
+
+@media(max-width:560px){
+  body{padding-bottom:38px}
+  .hero{min-height:auto!important;padding:88px 8px 22px!important}
+  .hero-grid{width:100%!important;padding:28px 8px 8px!important}
+  .hero-copy{padding:18px 14px!important}
+  .hero-copy:before{font-size:10px!important}
+  .hero h1{font-size:clamp(40px,14vw,66px)!important;line-height:.88!important}
+  .hero-text{font-size:13px!important}
+  .signal-card strong{font-size:16px!important}
+  .section,.booking,.voice-section{padding:38px 6px 8px!important}
+  .section-head{padding:6px!important;grid-template-columns:1fr!important}
+  .section-id{display:flex;gap:7px;align-items:baseline}
+  .section-id strong{font-size:22px!important}
+  .section-title h2,.voice-intro h2,.booking h2{font-size:clamp(28px,10vw,42px)!important}
+  .carousel{padding:6px!important}
+  .fresh-rail,.article-rail{grid-auto-columns:84vw!important}
+  .fresh-card{grid-template-columns:92px minmax(0,1fr)!important;min-height:112px!important}
+  .fresh-thumb{min-height:110px!important}
+  .fresh-meta h3{font-size:21px!important}
+  .projects-rail{grid-auto-columns:88vw!important}
+  .project-visual{min-height:230px!important}
+  .project-copy{padding:15px!important}
+  .project-copy h3{font-size:27px!important}
+  .voice-intro{padding:8px!important}
+  .booking-card>div{padding:18px!important}
+  footer.site-footer{margin-bottom:52px!important}
+  .os95-taskbar{height:38px}
+  .os95-start-btn{height:30px}
+  .os95-task-items{display:none}
+  .os95-tray{margin-left:auto;height:29px;min-width:85px}
+  .os95-start-menu{bottom:38px;width:min(260px,calc(100vw - 6px))}
+}
