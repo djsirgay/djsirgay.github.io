@@ -15,11 +15,46 @@
 .direct-subnav{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 8px;padding:4px;background:#c0c0c0;border:1px solid #808080}
 .direct-subnav a{padding:4px 8px;color:#000080;background:#fff;border:1px solid #aaa;text-decoration:none;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 
-/* The video is the next thing after the identity block. */
 .player{scroll-margin-top:12px!important}
 .player iframe{min-height:min(62vw,560px)!important}
 .copy:before{content:"File information";display:block;margin-bottom:8px;color:#000080;font:bold 11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .copy .eyebrow{margin-bottom:8px!important}
+
+/* Desktop reality: project properties and Windows Media Player are separate windows. */
+@media(min-width:1120px){
+  body{overflow-x:hidden!important;background:#008080!important}
+  .main{
+    width:min(720px,calc(100vw - 585px))!important;
+    margin:22px 0 72px 26px!important;
+    transform:translate(0,10px);
+  }
+  .main:before{content:"Disk D:\\PROJECTS\\ — Project Properties"!important}
+  .player{
+    position:fixed!important;z-index:1400!important;
+    top:62px!important;right:24px!important;
+    width:520px!important;height:390px!important;
+    margin:0!important;padding:26px 7px 46px!important;
+    border:2px solid!important;border-color:#fff #303030 #303030 #fff!important;
+    background:#c0c0c0!important;box-shadow:5px 5px 0 rgba(0,0,0,.32)!important;
+    clip-path:none!important;overflow:hidden!important;
+  }
+  .player:before{
+    content:"Windows Media Player — DJ Sir Gay.exe"!important;
+    position:absolute!important;left:3px!important;right:3px!important;top:3px!important;height:21px!important;
+    display:flex!important;align-items:center!important;padding:0 5px!important;
+    background:linear-gradient(90deg,#000080,#0b54a8)!important;color:#fff!important;
+    font:bold 11px/1 Tahoma,"MS Sans Serif",Arial,sans-serif!important;
+  }
+  .player:after{
+    content:"▶   Ⅱ   ■      Now Playing";
+    position:absolute;left:7px;right:7px;bottom:7px;height:34px;
+    display:flex;align-items:center;padding:0 10px;
+    background:linear-gradient(#e8e8e8,#bdbdbd);color:#000;
+    border:1px solid #808080;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif;
+  }
+  .player iframe{width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border:2px solid #000!important;background:#000!important}
+  .direct-project{grid-template-columns:72px minmax(0,1fr)!important}.direct-icon{width:62px;height:62px;font-size:37px}.direct-actions{grid-column:1/-1;grid-template-columns:1.4fr 1fr 1fr}.direct-actions .play{min-height:48px;font-size:14px}
+}
 
 @media(max-width:720px){
   .direct-project{grid-template-columns:62px minmax(0,1fr);gap:10px;padding:12px}
