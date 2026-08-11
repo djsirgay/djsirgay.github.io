@@ -28,10 +28,22 @@
   const projectsHint = $('#projects .swipe-hint');
   if (projectsHint) projectsHint.textContent = '4 files';
 
-  // The legacy modal used to lock body scrolling. The new player is a floating window,
-  // so the visitor should keep browsing, painting or playing while the video continues.
   document.addEventListener('click', event => {
     if (!event.target.closest('[data-video]')) return;
     setTimeout(() => { document.body.style.overflow = ''; }, 0);
   }, true);
+
+  if (!document.querySelector('link[data-desktop-reality]')) {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/desktop-reality.css?v=20260810-1';
+    css.dataset.desktopReality = '1';
+    document.head.appendChild(css);
+  }
+  if (!document.querySelector('script[data-desktop-reality]')) {
+    const js = document.createElement('script');
+    js.src = '/desktop-reality.js?v=20260810-1';
+    js.dataset.desktopReality = '1';
+    document.body.appendChild(js);
+  }
 })();
