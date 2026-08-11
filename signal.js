@@ -18,9 +18,16 @@
   if (!document.querySelector('link[data-djsg-os95]')) {
     const osStyle = document.createElement('link');
     osStyle.rel = 'stylesheet';
-    osStyle.href = '/os95.css?v=20260810-1';
+    osStyle.href = '/os95.css?v=20260810-2';
     osStyle.dataset.djsgOs95 = '1';
     document.head.appendChild(osStyle);
+  }
+  if (!document.querySelector('link[data-djsg-evolution]')) {
+    const evolutionStyle = document.createElement('link');
+    evolutionStyle.rel = 'stylesheet';
+    evolutionStyle.href = '/os95-evolution.css?v=20260810-1';
+    evolutionStyle.dataset.djsgEvolution = '1';
+    document.head.appendChild(evolutionStyle);
   }
 
   const topbar = document.querySelector('.topbar');
@@ -195,9 +202,19 @@
   document.getElementById('year')?.replaceChildren(String(new Date().getFullYear()));
 
   if (!document.querySelector('script[data-djsg-os95]')) {
+    // Suppress the old fake security warning before the OS script can create it.
+    try { sessionStorage.setItem('djsg-exe-booted', '1'); } catch (_) {}
+
     const osScript = document.createElement('script');
-    osScript.src = '/os95.js?v=20260810-1';
+    osScript.src = '/os95.js?v=20260810-2';
     osScript.dataset.djsgOs95 = '1';
+    osScript.addEventListener('load', () => {
+      if (document.querySelector('script[data-djsg-evolution]')) return;
+      const evolutionScript = document.createElement('script');
+      evolutionScript.src = '/os95-evolution.js?v=20260810-1';
+      evolutionScript.dataset.djsgEvolution = '1';
+      document.body.appendChild(evolutionScript);
+    });
     document.body.appendChild(osScript);
   }
 })();
