@@ -28,18 +28,23 @@
     iframe.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), 'https://www.youtube.com');
   };
 
+  const ensureYoutubeApi = iframe => {
+    if (!iframe?.src || iframe.src === 'about:blank' || iframe.src.includes('enablejsapi=1')) return;
+    try {
+      const url=new URL(iframe.src);
+      if (!/youtube\.com$/i.test(url.hostname) && !/youtube-nocookie\.com$/i.test(url.hostname)) return;
+      url.searchParams.set('enablejsapi','1');
+      url.searchParams.set('origin',location.origin);
+      iframe.src=url.toString();
+    } catch(_) {}
+  };
+
   const prepareWmp = win => {
     if (!win || win.dataset.wmpPolished === '1') return;
     win.dataset.wmpPolished='1';
     const iframe=$('iframe',win);
-    if (iframe && iframe.src && !iframe.src.includes('enablejsapi=1')) {
-      try {
-        const url=new URL(iframe.src);
-        url.searchParams.set('enablejsapi','1');
-        url.searchParams.set('origin',location.origin);
-        iframe.src=url.toString();
-      } catch(_) {}
-    }
+    ensureYoutubeApi(iframe);
+    if (iframe) new MutationObserver(()=>ensureYoutubeApi(iframe)).observe(iframe,{attributes:true,attributeFilter:['src']});
     const controls=$$('.dr-wmp-controls>button',win);
     controls[0]?.addEventListener('click',()=>ytCommand(iframe,'playVideo'));
     controls[1]?.addEventListener('click',()=>ytCommand(iframe,'pauseVideo'));
@@ -113,7 +118,6 @@
     win.addEventListener('pointerdown',()=>setTimeout(sync,0));
   };
 
-  // Winamp's Pause button controls the media instead of merely hiding its window.
   desktop.addEventListener('click',e=>{
     const pause=e.target.closest('[data-wa-pause]');
     if(!pause)return;
