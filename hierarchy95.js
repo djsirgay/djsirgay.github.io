@@ -33,6 +33,22 @@
     setTimeout(() => { document.body.style.overflow = ''; }, 0);
   }, true);
 
+  const loadPolish = () => {
+    if (!document.querySelector('link[data-desktop-polish]')) {
+      const css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = '/desktop-polish.css?v=20260810-1';
+      css.dataset.desktopPolish = '1';
+      document.head.appendChild(css);
+    }
+    if (!document.querySelector('script[data-desktop-polish]')) {
+      const js = document.createElement('script');
+      js.src = '/desktop-polish.js?v=20260810-1';
+      js.dataset.desktopPolish = '1';
+      document.body.appendChild(js);
+    }
+  };
+
   const launchDesktop = () => {
     if (!document.querySelector('link[data-desktop-reality]')) {
       const css = document.createElement('link');
@@ -45,7 +61,10 @@
       const js = document.createElement('script');
       js.src = '/desktop-reality.js?v=20260810-3';
       js.dataset.desktopReality = '1';
+      js.addEventListener('load', loadPolish, { once:true });
       document.body.appendChild(js);
+    } else {
+      loadPolish();
     }
   };
 
