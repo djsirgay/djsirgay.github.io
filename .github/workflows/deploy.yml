@@ -85,7 +85,7 @@ jobs:
 
           # Keep the source HTML free of duplicate handlers, but force new cache keys
           # for the OS runtime and project skin in every DJ Sir Gay.exe release.
-          perl -0pi -e 's#signal\.js\?v=[^"[:space:]]+#signal.js?v=20260810-1#g' _site/index.html
+          perl -0pi -e 's#signal\.js\?v=[^"[:space:]]+#signal.js?v=20260810-2#g' _site/index.html
           perl -0pi -e 's#project-dramaturgy\.css\?v=[^"[:space:]]+#project-dramaturgy.css?v=20260810-1#g' _site/project.html
 
           printf 'djsirgay.com\n' > _site/CNAME
