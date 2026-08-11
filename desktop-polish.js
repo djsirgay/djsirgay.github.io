@@ -26,7 +26,8 @@
   const ensureTask = win => {
     const id = win.dataset.window;
     if (!id) return null;
-    let btn = taskItems.querySelector(`[data-dr-task="${CSS.escape(id)}"]`);
+    const safeId = window.CSS?.escape ? CSS.escape(id) : id.replace(/[^a-zA-Z0-9_-]/g,'_');
+    let btn = taskItems.querySelector(`[data-dr-task="${safeId}"]`);
     if (!btn) {
       btn = document.createElement('button');
       btn.type='button';
@@ -85,12 +86,19 @@
     win.addEventListener('pointerdown',()=>setTimeout(sync,0));
   };
 
+  let ordering=false;
   const reorderIcons = () => {
+    if(ordering)return;
     const icons=$('.dr-icons',desktop); if(!icons)return;
     const find=text=>$$('.dr-icon',icons).find(el=>$('span',el)?.textContent===text);
     const order=['WINAMP.EXE','BOOK_ME.EXE','SERGEY.BMP'];
-    let anchor=icons.firstChild;
-    order.reverse().forEach(name=>{const el=find(name);if(el)icons.insertBefore(el,anchor);});
+    ordering=true;
+    order.forEach((name,index)=>{
+      const el=find(name); if(!el)return;
+      const target=icons.children[index]||null;
+      if(target!==el)icons.insertBefore(el,target);
+    });
+    ordering=false;
   };
 
   // Desktop-style rubber-band selection. Decorative but useful: it makes empty space feel alive.
