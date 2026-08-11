@@ -27,4 +27,11 @@
   if (freshHint) freshHint.textContent = 'playlist';
   const projectsHint = $('#projects .swipe-hint');
   if (projectsHint) projectsHint.textContent = '4 files';
+
+  // The legacy modal used to lock body scrolling. The new player is a floating window,
+  // so the visitor should keep browsing, painting or playing while the video continues.
+  document.addEventListener('click', event => {
+    if (!event.target.closest('[data-video]')) return;
+    setTimeout(() => { document.body.style.overflow = ''; }, 0);
+  }, true);
 })();
