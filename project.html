@@ -10,15 +10,15 @@
   <link rel="icon" href="/assets/logo-square.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/project-signal.css?v=20260730-3" />
   <link rel="stylesheet" href="/mobile-overflow.css?v=20260730-3" />
   <link rel="stylesheet" href="/project-extras.css?v=20260730-3" />
-  <link rel="stylesheet" href="/project-dramaturgy.css?v=20260810-1" />
-  <link rel="stylesheet" href="/project-direct.css?v=20260810-1" />
+  <link rel="stylesheet" href="/project-dramaturgy.css?v=20260810-4" />
+  <link rel="stylesheet" href="/project-direct.css?v=20260810-4" />
 </head>
 <body>
-  <header class="header"><div class="header-in"><a class="wordmark" href="/">DJ SIR GAY.exe</a><a class="back" href="/#projects">← Back to Desktop</a></div></header>
+  <header class="header"><div class="header-in"><a class="wordmark" href="/">DJ SIR GAY.exe</a><a class="back" href="/">← Back to Desktop</a></div></header>
   <main class="main">
     <p class="file-label" id="file-label">Loading project file / DJSG archive</p>
     <section class="direct-project" id="direct-project" aria-live="polite"></section>
@@ -104,27 +104,39 @@
     const slug=new URLSearchParams(location.search).get('slug')||projects[0].slug;
     const p=projects.find(item=>item.slug===slug)||projects[0];
     const projectNumber=String(projects.indexOf(p)+1).padStart(2,'0');
+    const fileName=p.slug.toUpperCase().replace(/[^A-Z0-9]+/g,'_')+'.EXE';
     document.title=`DJ Sir Gay.exe — ${p.title}`;
     document.querySelector('meta[name="description"]').content=p.short;
-    document.getElementById('file-label').textContent=`Project file / ${projectNumber} of ${String(projects.length).padStart(2,'0')} / ${p.slug}.djsg`;
+    document.querySelector('.main').dataset.projectTitle=`Disk D:\\PROJECTS\\${fileName} — Properties`;
+    document.getElementById('file-label').textContent=`Project file / ${projectNumber} of ${String(projects.length).padStart(2,'0')} / ${fileName}`;
 
     const embedUrl=autoplay=>{
+      const origin=encodeURIComponent(location.origin);
       const base=p.embed.startsWith('videoseries')?`https://www.youtube.com/embed/${p.embed}`:`https://www.youtube.com/embed/${p.embed}?rel=0`;
-      if(!autoplay)return base;
-      return base+(base.includes('?')?'&':'?')+'autoplay=1';
+      const sep=base.includes('?')?'&':'?';
+      return `${base}${sep}enablejsapi=1&origin=${origin}${autoplay?'&autoplay=1':''}`;
     };
 
     document.getElementById('direct-project').innerHTML=`<div class="direct-icon">♫</div><div class="direct-copy"><small>${p.eyebrow}</small><h1>${p.title}</h1><h2>${p.subtitle}</h2></div><div class="direct-actions"><button class="play" id="direct-play" type="button">▶ PLAY PROJECT</button><a class="btn" href="${p.youtube}" target="_blank" rel="noreferrer">YouTube ↗</a><a class="btn" href="/">Desktop</a></div>`;
-    document.getElementById('player').innerHTML=`<iframe src="${embedUrl(false)}" title="Listen to ${p.title}: ${p.subtitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    const player=document.getElementById('player');
+    player.dataset.playerTitle=`Windows Media Player — ${p.title}`;
+    player.innerHTML=`<div class="project-wmp-screen"><iframe src="${embedUrl(false)}" title="Listen to ${p.title}: ${p.subtitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="project-wmp-controls"><button type="button" data-pwmp="play">▶</button><button type="button" data-pwmp="pause">Ⅱ</button><button type="button" data-pwmp="stop">■</button><strong>${p.title}</strong></div>`;
     document.getElementById('visual').innerHTML=`<img src="${p.img}" alt="${p.title} — ${p.subtitle}">`;
-    document.getElementById('copy').innerHTML=`<div><div class="eyebrow">FILE INFO / ${p.slug}.djsg</div><div class="meta">${p.meta.map(item=>`<span>${item}</span>`).join('')}</div><p class="summary">${p.short}</p></div><div class="actions"><a class="btn" href="${p.soundcloud}" target="_blank" rel="noreferrer">SoundCloud ↗</a><a class="btn" href="/#booking">Book this signal</a></div>`;
-    document.getElementById('story').innerHTML=p.story.map((text,index)=>`<article class="log"><p>${text}</p></article>`).join('');
+    document.getElementById('copy').innerHTML=`<div><div class="eyebrow">FILE INFO / ${fileName}</div><div class="meta">${p.meta.map(item=>`<span>${item}</span>`).join('')}</div><p class="summary">${p.short}</p></div><div class="actions"><a class="btn" href="${p.soundcloud}" target="_blank" rel="noreferrer">SoundCloud ↗</a><a class="btn" href="/#booking">Book this signal</a></div>`;
+    document.getElementById('story').innerHTML=p.story.map(text=>`<article class="log"><p>${text}</p></article>`).join('');
     document.getElementById('more').innerHTML=projects.filter(item=>item.slug!==p.slug).map(item=>`<a class="mini" href="/project.html?slug=${item.slug}"><div class="mini-image"><img src="${item.img}" alt="${item.title}" loading="lazy"></div><div class="mini-copy"><p>${item.eyebrow}</p><h4>${item.title}</h4><span>${item.subtitle} →</span></div></a>`).join('');
 
+    const iframe=player.querySelector('iframe');
+    const command=func=>iframe.contentWindow?.postMessage(JSON.stringify({event:'command',func,args:[]}), 'https://www.youtube.com');
+    player.addEventListener('click',event=>{
+      const action=event.target.closest('[data-pwmp]')?.dataset.pwmp;
+      if(action==='play')command('playVideo');
+      if(action==='pause')command('pauseVideo');
+      if(action==='stop')command('stopVideo');
+    });
     document.getElementById('direct-play').addEventListener('click',()=>{
-      const iframe=document.querySelector('#player iframe');
       iframe.src=embedUrl(true);
-      document.getElementById('player').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+      player.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
     });
   </script>
 </body>
