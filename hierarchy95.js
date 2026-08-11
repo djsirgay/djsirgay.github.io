@@ -37,13 +37,13 @@
     if (!document.querySelector('link[data-desktop-polish]')) {
       const css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = '/desktop-polish.css?v=20260810-1';
+      css.href = '/desktop-polish.css?v=20260810-2';
       css.dataset.desktopPolish = '1';
       document.head.appendChild(css);
     }
     if (!document.querySelector('script[data-desktop-polish]')) {
       const js = document.createElement('script');
-      js.src = '/desktop-polish.js?v=20260810-1';
+      js.src = '/desktop-polish.js?v=20260810-2';
       js.dataset.desktopPolish = '1';
       document.body.appendChild(js);
     }
@@ -68,8 +68,6 @@
     }
   };
 
-  // Paint, Solitaire and Minesweeper are supplied by apps95.js. Let that script finish first
-  // so every desktop icon works on the very first click, even on a fast connection.
   if ($('#djsg-paint-launch')) {
     launchDesktop();
   } else {
