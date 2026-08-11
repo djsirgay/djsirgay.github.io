@@ -1,0 +1,61 @@
+/* Content hierarchy pass: less chrome competition, faster comprehension. */
+.hero{min-height:78svh!important;padding-top:68px!important;padding-bottom:44px!important}
+.hero-grid{width:min(790px,calc(100vw - 150px))!important}
+.hero-copy{padding:22px 18px 18px!important}
+.hero-copy:before{margin-bottom:11px!important;font-size:10px!important}
+.hero h1{max-width:650px!important;font-size:clamp(42px,6.6vw,76px)!important;line-height:.9!important}
+.hero-text{max-width:590px!important;margin-top:15px!important;font-size:14px!important;line-height:1.45!important}
+.hero-actions{margin-top:16px!important;gap:6px!important}
+.hero-actions .button{min-height:34px!important;font-size:11px!important;font-weight:700!important}
+.signal-card{margin-top:7px!important;padding:7px 9px!important}
+.signal-card:before{padding-bottom:3px!important;font-size:10px!important}
+.signal-card strong{display:none!important}
+.signal-card footer{margin-top:5px!important;padding-top:5px!important;font-size:10px!important}
+
+.section,.booking,.voice-section{margin:24px auto!important;padding-top:36px!important}
+.section-head{margin-bottom:7px!important;padding:6px 7px!important;grid-template-columns:82px minmax(0,1fr) auto!important;gap:9px!important}
+.section-id{font-size:10px!important}.section-id strong{font-size:23px!important}
+.section-title h2,.voice-intro h2,.booking h2{font-size:clamp(27px,3.5vw,43px)!important;line-height:.96!important}
+.section-title p{max-width:620px!important;margin-top:5px!important;font-size:12px!important;line-height:1.38!important}
+.swipe-hint{font-size:10px!important}
+.rail-controls{margin-top:4px!important}
+
+#fresh{padding-top:36px!important}
+#fresh .section-head{margin-bottom:7px!important}
+#fresh .section-title h2{font-size:clamp(27px,3.8vw,42px)!important}
+
+.projects-rail{grid-auto-columns:min(78vw,690px)!important}
+.project-card{min-height:330px!important;grid-template-columns:minmax(220px,.78fr) 1.22fr!important}
+.project-visual{min-height:330px!important}
+.project-copy{padding:16px!important}
+.project-copy h3{font-size:28px!important}
+.project-copy h4{font-size:13px!important}
+.project-copy p{font-size:12px!important;line-height:1.38!important}
+
+.voice-intro{padding:9px!important;gap:12px!important}
+.voice-copy{font-size:12px!important}
+.article-rail{grid-auto-columns:min(70vw,335px)!important}
+.article-body h3{font-size:19px!important}.article-body p{font-size:12px!important}
+
+.booking-card>div{padding:18px!important}.booking-side p{font-size:12px!important}
+footer.site-footer{margin-top:24px!important}
+
+@media(max-width:950px){
+  .hero-grid{width:min(790px,calc(100vw - 112px))!important}
+}
+@media(max-width:700px){
+  .hero{min-height:auto!important;padding:72px 8px 22px!important}
+  .hero-grid{width:calc(100vw - 16px)!important}
+  .hero h1{font-size:clamp(39px,12vw,60px)!important}
+  .hero-actions{display:grid!important;grid-template-columns:1fr 1fr!important}
+  .hero-actions .button:first-child{grid-column:1/-1}
+  .section,.booking,.voice-section{width:calc(100% - 12px)!important;margin:14px auto!important}
+  .section-head{grid-template-columns:62px minmax(0,1fr)!important}
+  .swipe-hint{display:none!important}
+  .section-title h2,.voice-intro h2,.booking h2{font-size:30px!important}
+  .projects-rail{grid-auto-columns:88vw!important}
+  .project-card{grid-template-columns:1fr!important;min-height:0!important}
+  .project-visual{min-height:230px!important;border-right:0!important;border-bottom:1px solid #808080!important}
+  .voice-intro{grid-template-columns:1fr!important}
+  .booking-card{grid-template-columns:1fr!important}
+}
