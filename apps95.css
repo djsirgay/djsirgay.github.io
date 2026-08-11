@@ -1,0 +1,91 @@
+/* DJ Sir Gay.exe applications: useful first, ridiculous second. */
+
+/* ---------- DJSGAMP now-playing console ---------- */
+.djsgamp-console{
+  display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:10px;align-items:stretch;
+  margin:0 0 8px;padding:7px;background:#151515;color:#00ff63;
+  border:2px solid;border-color:#666 #000 #000 #666;
+  font-family:"VT323","Lucida Console",monospace;
+}
+.djsgamp-art{position:relative;min-height:112px;background:#000;border:1px solid #444;overflow:hidden}
+.djsgamp-art img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.12)}
+.djsgamp-art:after{content:"NOW PLAYING";position:absolute;left:4px;bottom:4px;padding:2px 4px;background:#000;color:#00ff63;border:1px solid #00ff63;font:14px/1 "VT323",monospace}
+.djsgamp-display{min-width:0;padding:6px 9px;background:#050a05;border:1px solid #303030;box-shadow:inset 0 0 18px rgba(0,255,70,.06)}
+.djsgamp-label{margin:0;color:#8c8c8c;font:13px/1 "VT323",monospace;text-transform:uppercase}
+.djsgamp-title{margin:5px 0 7px;color:#00ff63;font:clamp(25px,3vw,39px)/.94 "VT323",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 5px rgba(0,255,80,.35)}
+.djsgamp-meta{display:flex;flex-wrap:wrap;gap:7px;color:#b5b5b5;font:15px/1 "VT323",monospace}
+.djsgamp-eq{display:flex;align-items:end;gap:2px;height:20px;margin-top:10px;overflow:hidden}
+.djsgamp-eq i{display:block;width:5px;background:#00ff63;animation:djsgEq .65s steps(4,end) infinite alternate;transform-origin:bottom}
+.djsgamp-eq i:nth-child(2n){animation-duration:.47s}.djsgamp-eq i:nth-child(3n){animation-duration:.82s}
+@keyframes djsgEq{from{height:3px}to{height:20px}}
+.djsgamp-actions{display:flex;flex-direction:column;gap:5px;min-width:118px}
+.djsgamp-actions button,.djsgamp-actions a{
+  min-height:28px;display:flex;align-items:center;justify-content:center;padding:3px 8px;
+  background:#303030;color:#00ff63;border:2px solid;border-color:#777 #000 #000 #777;
+  text-decoration:none;font:14px/1 "VT323",monospace;cursor:pointer
+}
+.djsgamp-actions button:active,.djsgamp-actions a:active{border-color:#000 #777 #777 #000}
+.djsgamp-copy-status{min-height:16px;color:#aaa;font:12px/1 "VT323",monospace;text-align:center}
+
+/* ---------- application shortcuts ---------- */
+.djsg-app-shortcut svg{width:32px;height:32px;shape-rendering:crispEdges;image-rendering:pixelated}
+
+/* ---------- shared app window ---------- */
+.djsg-app-layer{position:fixed;z-index:7600;inset:0;display:grid;place-items:center;padding:12px;background:rgba(0,0,0,.18)}
+.djsg-app-window{
+  position:relative;width:min(920px,calc(100vw - 22px));max-height:calc(100vh - 58px);overflow:auto;
+  padding:31px 7px 7px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #303030 #303030 #fff;
+  box-shadow:7px 7px 0 rgba(0,0,0,.34);font-family:Tahoma,"MS Sans Serif",Arial,sans-serif
+}
+.djsg-app-titlebar{position:sticky;z-index:4;top:-28px;margin:-28px -4px 6px;height:23px;display:flex;align-items:center;padding:0 5px;background:#000080;color:#fff;font:bold 12px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.djsg-app-close{margin-left:auto;width:18px;height:17px;padding:0;display:grid;place-items:center;background:#c0c0c0;color:#000;border:1px solid;border-color:#fff #333 #333 #fff;font:bold 12px/1 Arial}
+.djsg-menubar{display:flex;gap:13px;padding:3px 6px;margin-bottom:5px;border:1px solid #aaa;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif;background:#c0c0c0}
+.djsg-menubar span:first-letter{text-decoration:underline}
+
+/* ---------- Paint.exe ---------- */
+.paint-layout{display:grid;grid-template-columns:56px minmax(0,1fr);gap:5px}
+.paint-tools{display:grid;grid-template-columns:repeat(2,25px);align-content:start;gap:2px;padding:3px;background:#c0c0c0}
+.paint-tool{height:27px;padding:0;border:2px solid;border-color:#fff #555 #555 #fff;background:#c0c0c0;font-size:14px}
+.paint-tool.active{border-color:#555 #fff #fff #555;background:#a9a9a9}
+.paint-stage{overflow:auto;padding:7px;background:#7f7f7f;border:2px solid;border-color:#555 #fff #fff #555}
+.paint-canvas-wrap{width:max-content;min-width:100%;display:grid;place-items:center}
+#djsg-paint-canvas{display:block;max-width:100%;height:auto;background:#fff;box-shadow:1px 1px #000;cursor:crosshair;touch-action:none}
+.paint-bottom{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:center;margin-top:5px}
+.paint-colors{display:grid;grid-template-columns:repeat(14,18px);gap:1px;width:max-content;padding:3px;background:#c0c0c0;border:2px solid;border-color:#555 #fff #fff #555}
+.paint-color{width:18px;height:18px;padding:0;border:1px solid #000}
+.paint-color.active{outline:2px dotted #fff;outline-offset:-4px}
+.paint-status{padding:4px 7px;border:2px solid;border-color:#808080 #fff #fff #808080;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.paint-actions{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.paint-actions button{min-height:28px;padding:3px 9px;background:#c0c0c0;border:2px solid;border-color:#fff #444 #444 #fff;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.paint-actions button:active{border-color:#444 #fff #fff #444}
+.paint-size{width:50px;height:26px;background:#fff;border:2px solid;border-color:#555 #fff #fff #555;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+
+/* ---------- Solitaire.exe ---------- */
+.solitaire-window{width:min(1080px,calc(100vw - 14px))}
+.solitaire-board{min-width:760px;padding:12px;background:#008000;border:2px solid;border-color:#005900 #38aa38 #38aa38 #005900;user-select:none}
+.sol-top{display:grid;grid-template-columns:70px 70px 1fr repeat(4,70px);gap:10px;margin-bottom:22px}
+.sol-tableau{display:grid;grid-template-columns:repeat(7,70px);gap:10px;align-items:start;min-height:390px}
+.sol-pile{position:relative;width:70px;height:98px;border:2px dotted rgba(255,255,255,.55);border-radius:3px}
+.sol-pile.foundation:after{content:"A";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.35);font:40px Georgia,serif}
+.sol-card{position:absolute;left:-2px;top:-2px;width:70px;height:98px;padding:4px;background:#fff;border:1px solid #000;border-radius:4px;box-shadow:1px 1px 0 rgba(0,0,0,.35);font:bold 15px Georgia,serif;cursor:pointer}
+.sol-card.red{color:#c00000}.sol-card.black{color:#000}
+.sol-card.back{background:repeating-linear-gradient(45deg,#000080 0 4px,#e7e7e7 4px 6px);border:3px solid #fff;box-shadow:0 0 0 1px #000}
+.sol-card.selected{outline:3px dashed #ffff00;outline-offset:-5px}
+.sol-rank{display:block}.sol-suit{display:block;font-size:20px;line-height:1}
+.sol-stock-count{position:absolute;right:3px;bottom:2px;padding:1px 3px;background:#000080;color:#fff;font:10px Tahoma,sans-serif}
+.sol-column{position:relative;min-height:390px}
+.sol-column>.sol-card{position:absolute}
+.sol-toolbar{display:flex;align-items:center;gap:6px;margin-bottom:6px;padding:4px;border:2px solid;border-color:#808080 #fff #fff #808080}
+.sol-toolbar button{min-height:27px;padding:3px 8px;background:#c0c0c0;border:2px solid;border-color:#fff #444 #444 #fff;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.sol-status{margin-left:auto;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+
+@media(max-width:760px){
+  .djsgamp-console{grid-template-columns:92px minmax(0,1fr)}
+  .djsgamp-actions{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr)}
+  .djsgamp-art{min-height:86px}.djsgamp-title{font-size:26px}
+  .paint-layout{grid-template-columns:48px minmax(0,1fr)}
+  .paint-tools{grid-template-columns:repeat(2,21px)}.paint-tool{height:23px;font-size:12px}
+  .paint-colors{grid-template-columns:repeat(8,18px)}
+  .solitaire-window{overflow:auto}.solitaire-board{transform-origin:top left}
+}
+@media(prefers-reduced-motion:reduce){.djsgamp-eq i{animation:none;height:10px}}
