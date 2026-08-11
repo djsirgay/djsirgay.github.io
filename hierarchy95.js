@@ -33,17 +33,29 @@
     setTimeout(() => { document.body.style.overflow = ''; }, 0);
   }, true);
 
-  if (!document.querySelector('link[data-desktop-reality]')) {
-    const css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = '/desktop-reality.css?v=20260810-2';
-    css.dataset.desktopReality = '1';
-    document.head.appendChild(css);
-  }
-  if (!document.querySelector('script[data-desktop-reality]')) {
-    const js = document.createElement('script');
-    js.src = '/desktop-reality.js?v=20260810-2';
-    js.dataset.desktopReality = '1';
-    document.body.appendChild(js);
+  const launchDesktop = () => {
+    if (!document.querySelector('link[data-desktop-reality]')) {
+      const css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = '/desktop-reality.css?v=20260810-3';
+      css.dataset.desktopReality = '1';
+      document.head.appendChild(css);
+    }
+    if (!document.querySelector('script[data-desktop-reality]')) {
+      const js = document.createElement('script');
+      js.src = '/desktop-reality.js?v=20260810-3';
+      js.dataset.desktopReality = '1';
+      document.body.appendChild(js);
+    }
+  };
+
+  // Paint, Solitaire and Minesweeper are supplied by apps95.js. Let that script finish first
+  // so every desktop icon works on the very first click, even on a fast connection.
+  if ($('#djsg-paint-launch')) {
+    launchDesktop();
+  } else {
+    const apps = document.querySelector('script[data-djsg-apps]');
+    if (apps) apps.addEventListener('load', launchDesktop, { once:true });
+    setTimeout(launchDesktop, 900);
   }
 })();
