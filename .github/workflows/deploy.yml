@@ -84,10 +84,10 @@ jobs:
           fi
 
           # Keep source files readable while forcing fresh public runtime URLs.
-          perl -0pi -e 's#signal\.js\?v=[^"[:space:]]+#signal.js?v=20260810-5#g' _site/index.html
-          perl -0pi -e 's#hierarchy95\.css\?v=20260810-1#hierarchy95.css?v=20260810-3#g; s#hierarchy95\.js\?v=20260810-1#hierarchy95.js?v=20260810-3#g' _site/signal.js
-          perl -0pi -e 's#project-dramaturgy\.css\?v=[^"[:space:]]+#project-dramaturgy.css?v=20260810-3#g' _site/project.html
-          perl -0pi -e 's#project-direct\.css\?v=[^"[:space:]]+#project-direct.css?v=20260810-3#g' _site/project.html
+          perl -0pi -e 's#signal\.js\?v=[^"[:space:]]+#signal.js?v=20260810-6#g' _site/index.html
+          perl -0pi -e 's#hierarchy95\.css\?v=20260810-1#hierarchy95.css?v=20260810-4#g; s#hierarchy95\.js\?v=20260810-1#hierarchy95.js?v=20260810-4#g' _site/signal.js
+          perl -0pi -e 's#project-dramaturgy\.css\?v=[^"[:space:]]+#project-dramaturgy.css?v=20260810-4#g' _site/project.html
+          perl -0pi -e 's#project-direct\.css\?v=[^"[:space:]]+#project-direct.css?v=20260810-4#g' _site/project.html
 
           printf 'djsirgay.com\n' > _site/CNAME
           touch _site/.nojekyll
