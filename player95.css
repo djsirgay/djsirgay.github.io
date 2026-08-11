@@ -1,0 +1,39 @@
+/* Keep music playing while the visitor uses the rest of DJ Sir Gay.exe. */
+.player-modal{
+  inset:auto 12px 49px auto!important;
+  width:min(560px,calc(100vw - 24px))!important;
+  height:auto!important;
+  padding:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+  pointer-events:none!important;
+  place-items:unset!important;
+}
+.player-modal.open{display:block!important}
+.player-shell{
+  width:100%!important;aspect-ratio:16/9!important;
+  padding-top:23px!important;position:relative!important;
+  border:2px solid!important;border-color:#fff #303030 #303030 #fff!important;
+  background:#c0c0c0!important;clip-path:none!important;
+  box-shadow:6px 6px 0 rgba(0,0,0,.33)!important;
+  pointer-events:auto!important;overflow:hidden!important
+}
+.player-shell:before{
+  content:"Media Player — DJSGAMP"!important;
+  position:absolute!important;z-index:5!important;left:3px!important;right:3px!important;top:3px!important;
+  height:19px!important;display:flex!important;align-items:center!important;padding:0 5px!important;
+  background:#000080!important;color:#fff!important;
+  font:bold 11px/1 Tahoma,"MS Sans Serif",Arial,sans-serif!important;letter-spacing:0!important
+}
+.player-shell iframe{display:block!important;width:100%!important;height:100%!important;border:0!important;background:#000!important}
+.player-close{
+  z-index:8!important;top:5px!important;right:5px!important;width:17px!important;height:16px!important;padding:0!important;
+  display:grid!important;place-items:center!important;background:#c0c0c0!important;color:#000!important;
+  border:1px solid!important;border-color:#fff #333 #333 #fff!important;
+  font:bold 12px/1 Arial,sans-serif!important
+}
+.player-close:active{border-color:#333 #fff #fff #333!important}
+@media(max-width:650px){
+  .player-modal{left:6px!important;right:6px!important;bottom:46px!important;width:auto!important}
+  .player-shell{box-shadow:3px 3px 0 rgba(0,0,0,.3)!important}
+}
