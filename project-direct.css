@@ -1,4 +1,4 @@
-/* Direct project links: identify the file and make PLAY impossible to miss. */
+/* Direct project links: one project Properties window + one real Media Player window. */
 .direct-project{
   display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:18px;align-items:center;
   margin:0 0 10px;padding:18px;background:#fff;color:#000;
@@ -15,12 +15,20 @@
 .direct-subnav{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 8px;padding:4px;background:#c0c0c0;border:1px solid #808080}
 .direct-subnav a{padding:4px 8px;color:#000080;background:#fff;border:1px solid #aaa;text-decoration:none;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 
+.main:before{content:attr(data-project-title)!important}
 .player{scroll-margin-top:12px!important}
-.player iframe{min-height:min(62vw,560px)!important}
+.player:before{content:attr(data-player-title)!important}
+.player:after{display:none!important}
+.project-wmp-screen{width:100%;height:100%;background:#000}
+.project-wmp-screen iframe{display:block;width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border:2px solid #000!important;background:#000!important}
+.project-wmp-controls{display:grid;grid-template-columns:32px 32px 32px minmax(0,1fr);gap:4px;align-items:center;padding:5px 0 0}
+.project-wmp-controls button{height:29px;background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff;font:bold 11px Arial}
+.project-wmp-controls button:active{border-color:#404040 #fff #fff #404040;transform:translate(1px,1px)}
+.project-wmp-controls strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:10px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .copy:before{content:"File information";display:block;margin-bottom:8px;color:#000080;font:bold 11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .copy .eyebrow{margin-bottom:8px!important}
 
-/* Desktop reality: project properties and Windows Media Player are separate windows. */
+/* On desktop the properties file and the player are visibly separate application windows. */
 @media(min-width:1120px){
   body{overflow-x:hidden!important;background:#008080!important}
   .main{
@@ -28,32 +36,29 @@
     margin:22px 0 72px 26px!important;
     transform:translate(0,10px);
   }
-  .main:before{content:"Disk D:\\PROJECTS\\ — Project Properties"!important}
   .player{
     position:fixed!important;z-index:1400!important;
     top:62px!important;right:24px!important;
     width:520px!important;height:390px!important;
-    margin:0!important;padding:26px 7px 46px!important;
+    margin:0!important;padding:26px 7px 7px!important;
     border:2px solid!important;border-color:#fff #303030 #303030 #fff!important;
     background:#c0c0c0!important;box-shadow:5px 5px 0 rgba(0,0,0,.32)!important;
     clip-path:none!important;overflow:hidden!important;
   }
   .player:before{
-    content:"Windows Media Player — DJ Sir Gay.exe"!important;
     position:absolute!important;left:3px!important;right:3px!important;top:3px!important;height:21px!important;
     display:flex!important;align-items:center!important;padding:0 5px!important;
     background:linear-gradient(90deg,#000080,#0b54a8)!important;color:#fff!important;
     font:bold 11px/1 Tahoma,"MS Sans Serif",Arial,sans-serif!important;
+    overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;
   }
-  .player:after{
-    content:"▶   Ⅱ   ■      Now Playing";
-    position:absolute;left:7px;right:7px;bottom:7px;height:34px;
-    display:flex;align-items:center;padding:0 10px;
-    background:linear-gradient(#e8e8e8,#bdbdbd);color:#000;
-    border:1px solid #808080;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif;
-  }
-  .player iframe{width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border:2px solid #000!important;background:#000!important}
+  .project-wmp-screen{height:calc(100% - 39px)}
   .direct-project{grid-template-columns:72px minmax(0,1fr)!important}.direct-icon{width:62px;height:62px;font-size:37px}.direct-actions{grid-column:1/-1;grid-template-columns:1.4fr 1fr 1fr}.direct-actions .play{min-height:48px;font-size:14px}
+}
+
+@media(max-width:1119px){
+  .player{padding-bottom:7px!important}
+  .project-wmp-screen{aspect-ratio:16/9;height:auto}
 }
 
 @media(max-width:720px){
@@ -62,5 +67,5 @@
   .direct-actions{grid-column:1/-1;grid-template-columns:1fr 1fr;min-width:0}
   .direct-actions .play{grid-column:1/-1;min-height:42px;font-size:13px}
   .direct-copy h1{font-size:clamp(31px,10.5vw,50px)!important}
-  .player iframe{min-height:56vw!important}
+  .project-wmp-controls{grid-template-columns:28px 28px 28px minmax(0,1fr)}
 }
