@@ -15,20 +15,18 @@
   const twitterDescription = document.querySelector('meta[name="twitter:description"]');
   if (twitterDescription) twitterDescription.content = 'A personal operating system built from queer memory, pop archaeology and unauthorized emotion.';
 
-  if (!document.querySelector('link[data-djsg-os95]')) {
-    const osStyle = document.createElement('link');
-    osStyle.rel = 'stylesheet';
-    osStyle.href = '/os95.css?v=20260810-2';
-    osStyle.dataset.djsgOs95 = '1';
-    document.head.appendChild(osStyle);
-  }
-  if (!document.querySelector('link[data-djsg-evolution]')) {
-    const evolutionStyle = document.createElement('link');
-    evolutionStyle.rel = 'stylesheet';
-    evolutionStyle.href = '/os95-evolution.css?v=20260810-1';
-    evolutionStyle.dataset.djsgEvolution = '1';
-    document.head.appendChild(evolutionStyle);
-  }
+  const addStyle = (key, href) => {
+    if (document.querySelector(`link[data-djsg-${key}]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.dataset[`djsg${key[0].toUpperCase()}${key.slice(1)}`] = '1';
+    document.head.appendChild(link);
+  };
+  addStyle('os95', '/os95.css?v=20260810-2');
+  addStyle('evolution', '/os95-evolution.css?v=20260810-1');
+  addStyle('hierarchy', '/hierarchy95.css?v=20260810-1');
+  addStyle('apps', '/apps95.css?v=20260810-1');
 
   const topbar = document.querySelector('.topbar');
   const progress = document.getElementById('signal-progress');
@@ -209,10 +207,20 @@
     osScript.src = '/os95.js?v=20260810-2';
     osScript.dataset.djsgOs95 = '1';
     osScript.addEventListener('load', () => {
-      if (document.querySelector('script[data-djsg-evolution]')) return;
       const evolutionScript = document.createElement('script');
       evolutionScript.src = '/os95-evolution.js?v=20260810-1';
       evolutionScript.dataset.djsgEvolution = '1';
+      evolutionScript.addEventListener('load', () => {
+        const hierarchyScript = document.createElement('script');
+        hierarchyScript.src = '/hierarchy95.js?v=20260810-1';
+        hierarchyScript.dataset.djsgHierarchy = '1';
+        document.body.appendChild(hierarchyScript);
+
+        const appsScript = document.createElement('script');
+        appsScript.src = '/apps95.js?v=20260810-1';
+        appsScript.dataset.djsgApps = '1';
+        document.body.appendChild(appsScript);
+      });
       document.body.appendChild(evolutionScript);
     });
     document.body.appendChild(osScript);
