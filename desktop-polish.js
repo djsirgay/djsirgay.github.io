@@ -26,8 +26,7 @@
   const ensureTask = win => {
     const id = win.dataset.window;
     if (!id) return null;
-    const safeId = window.CSS?.escape ? CSS.escape(id) : id.replace(/[^a-zA-Z0-9_-]/g,'_');
-    let btn = taskItems.querySelector(`[data-dr-task="${safeId}"]`);
+    let btn = [...taskItems.querySelectorAll('[data-dr-task]')].find(node => node.dataset.drTask === id);
     if (!btn) {
       btn = document.createElement('button');
       btn.type='button';
@@ -35,8 +34,9 @@
       btn.dataset.drTask=id;
       btn.innerHTML=`<span>${labelOf(win)}</span>`;
       btn.addEventListener('click',()=>{
-        const hidden = win.classList.contains('hidden') || win.classList.contains('minimized');
-        if (hidden) {
+        const closed = win.classList.contains('hidden');
+        const minimized = win.classList.contains('minimized');
+        if (closed || minimized) {
           win.classList.remove('hidden','minimized');
           win.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerType:'mouse'}));
         } else if (win.classList.contains('active')) {
@@ -59,8 +59,9 @@
     wins.forEach(win=>{
       const id=win.dataset.window; if(!id)return; ids.add(id);
       const btn=ensureTask(win);
-      const visible=!win.classList.contains('hidden')&&!win.classList.contains('minimized');
-      btn.style.display=visible?'flex':'none';
+      const open=!win.classList.contains('hidden');
+      const visible=open&&!win.classList.contains('minimized');
+      btn.style.display=open?'flex':'none';
       btn.classList.toggle('active',visible&&win.classList.contains('active'));
     });
     $$('.dr-task-btn',taskItems).forEach(btn=>{if(!ids.has(btn.dataset.drTask))btn.remove();});
@@ -77,7 +78,8 @@
       sync();
     });
     $('[data-min]',win)?.addEventListener('click',e=>{
-      e.stopPropagation();
+      e.preventDefault();
+      e.stopImmediatePropagation();
       win.classList.add('minimized');
       win.classList.remove('active');
       sync();
@@ -101,7 +103,6 @@
     ordering=false;
   };
 
-  // Desktop-style rubber-band selection. Decorative but useful: it makes empty space feel alive.
   let selectBox=null,start=null;
   desktop.addEventListener('pointerdown',e=>{
     if(e.target!==desktop || e.pointerType==='touch')return;
