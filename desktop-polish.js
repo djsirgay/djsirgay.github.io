@@ -23,6 +23,30 @@
     return raw.split('\\').pop().slice(0,28);
   };
 
+  const ytCommand = (iframe, func) => {
+    if (!iframe?.contentWindow) return;
+    iframe.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), 'https://www.youtube.com');
+  };
+
+  const prepareWmp = win => {
+    if (!win || win.dataset.wmpPolished === '1') return;
+    win.dataset.wmpPolished='1';
+    const iframe=$('iframe',win);
+    if (iframe && iframe.src && !iframe.src.includes('enablejsapi=1')) {
+      try {
+        const url=new URL(iframe.src);
+        url.searchParams.set('enablejsapi','1');
+        url.searchParams.set('origin',location.origin);
+        iframe.src=url.toString();
+      } catch(_) {}
+    }
+    const controls=$$('.dr-wmp-controls>button',win);
+    controls[0]?.addEventListener('click',()=>ytCommand(iframe,'playVideo'));
+    controls[1]?.addEventListener('click',()=>ytCommand(iframe,'pauseVideo'));
+    controls[2]?.addEventListener('click',()=>ytCommand(iframe,'stopVideo'));
+    $('[data-close]',win)?.addEventListener('click',()=>ytCommand(iframe,'stopVideo'),true);
+  };
+
   const ensureTask = win => {
     const id = win.dataset.window;
     if (!id) return null;
@@ -70,6 +94,7 @@
   const wireWindow = win => {
     if (win.dataset.polished==='1') return;
     win.dataset.polished='1';
+    if(win.dataset.window==='wmp')prepareWmp(win);
     const bar=$('.dr-titlebar',win);
     bar?.addEventListener('dblclick',e=>{
       if(e.target.closest('button'))return;
@@ -87,6 +112,16 @@
     $('[data-close]',win)?.addEventListener('click',()=>setTimeout(sync,0),true);
     win.addEventListener('pointerdown',()=>setTimeout(sync,0));
   };
+
+  // Winamp's Pause button controls the media instead of merely hiding its window.
+  desktop.addEventListener('click',e=>{
+    const pause=e.target.closest('[data-wa-pause]');
+    if(!pause)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const wmp=$('.dr-window[data-window="wmp"]',desktop);
+    if(wmp)ytCommand($('iframe',wmp),'pauseVideo');
+  },true);
 
   let ordering=false;
   const reorderIcons = () => {
