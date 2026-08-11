@@ -1,0 +1,85 @@
+/* DJ Sir Gay.exe — second-pass interaction layer.
+   Keep the desktop readable; put the chaos inside applications. */
+
+.djsg-boot-screen{
+  position:fixed;z-index:12000;inset:0;
+  display:grid;place-items:center;
+  background:#000;color:#fff;
+  font-family:Tahoma,"MS Sans Serif",Arial,sans-serif;
+  transition:opacity .28s ease,visibility .28s ease;
+}
+.djsg-boot-screen.done{opacity:0;visibility:hidden;pointer-events:none}
+.djsg-boot-panel{width:min(560px,calc(100vw - 36px));text-align:center}
+.djsg-boot-mark{display:inline-grid;grid-template-columns:repeat(2,24px);grid-template-rows:repeat(2,24px);gap:3px;transform:skew(-7deg);margin-bottom:22px;filter:drop-shadow(3px 3px 0 #333)}
+.djsg-boot-mark i:nth-child(1){background:#f23b2f}.djsg-boot-mark i:nth-child(2){background:#58b847}.djsg-boot-mark i:nth-child(3){background:#2e77d0}.djsg-boot-mark i:nth-child(4){background:#f6cf32}
+.djsg-boot-title{margin:0;font:700 clamp(34px,8vw,64px)/.9 "Pixelify Sans",Tahoma,sans-serif;letter-spacing:-.045em}
+.djsg-boot-sub{margin:11px 0 25px;color:#c9c9c9;font:13px/1.45 Tahoma,"MS Sans Serif",Arial,sans-serif}
+.djsg-boot-track{height:18px;padding:2px;border:2px solid;border-color:#fff #555 #555 #fff;background:#c0c0c0;text-align:left}
+.djsg-boot-bar{display:block;width:12%;height:100%;background:repeating-linear-gradient(90deg,#000080 0 15px,#c0c0c0 15px 18px);animation:djsgBoot 1.05s steps(7,end) forwards}
+.djsg-boot-status{margin:8px 0 0;color:#aaa;font:11px "Courier New",monospace;text-align:left}
+@keyframes djsgBoot{to{width:100%}}
+
+/* The old security-warning layer is never a valid first impression. */
+.os95-startup{display:none!important}
+
+/* Stay Fucking Strong becomes system telemetry, not a random slogan card. */
+.djsg-led{
+  position:relative;overflow:hidden;margin:9px 0 2px;height:31px;
+  border:2px solid;border-color:#505050 #fff #fff #505050;
+  background:#071007;color:#7cff6d;
+  box-shadow:inset 0 0 10px rgba(0,255,60,.16);
+  font:22px/27px "VT323","Lucida Console",monospace;
+  white-space:nowrap;text-transform:uppercase;
+}
+.djsg-led-track{display:inline-block;min-width:max-content;padding-left:100%;animation:djsgLed 13s linear infinite;text-shadow:0 0 6px rgba(124,255,109,.6)}
+@keyframes djsgLed{to{transform:translateX(-100%)}}
+
+/* HELP.DOG: useful once, ignorable forever. */
+.djsg-helper{
+  position:fixed;z-index:6200;right:12px;bottom:51px;
+  width:min(320px,calc(100vw - 24px));
+  display:grid;grid-template-columns:58px 1fr;gap:8px;
+  padding:8px;background:#ffffd8;color:#000;
+  border:2px solid;border-color:#fff #404040 #404040 #fff;
+  box-shadow:3px 3px 0 rgba(0,0,0,.3);
+  font:12px/1.35 Tahoma,"MS Sans Serif",Arial,sans-serif;
+  animation:djsgHelperIn .18s steps(2,end) both;
+}
+@keyframes djsgHelperIn{from{transform:translateY(12px);opacity:0}}
+.djsg-helper-dog{display:grid;place-items:center;width:54px;height:54px;background:#c0c0c0;border:2px solid;border-color:#808080 #fff #fff #808080}
+.djsg-helper-dog svg{width:45px;height:45px;shape-rendering:crispEdges;image-rendering:pixelated}
+.djsg-helper strong{display:block;margin-bottom:3px;color:#000080}
+.djsg-helper p{margin:0 0 7px}
+.djsg-helper-actions{display:flex;flex-wrap:wrap;gap:5px}
+.djsg-helper button{min-height:26px;padding:3px 7px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.djsg-helper button:active{border-color:#404040 #fff #fff #404040}
+
+/* Games live in Start, not on the content desktop. */
+.djsg-game-window{
+  position:fixed;z-index:7000;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(390px,calc(100vw - 22px));padding:31px 8px 8px;
+  background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #303030 #303030 #fff;
+  box-shadow:6px 6px 0 rgba(0,0,0,.33);font-family:Tahoma,"MS Sans Serif",Arial,sans-serif;
+}
+.djsg-game-title{position:absolute;left:3px;right:3px;top:3px;height:22px;display:flex;align-items:center;padding:0 6px;background:#000080;color:#fff;font:bold 12px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.djsg-game-close{margin-left:auto;width:18px;height:17px;padding:0;display:grid;place-items:center;background:#c0c0c0;color:#000;border:1px solid;border-color:#fff #333 #333 #fff;font:bold 12px/1 Arial}
+.djsg-game-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;padding:5px;border:2px solid;border-color:#808080 #fff #fff #808080;background:#c0c0c0}
+.djsg-mine-counter{min-width:52px;padding:2px 6px;background:#120000;color:#ff2a2a;font:24px/1 "VT323",monospace;text-align:center}
+.djsg-game-face,.djsg-flag-mode{min-height:28px;padding:3px 8px;border:2px solid;border-color:#fff #404040 #404040 #fff;background:#c0c0c0;font:12px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.djsg-flag-mode.active{border-color:#404040 #fff #fff #404040;background:#aaa}
+.djsg-mines{display:grid;grid-template-columns:repeat(9,1fr);aspect-ratio:1;background:#808080;border:3px solid;border-color:#808080 #fff #fff #808080}
+.djsg-cell{min-width:0;padding:0;border:2px solid;border-color:#fff #555 #555 #fff;background:#c0c0c0;font:bold 14px/1 Arial;display:grid;place-items:center;aspect-ratio:1}
+.djsg-cell.open{border:1px solid #888;background:#c0c0c0}
+.djsg-cell.flagged{color:#d00000}.djsg-cell.mine{background:#ffb0b0}
+.djsg-cell.n1{color:#0000ff}.djsg-cell.n2{color:#008000}.djsg-cell.n3{color:#f00}.djsg-cell.n4{color:#000080}.djsg-cell.n5{color:#800000}.djsg-cell.n6{color:#008080}.djsg-cell.n7{color:#000}.djsg-cell.n8{color:#808080}
+.djsg-game-status{margin:7px 0 0;font:11px/1.3 Tahoma,"MS Sans Serif",Arial,sans-serif}
+
+@media(max-width:700px){
+  .djsg-helper{right:7px;bottom:47px;width:calc(100vw - 14px)}
+  .djsg-boot-title{font-size:clamp(34px,12vw,54px)}
+  .djsg-led{height:29px;font-size:20px;line-height:25px}
+}
+@media(prefers-reduced-motion:reduce){
+  .djsg-boot-bar,.djsg-led-track,.djsg-helper{animation:none!important}
+  .djsg-boot-bar{width:100%}
+}
