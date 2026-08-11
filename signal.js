@@ -1,8 +1,6 @@
 (() => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // DJ Sir Gay.exe is the final visual layer. Loading it from the already-stable
-  // core runtime keeps the existing content, playlist sync and carousel behavior intact.
   document.title = 'DJ Sir Gay.exe — Personal Operating System';
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) themeMeta.content = '#008080';
@@ -28,9 +26,11 @@
   addStyle('hierarchy', '/hierarchy95.css?v=20260810-1');
   addStyle('apps', '/apps95.css?v=20260810-1');
 
+  // The old theatrical intro is gone. DJ Sir Gay 95 has exactly one startup screen.
+  document.getElementById('signal-boot')?.remove();
+
   const topbar = document.querySelector('.topbar');
   const progress = document.getElementById('signal-progress');
-
   const updateViewportSignal = () => {
     topbar?.classList.toggle('scrolled', scrollY > 18);
     if (!progress) return;
@@ -40,22 +40,6 @@
   updateViewportSignal();
   addEventListener('scroll', updateViewportSignal, { passive: true });
   addEventListener('resize', updateViewportSignal, { passive: true });
-
-  const boot = document.getElementById('signal-boot');
-  if (boot) {
-    let seen = false;
-    try { seen = sessionStorage.getItem('djsg-signal-seen') === '1'; } catch (_) {}
-    if (seen || reducedMotion) {
-      boot.remove();
-    } else {
-      setTimeout(() => {
-        boot.classList.add('done');
-        try { sessionStorage.setItem('djsg-signal-seen', '1'); } catch (_) {}
-        setTimeout(() => boot.remove(), 450);
-      }, 980);
-      boot.addEventListener('click', () => boot.classList.add('done'));
-    }
-  }
 
   const timecode = document.getElementById('timecode');
   const renderTimecode = () => {
@@ -131,8 +115,6 @@
     new MutationObserver(updateCurrent).observe(rail, { childList: true });
     updateCurrent();
 
-    // Mouse drag remains horizontal. Touch and trackpad gestures stay native,
-    // so a vertical swipe or mouse wheel over a card continues down the page.
     let dragging = false;
     let startX = 0;
     let startScroll = 0;
@@ -185,6 +167,8 @@
     if (event.key === 'Escape') {
       closePlayer();
       setMenu(false);
+      document.querySelector('.djsg-app-layer')?.remove();
+      document.querySelector('.djsg-game-window')?.remove();
     }
   });
 
@@ -200,7 +184,6 @@
   document.getElementById('year')?.replaceChildren(String(new Date().getFullYear()));
 
   if (!document.querySelector('script[data-djsg-os95]')) {
-    // Suppress the old fake security warning before the OS script can create it.
     try { sessionStorage.setItem('djsg-exe-booted', '1'); } catch (_) {}
 
     const osScript = document.createElement('script');
