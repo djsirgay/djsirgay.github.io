@@ -1,0 +1,30 @@
+/* Final desktop ergonomics: taskbar mirrors real open windows. */
+body.desktop-reality-on .os95-task-items{display:flex!important;gap:3px;overflow:hidden;min-width:0;flex:1}
+body.desktop-reality-on .os95-task-items .os95-task-btn{display:none!important}
+.dr-task-btn{
+  height:31px;min-width:82px;max-width:185px;display:flex;align-items:center;gap:5px;padding:0 7px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#c0c0c0;color:#000;
+  border:2px solid;border-color:#fff #404040 #404040 #fff;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+  font:11px Tahoma,"MS Sans Serif",Arial,sans-serif;
+}
+.dr-task-btn.active{border-color:#404040 #fff #fff #404040;background:#b4b4b4;font-weight:bold}
+.dr-task-btn span{overflow:hidden;text-overflow:ellipsis}
+.dr-window.minimized{display:none!important}
+.dr-window .dr-titlebar{cursor:default}
+.dr-window .dr-titlebar:active{cursor:grabbing}
+.dr-desktop-selection{position:absolute;z-index:12;border:1px dotted #fff;background:rgba(0,0,128,.14);pointer-events:none}
+
+/* The first three icons should explain the whole site without scrolling the desktop. */
+.dr-icons{grid-auto-rows:minmax(0,max-content)!important;gap:3px!important}
+.dr-icon{min-height:61px!important;padding-top:1px!important}
+.dr-icon svg{width:31px!important;height:31px!important}
+
+/* Tiny physical detail: taskbar tray behaves more like old Windows. */
+.os95-tray:before{content:"▣";font:11px Arial;color:#000080}
+.os95-tray{min-width:102px!important}
+
+@media(max-width:760px){
+  .dr-task-btn{min-width:58px;max-width:95px;padding:0 5px;font-size:9px}
+  body.desktop-reality-on .os95-task-items{gap:1px}
+}
