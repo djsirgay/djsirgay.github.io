@@ -30,7 +30,7 @@ body.desktop-reality-on [role="button"]{
 }
 
 /* The legacy page is the data source only. Nothing from it should visually leak through. */
-body.desktop-reality-on > main,
+body.desktop-reality-on > main#top,
 body.desktop-reality-on > .topbar,
 body.desktop-reality-on > .mobile-menu,
 body.desktop-reality-on > .mobile-book,
