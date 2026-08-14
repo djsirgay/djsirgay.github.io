@@ -114,7 +114,7 @@
 
   /* Vertical Winamp. Five hand-picked local MP3s; no redirects. */
   const tracks = [
-    {title:'I Feel So Free Love',file:'/assets/audio/i-feel-so-free-love.mp3',duration:'3:44',art:'https://i.ytimg.com/vi/24_RoSB5I1w/hqdefault.jpg',madonna:true},
+    {title:'I Feel So Free Love',file:'/assets/audio/i-feel-so-free-love.mp3',duration:'3:44',art:'/assets/madonna-cover.jpg',madonna:true},
     {title:'We Found Love × Save Me Tonight',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/logo-square.svg'},
     {title:'How Deep Is Your Time — Coachella',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/logo-square.svg'},
     {title:'A Sky Full of Stars × Love Me',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/logo-square.svg'},
