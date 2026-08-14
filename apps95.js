@@ -126,7 +126,7 @@
   }
 
   function extractHeroDataUrl() {
-    return '/assets/dj-sir-gay-paint.png';
+    return '/assets/dj-sir-gay-paint-v2.webp';
   }
 
   // Desktop Reality can call Paint directly even if its own script wins the load race.

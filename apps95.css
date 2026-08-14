@@ -43,6 +43,7 @@
 .djsg-menubar span:first-letter{text-decoration:underline}
 
 /* ---------- Paint.exe ---------- */
+.paint-window{width:min(720px,calc(100vw - 22px))}
 .paint-layout{display:grid;grid-template-columns:56px minmax(0,1fr);gap:5px}
 .paint-tools{display:grid;grid-template-columns:repeat(2,25px);align-content:start;gap:2px;padding:3px;background:#c0c0c0}
 .paint-tool{height:27px;padding:0;border:2px solid;border-color:#fff #555 #555 #fff;background:#c0c0c0;font-size:14px}

@@ -109,19 +109,35 @@
 
   const show = id => { const w=windows.get(id); if(w){w.classList.remove('hidden');focusWin(w);} return w; };
 
+  const ledWords = ['STAY','FUC*ING','STRONG','PLAY','IT','LOUD','BE','GAY','DO','CRIME','FROM','DICTATORSHIP','TO','DANCEFLOOR','MUSIC','WITHOUT','LIMITS'];
+  const ledMarkup = () => `${ledWords.map(word=>`<span${word.length > 10 ? ' class="long"' : ''} aria-hidden="true"><b>${esc(word)}</b></span>`).join('')}<span aria-hidden="true"><b>${esc(ledWords[0])}</b></span>`;
+  const startLed = sequence => {
+    if (!sequence?.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const frames = [];
+    ledWords.forEach((_, index) => {
+      const start = index / ledWords.length;
+      const hold = (index + .7) / ledWords.length;
+      const end = (index + 1) / ledWords.length;
+      frames.push({transform:`translateY(${-index * 82}px)`,offset:start});
+      frames.push({transform:`translateY(${-index * 82}px)`,offset:hold});
+      frames.push({transform:`translateY(${-(index + 1) * 82}px)`,offset:end});
+    });
+    sequence.animate(frames,{duration:ledWords.length * 2100,iterations:Infinity,easing:'linear'});
+  };
+
   /* README is a real window, not a website hero. */
-  const welcome = makeWindow({id:'welcome',title:'Disk D:\\DJSG\\README.TXT',className:'dr-welcome',x:145,y:30,html:`<div class="dr-brandline"><img src="/assets/logo-square.svg" alt="DJ Sir Gay logo"><h1>DJ Sir Gay<span>.exe</span></h1></div><p>Mashups, narrative DJ sets and pop memories rebuilt by a queer Eastern European artist in exile. This computer contains music, questionable files and a booking button with no sense of proportion.</p><div class="dr-quick"><button class="dr-btn primary" data-open-paint>🎨 Paint me gay</button><button class="dr-btn" data-open-winamp>▶ Play music</button><button class="dr-btn" data-open-stay>▰ Stay strong</button><button class="dr-btn" data-open-projects>Disk D:\\PROJECTS</button><button class="dr-btn" data-open-browser>Public Record</button></div>`});
+  const welcome = makeWindow({id:'welcome',title:'Disk D:\\DJSG\\README.TXT',className:'dr-welcome',x:145,y:30,html:`<div class="dr-brandline"><img src="/assets/logo-square.svg" alt="DJ Sir Gay logo"><h1>DJ Sir Gay<span>.exe</span></h1></div><p>Mashups, narrative DJ sets and pop memories rebuilt by a queer Eastern European artist in exile. This computer contains music, questionable files and a booking button with no sense of proportion.</p><div class="dr-ledbox dr-ledbox-compact" aria-label="STAY FUC*ING STRONG and rotating DJ Sir Gay messages"><div class="dr-led-sequence">${ledMarkup()}</div></div><div class="dr-quick"><button class="dr-btn primary" data-open-winamp>▶ Play music</button><button class="dr-btn" data-open-paint>🎨 Paint me gay</button><button class="dr-btn" data-open-stay>▰ Open LED</button><button class="dr-btn" data-open-projects>Disk D:\\PROJECTS</button><button class="dr-btn" data-open-browser>Public Record</button></div>`});
 
   /* Vertical Winamp. Five hand-picked local MP3s; no redirects. */
   const tracks = [
-    {title:'I Feel So Free Love',file:'/assets/audio/i-feel-so-free-love.mp3',duration:'3:44',art:'/assets/madonna-cover.jpg',madonna:true},
-    {title:'We Found Love × Save Me Tonight',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/logo-square.svg'},
-    {title:'How Deep Is Your Time — Coachella',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/logo-square.svg'},
-    {title:'A Sky Full of Stars × Love Me',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/logo-square.svg'},
-    {title:'Club Song × Like I Love You',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/logo-square.svg'}
+    {title:'Madonna × Lady Gaga — I Feel So Free Love',artist:'MADONNA × LADY GAGA',file:'/assets/audio/i-feel-so-free-love.mp3',duration:'3:44',art:'/assets/madonna-gaga-cover.webp'},
+    {title:'We Found Love × Save Me Tonight',artist:'DJ SIR GAY',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/logo-square.svg'},
+    {title:'How Deep Is Your Time — Coachella',artist:'DJ SIR GAY',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/logo-square.svg'},
+    {title:'A Sky Full of Stars × Love Me',artist:'DJ SIR GAY',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/logo-square.svg'},
+    {title:'Club Song × Like I Love You',artist:'DJ SIR GAY',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/logo-square.svg'}
   ];
-  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP</small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev>◀◀</button><button type="button" data-wa-play>▶</button><button type="button" data-wa-pause>Ⅱ</button><button type="button" data-wa-next>▶▶</button><button type="button" data-wa-art>ART</button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="metadata"></audio>`});
-  const album = makeWindow({id:'album',title:'D:\\COVERS\\SELECTED.BMP',className:'dr-album',x:Math.max(520,innerWidth-630),y:350,html:`<div class="dr-album-artwrap"><img data-album-img alt="Selected release artwork"><span>DJ SIR GAY</span></div><div class="dr-album-caption" data-album-caption>Album Art / Preview.bmp</div>`});
+  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,hidden:mobile(),html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track">◀◀</button><button type="button" data-wa-play aria-label="Play">▶</button><button type="button" data-wa-pause aria-label="Pause">❚❚</button><button type="button" data-wa-next aria-label="Next track">▶▶</button><button type="button" data-wa-art aria-label="Open cover art">ART</button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="metadata"></audio>`});
+  const album = makeWindow({id:'album',title:'D:\\COVERS\\SELECTED.BMP',className:'dr-album',x:Math.max(520,innerWidth-630),y:350,hidden:true,html:`<div class="dr-album-artwrap"><img data-album-img alt="Selected release artwork"><div class="dr-album-copy"><small data-album-artist>MADONNA × LADY GAGA</small><strong>DJ SIR GAY</strong><b>MASHUP</b></div></div><div class="dr-album-caption" data-album-caption>Album Art / Preview.bmp</div>`});
 
   const audio = $('[data-wa-audio]', winamp);
   const list = $('[data-wa-list]', winamp);
@@ -134,7 +150,7 @@
     $$('.dr-track',winamp).forEach((row,i)=>row.classList.toggle('selected',i===selectedFresh));
     $('[data-wa-title]',winamp).textContent=track.title.toUpperCase();
     $('[data-album-img]',album).src=track.art;
-    $('.dr-album-artwrap',album).classList.toggle('madonna',Boolean(track.madonna));
+    $('[data-album-artist]',album).textContent=track.artist;
     $('[data-album-caption]',album).textContent=`${track.title} / Preview.bmp`;
     if(audio.src !== new URL(track.file,location.href).href){audio.src=track.file;seek.value=0;$('[data-wa-elapsed]',winamp).textContent='0:00';$('[data-wa-total]',winamp).textContent=track.duration;}
     if(play) audio.play().catch(()=>{});
@@ -146,6 +162,8 @@
   $('[data-wa-play]',winamp).addEventListener('click',()=>audio.play().catch(()=>{}));
   $('[data-wa-pause]',winamp).addEventListener('click',()=>audio.pause());
   $('[data-wa-art]',winamp).addEventListener('click',()=>show('album'));
+  audio.addEventListener('play',()=>{winamp.classList.add('is-playing');$('[data-wa-mode]',winamp).textContent='PLAYING';});
+  audio.addEventListener('pause',()=>{winamp.classList.remove('is-playing');$('[data-wa-mode]',winamp).textContent=audio.currentTime ? 'PAUSED' : 'READY';});
   audio.addEventListener('timeupdate',()=>{seek.value=audio.duration?String(audio.currentTime/audio.duration*100):'0';$('[data-wa-elapsed]',winamp).textContent=fmt(audio.currentTime);$('[data-wa-total]',winamp).textContent=fmt(audio.duration);});
   audio.addEventListener('ended',()=>selectFresh(selectedFresh+1,true));
   seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=Number(seek.value)/100*audio.duration;});
@@ -179,8 +197,9 @@
   const news=$('[data-news]',browser); articleCards.forEach((a,i)=>{const row=document.createElement('button');row.type='button';row.className='dr-news-row';row.innerHTML=`<img src="${esc(a.image)}" alt=""><div><small>${esc(a.source)}</small><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></div>`;row.addEventListener('click',()=>openArticle(a,i));news.append(row)});
   function openArticle(a,i){let win=windows.get(`article-${i}`);if(win){win.classList.remove('hidden');focusWin(win);return;}win=makeWindow({id:`article-${i}`,title:`Internet Explorer — ${a.title}`,className:'dr-article-preview',x:240+i*25,y:120+i*18,html:`<img src="${esc(a.image)}" alt=""><h2>${esc(a.title)}</h2><p><strong>${esc(a.source)}</strong></p><p>${esc(a.summary)}</p><a class="dr-btn primary" href="${esc(a.href)}" target="_blank" rel="noreferrer">Read full article ↗</a>`});}
 
-  /* Stay Strong is its own utility window. */
-  makeWindow({id:'stay',title:'C:\\WINDOWS\\SYSTEM\\STAY_FUCKING_STRONG.SYS',className:'dr-stay',x:145,y:Math.max(380,innerHeight-205),html:`<div class="dr-ledbox" aria-label="Rotating LED messages"><div class="dr-led-sequence"><span><b>STAY FUC*ING</b><b>STRONG</b></span><span><b>PLAY IT</b><b>LOUD</b></span><span><b>BE GAY</b><b>DO CRIME</b></span><span><b>FROM DICTATORSHIP</b><b>TO DANCEFLOOR</b></span><span><b>MUSIC WITHOUT</b><b>LIMITS</b></span><span aria-hidden="true"><b>STAY FUC*ING</b><b>STRONG</b></span></div></div><div class="dr-statusbar">Live message board / rear-window LED / Los Angeles</div>`});
+  /* Stay Strong is a separate utility too, but the compact living symbol already lives in README. */
+  makeWindow({id:'stay',title:'C:\\WINDOWS\\SYSTEM\\STAY_FUCKING_STRONG.SYS',className:'dr-stay',x:145,y:Math.max(380,innerHeight-205),hidden:true,html:`<div class="dr-ledbox" aria-label="STAY FUC*ING STRONG and rotating DJ Sir Gay messages"><div class="dr-led-sequence">${ledMarkup()}</div></div><div class="dr-statusbar">One word at a time / rear-window LED / Los Angeles</div>`});
+  $$('.dr-led-sequence',desktop).forEach(startLed);
 
   /* Booking is intentionally too large. */
   const booking=makeWindow({id:'booking',title:'D:\\BOOKING\\PUT_ME_IN_THE_ROOM.EXE',className:'dr-booking',x:Math.max(390,innerWidth*.48),y:Math.max(350,innerHeight-315),hidden:mobile(),html:`<h2>Put me in the room.</h2><p>Clubs, private parties, cultural programs, brands, weird ideas with a budget.</p><a class="dr-book-me" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20booking&body=Name:%0AEvent%20date:%0ACity%20/%20venue:%0AEvent%20type:%0AEstimated%20audience:%0ABudget%20range:%0AHow%20should%20the%20room%20feel:%0A">BOOK<br>DJ SIR GAY</a><div class="dr-booking-note">This button is intentionally larger than necessary.</div>`});
@@ -192,7 +211,7 @@
   };
 
   /* Desktop files. */
-  addIcon({type:'music',label:'WINAMP.EXE',small:'Fresh Releases',action:()=>{show('winamp');show('album')}});
+  addIcon({type:'music',label:'WINAMP.EXE',small:'Fresh Releases',action:()=>show('winamp')});
   projectCards.forEach((p,i)=>addIcon({type:'exe',label:`${cleanFile(p.title)}.EXE`,small:`D:\\PROJECTS\\${String(i+1).padStart(2,'0')}`,action:()=>projectWindow(p,i)}));
   addIcon({type:'paint',label:'SERGEY.BMP',small:'Open in Paint',action:()=>{const t=$('.djsg-app-shortcut[data-app="paint"]')||$('#djsg-paint-launch');t?.click();}});
   addIcon({type:'browser',label:'PUBLIC_RECORD.URL',small:'Yahoo! News',action:()=>show('browser')});
@@ -211,20 +230,20 @@
   const launchPaintWhenReady = (attempt=0) => {
     if (!launchPaint() && attempt < 40) setTimeout(()=>launchPaintWhenReady(attempt+1),250);
   };
-  $('[data-open-paint]',welcome).addEventListener('click',()=>launchPaintWhenReady()); $('[data-open-winamp]',welcome).addEventListener('click',()=>{show('winamp');show('album')}); $('[data-open-stay]',welcome).addEventListener('click',()=>show('stay')); $('[data-open-projects]',welcome).addEventListener('click',()=>show('projects-folder')); $('[data-open-browser]',welcome).addEventListener('click',()=>show('browser'));
-
-  /* Paint is the main-screen experience, not an easter egg. */
-  setTimeout(launchPaintWhenReady, 1450);
+  $('[data-open-paint]',welcome).addEventListener('click',()=>launchPaintWhenReady()); $('[data-open-winamp]',welcome).addEventListener('click',()=>show('winamp')); $('[data-open-stay]',welcome).addEventListener('click',()=>show('stay')); $('[data-open-projects]',welcome).addEventListener('click',()=>show('projects-folder')); $('[data-open-browser]',welcome).addEventListener('click',()=>show('browser'));
 
   /* Route the existing Start/taskbar into windows instead of hidden webpage sections. */
   const routeTarget = target => {
-    if(target==='#fresh'){show('winamp');show('album');return true} if(target==='#projects'){show('projects-folder');return true} if(target==='#voice'){show('browser');return true} if(target==='#booking'){show('booking');return true} return false;
+    if(target==='#fresh'){show('winamp');return true} if(target==='#projects'){show('projects-folder');return true} if(target==='#voice'){show('browser');return true} if(target==='#booking'){show('booking');return true} return false;
   };
   document.addEventListener('click',e=>{const link=e.target.closest('[data-os-target]');if(link&&routeTarget(link.dataset.osTarget)){e.preventDefault();e.stopImmediatePropagation();$('#os95-start-menu')?.classList.remove('open');$('#os95-start-btn')?.setAttribute('aria-expanded','false');}},true);
   const task=$$('.os95-task-btn'); if(task[0])task[0].textContent='♫ WINAMP'; if(task[1])task[1].textContent='▣ D:\\PROJECTS'; if(task[2])task[2].textContent='🌐 Yahoo!'; if(task[3])task[3].textContent='✉ BOOK ME';
 
   /* The old floating YouTube modal is superseded by Windows Media Player. */
   document.addEventListener('click',e=>{const old=e.target.closest('[data-video]');if(!old||old.closest('#djsg-desktop'))return;e.preventDefault();e.stopImmediatePropagation();openWmp(old.dataset.video,old.closest('.project-card')?.querySelector('h3')?.textContent||'DJ Sir Gay');},true);
+
+  /* README owns the first impression; utilities open only when requested. */
+  show('welcome');
 
   addEventListener('resize',()=>{if(mobile())return;windows.forEach(win=>{if(win.classList.contains('hidden')||win.classList.contains('maximized'))return;const maxX=Math.max(4,desktop.clientWidth-win.offsetWidth-4),maxY=Math.max(4,desktop.clientHeight-win.offsetHeight-4);win.style.left=`${Math.min(maxX,parseFloat(win.style.left)||4)}px`;win.style.top=`${Math.min(maxY,parseFloat(win.style.top)||4)}px`;});});
 })();
