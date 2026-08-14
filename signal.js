@@ -195,7 +195,7 @@
       evolutionScript.dataset.djsgEvolution = '1';
       evolutionScript.addEventListener('load', () => {
         const hierarchyScript = document.createElement('script');
-        hierarchyScript.src = '/hierarchy95.js?v=20260814-4';
+        hierarchyScript.src = '/hierarchy95.js?v=20260814-5';
         hierarchyScript.dataset.djsgHierarchy = '1';
         document.body.appendChild(hierarchyScript);
 

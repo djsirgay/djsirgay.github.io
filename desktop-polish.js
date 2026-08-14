@@ -118,15 +118,6 @@
     win.addEventListener('pointerdown',()=>setTimeout(sync,0));
   };
 
-  desktop.addEventListener('click',e=>{
-    const pause=e.target.closest('[data-wa-pause]');
-    if(!pause)return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const wmp=$('.dr-window[data-window="wmp"]',desktop);
-    if(wmp)ytCommand($('iframe',wmp),'pauseVideo');
-  },true);
-
   let ordering=false;
   const reorderIcons = () => {
     if(ordering)return;

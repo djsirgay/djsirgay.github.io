@@ -43,7 +43,7 @@
     }
     if (!document.querySelector('script[data-desktop-polish]')) {
       const js = document.createElement('script');
-      js.src = '/desktop-polish.js?v=20260810-2';
+      js.src = '/desktop-polish.js?v=20260814-5';
       js.dataset.desktopPolish = '1';
       document.body.appendChild(js);
     }
