@@ -34,6 +34,7 @@ body.desktop-reality-on > main,
 body.desktop-reality-on > .topbar,
 body.desktop-reality-on > .mobile-menu,
 body.desktop-reality-on > .mobile-book,
+body.desktop-reality-on > .player-modal,
 body.desktop-reality-on > .micro-ticker,
 body.desktop-reality-on > .signal-progress,
 body.desktop-reality-on > footer.site-footer,
@@ -117,15 +118,13 @@ body.desktop-reality-on > .signal-boot{display:none!important}
 .dr-statusbar{margin-top:5px;padding:3px 5px;border:2px solid;border-color:#808080 #fff #fff #808080;font:10px var(--dr-ui)}
 
 /* README */
-.dr-welcome{width:min(585px,calc(100vw - 150px))}
+.dr-welcome{width:min(700px,calc(100vw - 150px))}
 .dr-welcome .dr-body{padding:18px;background:#fff;border:2px solid;border-color:#808080 #fff #fff #808080;margin:0 4px 4px}
 .dr-welcome h1{margin:0;font:700 clamp(42px,7vw,78px)/.82 var(--dr-pixel);letter-spacing:-.055em}
 .dr-welcome h1 span{color:#000080}
 .dr-brandline{display:flex;align-items:center;gap:16px}.dr-brandline img{width:96px;height:96px;flex:0 0 auto;image-rendering:pixelated}
-.dr-welcome p{max-width:520px;margin:14px 0 15px;font:13px/1.45 var(--dr-ui)}
+.dr-welcome p{max-width:630px;margin:14px 0 15px;font:13px/1.45 var(--dr-ui)}
 .dr-quick{display:flex;flex-wrap:wrap;gap:5px}
-.dr-welcome .dr-ledbox-compact{height:66px;margin:0 0 10px;font-size:31px}
-.dr-welcome .dr-ledbox-compact .dr-led-sequence>span{height:82px;transform:translateY(-8px)}
 
 /* Winamp: deliberately tall, textual and image-free */
 .dr-winamp{width:315px;background:#292929;border-color:#777 #050505 #050505 #777;color:#00ff67}
@@ -270,7 +269,7 @@ body.desktop-reality-on > .djsg-game-window{z-index:9500!important}
   .dr-body{max-height:calc(100svh - 76px)}
   .dr-welcome .dr-body{padding:13px}.dr-welcome h1{font-size:45px}.dr-welcome p{font-size:11px}
   .dr-brandline{gap:9px}.dr-brandline img{width:70px;height:70px}.dr-brandline h1{font-size:37px}
-  .dr-welcome .dr-ledbox-compact{height:58px;font-size:28px}
+  .dr-quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.dr-quick .dr-btn:last-child:nth-child(odd){grid-column:1/-1}
   .dr-project .dr-body{grid-template-columns:1fr}.dr-project-media{min-height:180px;max-height:220px}.dr-project-copy{padding:12px}.dr-project-copy h2{font-size:26px}
   .dr-winamp{top:18px!important}.dr-winamp-controls button{min-height:40px}.dr-playlist{max-height:calc(100svh - 270px)}.dr-track{min-height:38px}
   .dr-album{top:48px!important}.dr-album-artwrap{aspect-ratio:1}.dr-album-copy strong{font-size:31px}

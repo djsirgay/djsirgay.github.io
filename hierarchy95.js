@@ -53,13 +53,13 @@
     if (!document.querySelector('link[data-desktop-reality]')) {
       const css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = '/desktop-reality.css?v=20260814-4';
+      css.href = '/desktop-reality.css?v=20260814-5';
       css.dataset.desktopReality = '1';
       document.head.appendChild(css);
     }
     if (!document.querySelector('script[data-desktop-reality]')) {
       const js = document.createElement('script');
-      js.src = '/desktop-reality.js?v=20260814-6';
+      js.src = '/desktop-reality.js?v=20260814-7';
       js.dataset.desktopReality = '1';
       js.addEventListener('load', loadPolish, { once:true });
       document.body.appendChild(js);
