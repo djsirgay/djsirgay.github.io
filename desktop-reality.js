@@ -202,11 +202,19 @@
   addIcon({type:'trash',label:'Recycle Bin',small:'0 useful files',action:()=>{const d=windows.get('trash')||makeWindow({id:'trash',title:'Recycle Bin',className:'dr-article-preview',x:280,y:180,html:'<h2>Recycle Bin</h2><p>Rejected norms, failed censorship and several career plans were permanently deleted.</p><p><strong>Useful files: 0</strong></p>'});d.classList.remove('hidden');focusWin(d);}});
 
   /* README quick actions */
-  const launchPaint = () => typeof window.openDJSGPaint === 'function' ? window.openDJSGPaint() : $('#djsg-paint-launch')?.click();
-  $('[data-open-paint]',welcome).addEventListener('click',launchPaint); $('[data-open-winamp]',welcome).addEventListener('click',()=>{show('winamp');show('album')}); $('[data-open-stay]',welcome).addEventListener('click',()=>show('stay')); $('[data-open-projects]',welcome).addEventListener('click',()=>show('projects-folder')); $('[data-open-browser]',welcome).addEventListener('click',()=>show('browser'));
+  const launchPaint = () => {
+    if (typeof window.openDJSGPaint === 'function') { window.openDJSGPaint(); return true; }
+    const launcher = $('#djsg-paint-launch');
+    if (launcher) { launcher.click(); return true; }
+    return false;
+  };
+  const launchPaintWhenReady = (attempt=0) => {
+    if (!launchPaint() && attempt < 40) setTimeout(()=>launchPaintWhenReady(attempt+1),250);
+  };
+  $('[data-open-paint]',welcome).addEventListener('click',()=>launchPaintWhenReady()); $('[data-open-winamp]',welcome).addEventListener('click',()=>{show('winamp');show('album')}); $('[data-open-stay]',welcome).addEventListener('click',()=>show('stay')); $('[data-open-projects]',welcome).addEventListener('click',()=>show('projects-folder')); $('[data-open-browser]',welcome).addEventListener('click',()=>show('browser'));
 
   /* Paint is the main-screen experience, not an easter egg. */
-  setTimeout(launchPaint, 1450);
+  setTimeout(launchPaintWhenReady, 1450);
 
   /* Route the existing Start/taskbar into windows instead of hidden webpage sections. */
   const routeTarget = target => {
