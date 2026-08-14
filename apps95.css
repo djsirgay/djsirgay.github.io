@@ -33,7 +33,7 @@
 /* ---------- shared app window ---------- */
 .djsg-app-layer{position:fixed;z-index:7600;inset:0;display:grid;place-items:center;padding:12px;background:rgba(0,0,0,.18)}
 .djsg-app-window{
-  position:relative;width:min(920px,calc(100vw - 22px));max-height:calc(100vh - 58px);overflow:auto;
+  position:relative;width:min(920px,calc(100vw - 22px));max-height:calc(100svh - 58px);overflow:auto;
   padding:31px 7px 7px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #303030 #303030 #fff;
   box-shadow:7px 7px 0 rgba(0,0,0,.34);font-family:Tahoma,"MS Sans Serif",Arial,sans-serif
 }
@@ -48,8 +48,8 @@
 .paint-tool{height:27px;padding:0;border:2px solid;border-color:#fff #555 #555 #fff;background:#c0c0c0;font-size:14px}
 .paint-tool.active{border-color:#555 #fff #fff #555;background:#a9a9a9}
 .paint-stage{overflow:auto;padding:7px;background:#7f7f7f;border:2px solid;border-color:#555 #fff #fff #555}
-.paint-canvas-wrap{width:max-content;min-width:100%;display:grid;place-items:center}
-#djsg-paint-canvas{display:block;max-width:100%;height:auto;background:#fff;box-shadow:1px 1px #000;cursor:crosshair;touch-action:none}
+.paint-canvas-wrap{width:100%;min-width:0;display:grid;place-items:center}
+#djsg-paint-canvas{display:block;width:100%;max-width:800px;height:auto;background:#fff;box-shadow:1px 1px #000;cursor:crosshair;touch-action:none}
 .paint-bottom{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:center;margin-top:5px}
 .paint-colors{display:grid;grid-template-columns:repeat(14,18px);gap:1px;width:max-content;padding:3px;background:#c0c0c0;border:2px solid;border-color:#555 #fff #fff #555}
 .paint-color{width:18px;height:18px;padding:0;border:1px solid #000}
@@ -84,8 +84,11 @@
   .djsgamp-actions{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr)}
   .djsgamp-art{min-height:86px}.djsgamp-title{font-size:26px}
   .paint-layout{grid-template-columns:48px minmax(0,1fr)}
-  .paint-tools{grid-template-columns:repeat(2,21px)}.paint-tool{height:23px;font-size:12px}
+  .djsg-app-layer{padding:5px}.djsg-app-window{width:calc(100vw - 8px);max-height:calc(100svh - 44px)}
+  .djsg-app-titlebar{height:35px;top:-28px}.djsg-app-close{width:34px;height:32px;font-size:17px}
+  .paint-tools{grid-template-columns:repeat(2,21px)}.paint-tool{height:32px;font-size:13px}
   .paint-colors{grid-template-columns:repeat(8,18px)}
+  .paint-actions button{min-height:38px}.paint-size{height:34px}
   .solitaire-window{overflow:auto}.solitaire-board{transform-origin:top left}
 }
 @media(prefers-reduced-motion:reduce){.djsgamp-eq i{animation:none;height:10px}}

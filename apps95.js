@@ -126,12 +126,11 @@
   }
 
   function extractHeroDataUrl() {
-    const hero = $('.hero-poster');
-    if (!hero) return null;
-    const value = getComputedStyle(hero).backgroundImage || '';
-    const match = value.match(/url\(["']?(data:image\/[^"')]+)["']?\)/i);
-    return match?.[1] || null;
+    return '/assets/dj-sir-gay-paint.png';
   }
+
+  // Desktop Reality can call Paint directly even if its own script wins the load race.
+  window.openDJSGPaint = openPaint;
 
   function openPaint() {
     const { content } = makeApp('untitled - Paint', 'paint-window');
@@ -144,11 +143,11 @@
           <button class="paint-tool" type="button" data-tool="eraser" title="Eraser">▱</button>
           <select class="paint-size" aria-label="Brush size"><option value="2">2 px</option><option value="5">5 px</option><option value="10">10 px</option><option value="18">18 px</option></select>
         </div>
-        <div class="paint-stage"><div class="paint-canvas-wrap"><canvas id="djsg-paint-canvas" width="900" height="650"></canvas></div></div>
+        <div class="paint-stage"><div class="paint-canvas-wrap"><canvas id="djsg-paint-canvas" width="800" height="1000" aria-busy="true"></canvas></div></div>
       </div>
       <div class="paint-bottom">
         <div class="paint-colors" aria-label="Colors"></div>
-        <div class="paint-status">SERGEY.BMP — ruin responsibly.</div>
+        <div class="paint-status">Loading SERGEY.BMP…</div>
       </div>
       <div class="paint-actions"><button type="button" data-paint-action="undo">Undo</button><button type="button" data-paint-action="reset">Restore photo</button><button type="button" data-paint-action="save">Save masterpiece.png</button><button type="button" data-paint-action="share">Share…</button><button type="button" data-paint-action="email">Save + email Sergey</button></div>`;
 
@@ -167,6 +166,7 @@
     let size = 2;
     let drawing = false;
     let last = null;
+    let ready = false;
     const history = [];
     let pristine = null;
 
@@ -184,16 +184,22 @@
       ctx.fillStyle = '#000080'; ctx.font = 'bold 52px Tahoma, sans-serif'; ctx.fillText('SERGEY.BMP', 55, 100);
       ctx.fillStyle = '#000'; ctx.font = '24px Tahoma, sans-serif'; ctx.fillText('Photo driver unavailable. Please vandalize this instead.', 55, 145);
       pristine = ctx.getImageData(0,0,canvas.width,canvas.height);
+      ready = true;
+      canvas.setAttribute('aria-busy', 'false');
     };
 
     const source = extractHeroDataUrl();
     if (source) {
       const image = new Image();
       image.onload = () => {
-        const scale = Math.max(canvas.width / image.width, canvas.height / image.height);
+        const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
         const w = image.width * scale, h = image.height * scale;
+        ctx.fillStyle = '#d8dce6';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(image, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
         pristine = ctx.getImageData(0,0,canvas.width,canvas.height);
+        ready = true;
+        canvas.setAttribute('aria-busy', 'false');
         setStatus('SERGEY.BMP — Paint is ready. Be disrespectful, artistically.');
       };
       image.onerror = drawFallback;
@@ -235,6 +241,7 @@
       ctx.restore();
     };
     canvas.addEventListener('pointerdown', event => {
+      if (!ready) { setStatus('Loading SERGEY.BMP… one very dramatic second.'); return; }
       event.preventDefault(); snapshot(); drawing=true; last=point(event); canvas.setPointerCapture(event.pointerId); stroke(last,last);
     });
     canvas.addEventListener('pointermove', event => { if (!drawing) return; const p=point(event); stroke(last,p); last=p; });
