@@ -59,7 +59,7 @@
     }
     if (!document.querySelector('script[data-desktop-reality]')) {
       const js = document.createElement('script');
-      js.src = '/desktop-reality.js?v=20260814-4';
+      js.src = '/desktop-reality.js?v=20260814-6';
       js.dataset.desktopReality = '1';
       js.addEventListener('load', loadPolish, { once:true });
       document.body.appendChild(js);

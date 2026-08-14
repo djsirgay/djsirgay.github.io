@@ -201,8 +201,8 @@
   makeWindow({id:'stay',title:'C:\\WINDOWS\\SYSTEM\\STAY_FUCKING_STRONG.SYS',className:'dr-stay',x:145,y:Math.max(380,innerHeight-205),hidden:true,html:`<div class="dr-ledbox" aria-label="STAY FUC*ING STRONG and rotating DJ Sir Gay messages"><div class="dr-led-sequence">${ledMarkup()}</div></div><div class="dr-statusbar">One word at a time / rear-window LED / Los Angeles</div>`});
   $$('.dr-led-sequence',desktop).forEach(startLed);
 
-  /* Booking is intentionally too large. */
-  const booking=makeWindow({id:'booking',title:'D:\\BOOKING\\PUT_ME_IN_THE_ROOM.EXE',className:'dr-booking',x:Math.max(390,innerWidth*.48),y:Math.max(350,innerHeight-315),hidden:mobile(),html:`<h2>Put me in the room.</h2><p>Clubs, private parties, cultural programs, brands, weird ideas with a budget.</p><a class="dr-book-me" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20booking&body=Name:%0AEvent%20date:%0ACity%20/%20venue:%0AEvent%20type:%0AEstimated%20audience:%0ABudget%20range:%0AHow%20should%20the%20room%20feel:%0A">BOOK<br>DJ SIR GAY</a><div class="dr-booking-note">This button is intentionally larger than necessary.</div>`});
+  /* Booking stays deliberately large, but opens only when somebody asks for it. */
+  const booking=makeWindow({id:'booking',title:'D:\\BOOKING\\PUT_ME_IN_THE_ROOM.EXE',className:'dr-booking',x:Math.max(390,innerWidth*.48),y:Math.max(350,innerHeight-315),hidden:true,html:`<h2>Put me in the room.</h2><p>Clubs, private parties, cultural programs, brands, weird ideas with a budget.</p><a class="dr-book-me" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20booking&body=Name:%0AEvent%20date:%0ACity%20/%20venue:%0AEvent%20type:%0AEstimated%20audience:%0ABudget%20range:%0AHow%20should%20the%20room%20feel:%0A">BOOK<br>DJ SIR GAY</a><div class="dr-booking-note">This button is intentionally larger than necessary.</div>`});
 
   /* Fake copy dialog is a functional Telegram conversion. */
   const openDownloads = () => {
