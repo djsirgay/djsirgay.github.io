@@ -90,6 +90,7 @@
   .paint-tools{grid-template-columns:repeat(2,21px)}.paint-tool{height:32px;font-size:13px}
   .paint-colors{grid-template-columns:repeat(8,18px)}
   .paint-stage{height:42svh}.paint-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.paint-actions button{min-height:34px;padding:2px 4px}.paint-size{height:34px}
-  .solitaire-window{overflow:hidden}.solitaire-board{--sol-card-w:min(70px,calc(14.2857vw - 8px));--sol-card-h:calc(var(--sol-card-w)*1.4);padding:5px}.sol-top,.sol-tableau{gap:3px}.sol-top{margin-bottom:13px}.sol-card{padding:2px;font-size:10px}.sol-card small{font-size:7px}.sol-status{display:none}
+  .paint-window,.solitaire-window{overflow-x:hidden;overflow-y:auto}
+  .solitaire-board{--sol-card-w:min(70px,calc(14.2857vw - 8px));--sol-card-h:calc(var(--sol-card-w)*1.4);padding:5px}.sol-top,.sol-tableau{gap:3px}.sol-top{margin-bottom:13px}.sol-card{padding:2px;font-size:10px}.sol-card small{font-size:7px}.sol-status{display:none}
 }
 @media(prefers-reduced-motion:reduce){.djsgamp-eq i{animation:none;height:10px}}

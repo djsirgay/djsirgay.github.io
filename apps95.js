@@ -417,7 +417,6 @@
       }
     });
 
-    $('[data-sol-new]',content).addEventListener('click',newGame);
     newGame();
   }
 })();

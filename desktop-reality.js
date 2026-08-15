@@ -137,7 +137,7 @@
   };
 
   /* README is a real window, not a website hero. */
-  const welcome = makeWindow({id:'welcome',title:'Disk D:\\DJSG\\README.TXT',className:'dr-welcome',x:145,y:30,html:`<div class="dr-brandline"><img src="/assets/logo-square.svg" alt="DJ Sir Gay logo"><div><h1>DJ Sir Gay<span>.exe</span></h1><a class="dr-domain" href="https://djsirgay.com">DJSIRGAY.COM</a></div></div><p>Mashups, narrative DJ sets and pop memories rebuilt by a queer Eastern European artist in exile. This computer contains music, questionable files and a booking button with no sense of proportion.</p><div class="dr-quick"><button class="dr-btn primary" data-open-winamp>▶ Play music</button><button class="dr-btn" data-open-paint>🎨 Paint me gay</button><button class="dr-btn" data-open-stay>▰ Open LED</button><button class="dr-btn" data-open-projects>Disk D:\\PROJECTS</button><button class="dr-btn" data-open-browser>Public Record</button></div>`});
+  const welcome = makeWindow({id:'welcome',title:'Disk D:\\DJSG\\README.TXT',className:'dr-welcome',x:145,y:30,html:`<div class="dr-brandline"><img src="/assets/logo-square.svg" alt="DJ Sir Gay logo"><div><h1>DJ Sir Gay<span>.exe</span></h1><a class="dr-domain" href="https://djsirgay.com">DJSIRGAY.COM</a></div></div><p>Mashups, narrative DJ sets and pop memories rebuilt by a queer Eastern European artist in exile. This computer contains music, questionable files and a booking button with no sense of proportion.</p><div class="dr-quick"><button class="dr-btn primary" data-open-winamp>▶ Play music</button><button class="dr-btn" data-open-paint>🎨 Paint me gay</button><button class="dr-btn" data-open-stay>▰ Open LED</button><button class="dr-btn" data-open-projects>Disk D:\\PROJECTS</button><button class="dr-btn" data-open-browser>Public Record</button><button class="dr-btn" data-open-presskit>Press kit</button></div>`});
 
   /* Vertical Winamp. Six hand-picked local MP3s; no redirects. */
   const tracks = [
@@ -184,7 +184,14 @@
   $('[data-wa-art]',winamp).addEventListener('click',()=>show('album'));
   audio.addEventListener('play',()=>{winamp.classList.add('is-playing');$('[data-wa-mode]',winamp).textContent='PLAYING';if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';});
   audio.addEventListener('pause',()=>{winamp.classList.remove('is-playing');$('[data-wa-mode]',winamp).textContent=audio.currentTime ? 'PAUSED' : 'READY';if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';});
-  audio.addEventListener('timeupdate',()=>{seek.value=audio.duration?String(audio.currentTime/audio.duration*100):'0';$('[data-wa-elapsed]',winamp).textContent=fmt(audio.currentTime);$('[data-wa-total]',winamp).textContent=fmt(audio.duration);});
+  audio.addEventListener('timeupdate',()=>{
+    seek.value=audio.duration?String(audio.currentTime/audio.duration*100):'0';
+    $('[data-wa-elapsed]',winamp).textContent=fmt(audio.currentTime);
+    $('[data-wa-total]',winamp).textContent=fmt(audio.duration);
+    if ('mediaSession' in navigator && navigator.mediaSession.setPositionState && Number.isFinite(audio.duration) && audio.duration>0) {
+      try { navigator.mediaSession.setPositionState({duration:audio.duration,playbackRate:audio.playbackRate,position:Math.min(audio.currentTime,audio.duration)}); } catch (_) {}
+    }
+  });
   audio.addEventListener('ended',()=>selectFresh(selectedFresh+1,true));
   seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=Number(seek.value)/100*audio.duration;});
   if ('mediaSession' in navigator) {
@@ -239,6 +246,9 @@
   /* Booking returns to the initial desktop composition. */
   const booking=makeWindow({id:'booking',title:'D:\\BOOKING\\PUT_ME_IN_THE_ROOM.EXE',className:'dr-booking',x:Math.max(650,innerWidth-520),y:Math.max(390,innerHeight-315),hidden:mobile(),html:`<h2>Put me in the room.</h2><p>Clubs, private parties, cultural programs, brands, weird ideas with a budget.</p><a class="dr-book-me" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20booking&body=Name:%0AEvent%20date:%0ACity%20/%20venue:%0AEvent%20type:%0AEstimated%20audience:%0ABudget%20range:%0AHow%20should%20the%20room%20feel:%0A">BOOK<br>DJ SIR GAY</a><div class="dr-booking-note">This button is intentionally larger than necessary.</div>`});
 
+  /* A compact desktop gateway plus a real shareable press-kit URL. */
+  const presskit=makeWindow({id:'presskit',title:'D:\\PRESS_KIT\\README.TXT',className:'dr-presskit',x:Math.max(250,innerWidth*.31),y:Math.max(120,innerHeight*.18),hidden:true,html:`<div class="dr-presskit-head"><small>OFFICIAL / 2026</small><h2>PRESS KIT</h2><p>More than a DJ. <b>Unfortunately.</b></p></div><div class="dr-presskit-files"><a href="/press-kit/files/DJ_Sir_Gay_EPK_2026.pdf" target="_blank" rel="noreferrer">📄 DJ_SIR_GAY_EPK_2026.PDF <span>↗</span></a><a href="/press-kit/files/DJ_Sir_Gay_Press_Release_Belarus_in_Exile.pdf" target="_blank" rel="noreferrer">📄 PRESS_RELEASE.PDF <span>↗</span></a><a href="/press-kit/files/DJ_Sir_Gay_Technical_Advance_2026.pdf" target="_blank" rel="noreferrer">📄 TECHNICAL_ADVANCE.PDF <span>↗</span></a><a href="/press-kit/files/DJ_Sir_Gay_Press_Kit_2026.zip" download>🗜 DOWNLOAD_EVERYTHING.ZIP <span>↓</span></a></div><div class="dr-project-actions"><a class="dr-btn primary" href="/press-kit/">OPEN SHAREABLE PRESS PAGE →</a><a class="dr-btn" href="mailto:ulyanoow@gmail.com?subject=DJ%20Sir%20Gay%20press%20or%20booking%20request">Contact ↗</a></div><div class="dr-statusbar">Direct link: djsirgay.com/press-kit/</div>`});
+
   /* Fake copy dialog is a functional Telegram conversion. */
   const openDownloads = () => {
     let win=windows.get('downloads'); if(!win){win=makeWindow({id:'downloads',title:'Copying files — D:\\DJSG → C:\\Downloads',className:'dr-copy',x:Math.max(220,innerWidth*.33),y:Math.max(150,innerHeight*.22),html:`<h2>Copy these files to your Downloads?</h2><div class="dr-copy-route"><div class="dr-folder">D:\\DJSG</div><div class="dr-copy-arrow">→</div><div class="dr-folder">C:\\Downloads</div></div><div class="dr-copy-files">FRESH_MASHUPS.m3u<br>BELARUS_IN_EXILE.exe<br>STAY_FUCKING_STRONG.txt<br>QUEER_POP_MEMORY.dll<br>TELEGRAM_SHORTCUT.url</div><div class="dr-copy-progress"><i></i></div><p class="dr-copy-result">Preparing files…</p><a class="dr-btn primary" href="https://t.me/djsirgay" target="_blank" rel="noreferrer">Open Downloads in Telegram ↗</a>`});}
@@ -250,6 +260,7 @@
   projectCards.forEach((p,i)=>addIcon({type:'exe',label:`${cleanFile(p.title)}.EXE`,small:`D:\\PROJECTS\\${String(i+1).padStart(2,'0')}`,action:()=>projectWindow(p,i)}));
   addIcon({type:'paint',label:'SERGEY.BMP',small:'Open in Paint',action:()=>{const t=$('.djsg-app-shortcut[data-app="paint"]')||$('#djsg-paint-launch');t?.click();}});
   addIcon({type:'browser',label:'PUBLIC_RECORD.URL',small:'Yahoo! News',action:()=>show('browser')});
+  addIcon({type:'folder',label:'PRESS_KIT',small:'EPK + advance + press',action:()=>show('presskit')});
   addIcon({type:'music',label:'STAY_STRONG.SYS',small:'Live rear-window LED',action:()=>show('stay')});
   addIcon({type:'telegram',label:'DOWNLOADS',small:'Copy to Telegram',action:openDownloads});
   addIcon({type:'mail',label:'BOOK_ME.EXE',small:'Put me in the room',action:()=>show('booking')});
@@ -265,7 +276,7 @@
   const launchPaintWhenReady = (attempt=0) => {
     if (!launchPaint() && attempt < 40) setTimeout(()=>launchPaintWhenReady(attempt+1),250);
   };
-  $('[data-open-paint]',welcome).addEventListener('click',()=>launchPaintWhenReady()); $('[data-open-winamp]',welcome).addEventListener('click',()=>show('winamp')); $('[data-open-stay]',welcome).addEventListener('click',()=>show('stay')); $('[data-open-projects]',welcome).addEventListener('click',()=>show('projects-folder')); $('[data-open-browser]',welcome).addEventListener('click',()=>show('browser'));
+  $('[data-open-paint]',welcome).addEventListener('click',()=>launchPaintWhenReady()); $('[data-open-winamp]',welcome).addEventListener('click',()=>show('winamp')); $('[data-open-stay]',welcome).addEventListener('click',()=>show('stay')); $('[data-open-projects]',welcome).addEventListener('click',()=>show('projects-folder')); $('[data-open-browser]',welcome).addEventListener('click',()=>show('browser')); $('[data-open-presskit]',welcome).addEventListener('click',()=>show('presskit'));
 
   /* Route the existing Start/taskbar into windows instead of hidden webpage sections. */
   const routeTarget = target => {

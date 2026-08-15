@@ -1,15 +1,15 @@
 (() => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.title = 'DJ Sir Gay.exe — Personal Operating System';
+  document.title = 'DJ Sir Gay — DJSirGay.com';
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) themeMeta.content = '#008080';
   const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.content = 'DJ Sir Gay.exe';
+  if (ogTitle) ogTitle.content = 'DJ Sir Gay — DJSirGay.com';
   const ogDescription = document.querySelector('meta[property="og:description"]');
   if (ogDescription) ogDescription.content = 'A personal operating system built from queer memory, pop archaeology and unauthorized emotion.';
   const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-  if (twitterTitle) twitterTitle.content = 'DJ Sir Gay.exe';
+  if (twitterTitle) twitterTitle.content = 'DJ Sir Gay — DJSirGay.com';
   const twitterDescription = document.querySelector('meta[name="twitter:description"]');
   if (twitterDescription) twitterDescription.content = 'A personal operating system built from queer memory, pop archaeology and unauthorized emotion.';
 
@@ -24,7 +24,7 @@
   addStyle('os95', '/os95.css?v=20260810-2');
   addStyle('evolution', '/os95-evolution.css?v=20260810-1');
   addStyle('hierarchy', '/hierarchy95.css?v=20260810-1');
-  addStyle('apps', '/apps95.css?v=20260815-1');
+  addStyle('apps', '/apps95.css?v=20260815-2');
 
   // The old theatrical intro is gone. DJ Sir Gay 95 has exactly one startup screen.
   document.getElementById('signal-boot')?.remove();
@@ -195,7 +195,7 @@
       evolutionScript.dataset.djsgEvolution = '1';
       evolutionScript.addEventListener('load', () => {
         const hierarchyScript = document.createElement('script');
-        hierarchyScript.src = '/hierarchy95.js?v=20260815-2';
+        hierarchyScript.src = '/hierarchy95.js?v=20260815-3';
         hierarchyScript.dataset.djsgHierarchy = '1';
         document.body.appendChild(hierarchyScript);
 
