@@ -284,6 +284,16 @@ body.desktop-reality-on > .djsg-game-window{z-index:9500!important}
   .dr-ledbox,.dr-led-sequence>span{height:90px}.dr-ledbox{font-size:36px}
 }
 
+@media(max-width:760px) and (max-height:720px){
+  .dr-welcome{height:230px!important;max-height:230px!important}
+  .dr-winamp{top:234px!important}
+  .dr-winamp-display{min-height:55px;font-size:19px}
+  .dr-winamp-controls button{min-height:31px}
+  .dr-winamp-eq{height:28px}
+  .dr-playlist{height:calc(100% - 170px)}
+  .dr-track{min-height:30px;padding:3px 4px;font-size:14px}
+}
+
 @media(prefers-reduced-motion:reduce){
   .dr-winamp-eq i,.dr-led-sequence,.dr-copy-progress i,.dr-wmp-bar i,.os95-tray-dot{animation:none!important}
   .dr-copy.running .dr-copy-progress i{width:100%}
