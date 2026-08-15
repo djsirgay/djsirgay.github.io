@@ -109,34 +109,45 @@
 
   const show = id => { const w=windows.get(id); if(w){w.classList.remove('hidden');focusWin(w);} return w; };
 
-  const ledWords = ['STAY','FUC*ING','STRONG','PLAY','IT','LOUD','BE','GAY','DO','CRIME','FROM','DICTATORSHIP','TO','DANCEFLOOR','MUSIC','WITHOUT','LIMITS'];
-  const ledMarkup = () => `${ledWords.map(word=>`<span${word.length > 10 ? ' class="long"' : ''} aria-hidden="true"><b>${esc(word)}</b></span>`).join('')}<span aria-hidden="true"><b>${esc(ledWords[0])}</b></span>`;
+  const ledMessages = [
+    ['STAY FUC*ING','STRONG'],
+    ['PLAY IT','LOUD'],
+    ['BE GAY','DO CRIME'],
+    ['FROM DICTATORSHIP','TO DANCEFLOOR'],
+    ['MUSIC WITHOUT','LIMITS']
+  ];
+  const ledSlide = (lines, duplicate=false) => {
+    const longest = Math.max(...lines.map(line => line.length));
+    return `<span${longest > 14 ? ' class="long"' : ''}${duplicate ? ' aria-hidden="true"' : ''}>${lines.map(line=>`<b>${esc(line)}</b>`).join('')}</span>`;
+  };
+  const ledMarkup = () => `${ledMessages.map(lines=>ledSlide(lines)).join('')}${ledSlide(ledMessages[0],true)}`;
   const startLed = sequence => {
     if (!sequence?.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const step = sequence.firstElementChild?.offsetHeight || 96;
     const frames = [];
-    ledWords.forEach((_, index) => {
-      const start = index / ledWords.length;
-      const hold = (index + .7) / ledWords.length;
-      const end = (index + 1) / ledWords.length;
-      frames.push({transform:`translateY(${-index * 82}px)`,offset:start});
-      frames.push({transform:`translateY(${-index * 82}px)`,offset:hold});
-      frames.push({transform:`translateY(${-(index + 1) * 82}px)`,offset:end});
+    ledMessages.forEach((_, index) => {
+      const start = index / ledMessages.length;
+      const hold = (index + .72) / ledMessages.length;
+      const end = (index + 1) / ledMessages.length;
+      frames.push({transform:`translateY(${-index * step}px)`,offset:start});
+      frames.push({transform:`translateY(${-index * step}px)`,offset:hold});
+      frames.push({transform:`translateY(${-(index + 1) * step}px)`,offset:end});
     });
-    sequence.animate(frames,{duration:ledWords.length * 2100,iterations:Infinity,easing:'linear'});
+    sequence.animate(frames,{duration:ledMessages.length * 2700,iterations:Infinity,easing:'linear'});
   };
 
   /* README is a real window, not a website hero. */
-  const welcome = makeWindow({id:'welcome',title:'Disk D:\\DJSG\\README.TXT',className:'dr-welcome',x:145,y:30,html:`<div class="dr-brandline"><img src="/assets/logo-square.svg" alt="DJ Sir Gay logo"><h1>DJ Sir Gay<span>.exe</span></h1></div><p>Mashups, narrative DJ sets and pop memories rebuilt by a queer Eastern European artist in exile. This computer contains music, questionable files and a booking button with no sense of proportion.</p><div class="dr-quick"><button class="dr-btn primary" data-open-winamp>▶ Play music</button><button class="dr-btn" data-open-paint>🎨 Paint me gay</button><button class="dr-btn" data-open-stay>▰ Open LED</button><button class="dr-btn" data-open-projects>Disk D:\\PROJECTS</button><button class="dr-btn" data-open-browser>Public Record</button></div>`});
+  const welcome = makeWindow({id:'welcome',title:'Disk D:\\DJSG\\README.TXT',className:'dr-welcome',x:145,y:30,html:`<div class="dr-brandline"><img src="/assets/logo-square.svg" alt="DJ Sir Gay logo"><div><h1>DJ Sir Gay<span>.exe</span></h1><a class="dr-domain" href="https://djsirgay.com">DJSIRGAY.COM</a></div></div><p>Mashups, narrative DJ sets and pop memories rebuilt by a queer Eastern European artist in exile. This computer contains music, questionable files and a booking button with no sense of proportion.</p><div class="dr-quick"><button class="dr-btn primary" data-open-winamp>▶ Play music</button><button class="dr-btn" data-open-paint>🎨 Paint me gay</button><button class="dr-btn" data-open-stay>▰ Open LED</button><button class="dr-btn" data-open-projects>Disk D:\\PROJECTS</button><button class="dr-btn" data-open-browser>Public Record</button></div>`});
 
   /* Vertical Winamp. Five hand-picked local MP3s; no redirects. */
   const tracks = [
     {title:'Runway × Bring Me Love',artist:'GAGA × DOECHII × MADONNA × SABRINA',file:'/assets/audio/runway-bring-me-love.mp3',duration:'3:05',art:'/assets/madonna-gaga-cover.webp'},
-    {title:'We Found Love × Save Me Tonight',artist:'DJ SIR GAY',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/we-found-love-cover.webp'},
-    {title:'How Deep Is Your Time — Coachella',artist:'DJ SIR GAY',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/how-deep-is-your-time-cover.webp'},
-    {title:'A Sky Full of Stars × Love Me',artist:'DJ SIR GAY',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/sky-full-of-stars-cover.webp'},
-    {title:'Club Song × Like I Love You',artist:'DJ SIR GAY',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/club-song-cover.webp'}
+    {title:'We Found Love × Save Me Tonight',artist:'JENNIFER LOPEZ × RIHANNA',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/we-found-love-artists.webp'},
+    {title:'How Deep Is Your Time — Coachella',artist:'CALVIN HARRIS × HANS ZIMMER × DISCIPLES',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/how-deep-is-your-time-cover.webp'},
+    {title:'A Sky Full of Stars × Love Me',artist:'COLDPLAY × ARSEN MUKENDI',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/sky-full-of-stars-artists.webp'},
+    {title:'Club Song × Like I Love You',artist:'THE PUSSYCAT DOLLS × JUSTIN TIMBERLAKE',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/club-song-artists.webp'}
   ];
-  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,hidden:mobile(),html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track">◀◀</button><button type="button" data-wa-play aria-label="Play">▶</button><button type="button" data-wa-pause aria-label="Pause">❚❚</button><button type="button" data-wa-next aria-label="Next track">▶▶</button><button type="button" data-wa-art aria-label="Open cover art">ART</button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="metadata"></audio>`});
+  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track">◀◀</button><button type="button" data-wa-play aria-label="Play">▶</button><button type="button" data-wa-pause aria-label="Pause">❚❚</button><button type="button" data-wa-next aria-label="Next track">▶▶</button><button type="button" data-wa-art aria-label="Open cover art">ART</button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="auto" autoplay playsinline></audio>`});
   const album = makeWindow({id:'album',title:'D:\\COVERS\\SELECTED.BMP',className:'dr-album',x:Math.max(520,innerWidth-795),y:Math.max(300,innerHeight-480),hidden:mobile(),html:`<div class="dr-album-artwrap"><img data-album-img alt="Selected release artwork"><div class="dr-album-copy"><small data-album-artist>GAGA × DOECHII × MADONNA × SABRINA</small><strong>DJ SIR GAY</strong><b>MASHUP</b></div></div><div class="dr-album-caption" data-album-caption>Album Art / Preview.bmp</div>`});
 
   const audio = $('[data-wa-audio]', winamp);
@@ -152,6 +163,14 @@
     $('[data-album-img]',album).src=track.art;
     $('[data-album-artist]',album).textContent=track.artist;
     $('[data-album-caption]',album).textContent=`${track.title} / Preview.bmp`;
+    if ('mediaSession' in navigator && 'MediaMetadata' in window) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: track.title,
+        artist: track.artist,
+        album: 'DJ Sir Gay — Music Without Limits',
+        artwork: [{src:new URL(track.art,location.href).href,sizes:'1000x1000',type:'image/webp'}]
+      });
+    }
     if(audio.src !== new URL(track.file,location.href).href){audio.src=track.file;seek.value=0;$('[data-wa-elapsed]',winamp).textContent='0:00';$('[data-wa-total]',winamp).textContent=track.duration;}
     if(play) audio.play().catch(()=>{});
   };
@@ -162,11 +181,26 @@
   $('[data-wa-play]',winamp).addEventListener('click',()=>audio.play().catch(()=>{}));
   $('[data-wa-pause]',winamp).addEventListener('click',()=>audio.pause());
   $('[data-wa-art]',winamp).addEventListener('click',()=>show('album'));
-  audio.addEventListener('play',()=>{winamp.classList.add('is-playing');$('[data-wa-mode]',winamp).textContent='PLAYING';});
-  audio.addEventListener('pause',()=>{winamp.classList.remove('is-playing');$('[data-wa-mode]',winamp).textContent=audio.currentTime ? 'PAUSED' : 'READY';});
+  audio.addEventListener('play',()=>{winamp.classList.add('is-playing');$('[data-wa-mode]',winamp).textContent='PLAYING';if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';});
+  audio.addEventListener('pause',()=>{winamp.classList.remove('is-playing');$('[data-wa-mode]',winamp).textContent=audio.currentTime ? 'PAUSED' : 'READY';if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';});
   audio.addEventListener('timeupdate',()=>{seek.value=audio.duration?String(audio.currentTime/audio.duration*100):'0';$('[data-wa-elapsed]',winamp).textContent=fmt(audio.currentTime);$('[data-wa-total]',winamp).textContent=fmt(audio.duration);});
   audio.addEventListener('ended',()=>selectFresh(selectedFresh+1,true));
   seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=Number(seek.value)/100*audio.duration;});
+  if ('mediaSession' in navigator) {
+    const actions = {
+      play:()=>audio.play().catch(()=>{}),
+      pause:()=>audio.pause(),
+      previoustrack:()=>selectFresh(selectedFresh-1,true),
+      nexttrack:()=>selectFresh(selectedFresh+1,true),
+      seekbackward:details=>{audio.currentTime=Math.max(0,audio.currentTime-(details.seekOffset||10));},
+      seekforward:details=>{audio.currentTime=Math.min(audio.duration||Infinity,audio.currentTime+(details.seekOffset||10));},
+      seekto:details=>{if(Number.isFinite(details.seekTime))audio.currentTime=details.seekTime;}
+    };
+    Object.entries(actions).forEach(([action,handler])=>{try{navigator.mediaSession.setActionHandler(action,handler);}catch(_){}});
+  }
+  const autoplay = () => audio.play().catch(()=>{});
+  setTimeout(autoplay,350);
+  document.addEventListener('pointerdown',autoplay,{once:true,capture:true});
 
   const videoEmbed = value => {
     if(!value)return '';
@@ -193,12 +227,12 @@
   const pf=$('[data-project-folder]',projectsFolder); projectCards.forEach((p,i)=>{const b=document.createElement('button');b.className='dr-icon';b.style.color='#000';b.style.textShadow='none';b.innerHTML=`${iconSvg('exe')}<span>${esc(cleanFile(p.title))}.EXE</span>`;b.addEventListener('click',()=>projectWindow(p,i));pf.append(b)});
 
   /* Public record looks like a period news portal inside Internet Explorer. */
-  const browser = makeWindow({id:'browser',title:'Internet Explorer — Yahoo! News / DJ Sir Gay',className:'dr-browser',x:Math.max(200,innerWidth*.34),y:80,hidden:true,html:`<div class="dr-menubar"><span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Help</span></div><div class="dr-address"><strong>Address</strong><input readonly value="http://news.yahoo.com/djsirgay/public-record"></div><div class="dr-browser-content"><div class="dr-yahoo-head">Yahoo! <small>Public Record / DJ Sir Gay</small></div><div data-news></div></div>`});
+  const browser = makeWindow({id:'browser',title:'Internet Explorer — Yahoo! News / DJ Sir Gay',className:'dr-browser',x:Math.max(200,innerWidth*.34),y:80,hidden:true,html:`<div class="dr-menubar"><span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Help</span></div><div class="dr-address"><strong>Address</strong><input readonly value="http://news.yahoo.com/djsirgay/public-record"></div><div class="dr-browser-content"><div class="dr-yahoo-head">Yahoo! <small>Public Record / DJ Sir Gay</small></div><div class="dr-record-tagline">More than a DJ. <span>Unfortunately.</span></div><div data-news></div></div>`});
   const news=$('[data-news]',browser); articleCards.forEach((a,i)=>{const row=document.createElement('button');row.type='button';row.className='dr-news-row';row.innerHTML=`<img src="${esc(a.image)}" alt=""><div><small>${esc(a.source)}</small><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></div>`;row.addEventListener('click',()=>openArticle(a,i));news.append(row)});
   function openArticle(a,i){let win=windows.get(`article-${i}`);if(win){win.classList.remove('hidden');focusWin(win);return;}win=makeWindow({id:`article-${i}`,title:`Internet Explorer — ${a.title}`,className:'dr-article-preview',x:240+i*25,y:120+i*18,html:`<img src="${esc(a.image)}" alt=""><h2>${esc(a.title)}</h2><p><strong>${esc(a.source)}</strong></p><p>${esc(a.summary)}</p><a class="dr-btn primary" href="${esc(a.href)}" target="_blank" rel="noreferrer">Read full article ↗</a>`});}
 
   /* Stay Strong stays in its original standalone utility window. */
-  makeWindow({id:'stay',title:'C:\\WINDOWS\\SYSTEM\\STAY_FUCKING_STRONG.SYS',className:'dr-stay',x:145,y:Math.max(380,innerHeight-205),hidden:mobile(),html:`<div class="dr-ledbox" aria-label="STAY FUC*ING STRONG and rotating DJ Sir Gay messages"><div class="dr-led-sequence">${ledMarkup()}</div></div><div class="dr-statusbar">One word at a time / rear-window LED / Los Angeles</div>`});
+  makeWindow({id:'stay',title:'C:\\WINDOWS\\SYSTEM\\STAY_FUCKING_STRONG.SYS',className:'dr-stay',x:145,y:Math.max(380,innerHeight-225),hidden:mobile(),html:`<div class="dr-ledbox" aria-label="STAY FUC*ING STRONG and rotating DJ Sir Gay messages"><div class="dr-led-sequence">${ledMarkup()}</div></div><div class="dr-statusbar">Live message board / rear-window LED / Los Angeles</div>`});
   $$('.dr-led-sequence',desktop).forEach(startLed);
 
   /* Booking returns to the initial desktop composition. */

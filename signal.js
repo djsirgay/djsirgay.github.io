@@ -24,7 +24,7 @@
   addStyle('os95', '/os95.css?v=20260810-2');
   addStyle('evolution', '/os95-evolution.css?v=20260810-1');
   addStyle('hierarchy', '/hierarchy95.css?v=20260810-1');
-  addStyle('apps', '/apps95.css?v=20260814-4');
+  addStyle('apps', '/apps95.css?v=20260815-1');
 
   // The old theatrical intro is gone. DJ Sir Gay 95 has exactly one startup screen.
   document.getElementById('signal-boot')?.remove();
@@ -195,7 +195,7 @@
       evolutionScript.dataset.djsgEvolution = '1';
       evolutionScript.addEventListener('load', () => {
         const hierarchyScript = document.createElement('script');
-        hierarchyScript.src = '/hierarchy95.js?v=20260814-7';
+        hierarchyScript.src = '/hierarchy95.js?v=20260815-1';
         hierarchyScript.dataset.djsgHierarchy = '1';
         document.body.appendChild(hierarchyScript);
 
