@@ -80,7 +80,13 @@
         <button type="button" data-help-close>Leave me alone</button>
       </div>
     </div>`;
-    document.body.append(helper);
+    const safeHome = document.querySelector('#djsg-desktop .dr-welcome .dr-body');
+    if (safeHome) {
+      helper.classList.add('djsg-helper-inline');
+      safeHome.append(helper);
+    } else {
+      document.body.append(helper);
+    }
 
     helper.addEventListener('click', event => {
       const nav = event.target.closest('[data-help]');

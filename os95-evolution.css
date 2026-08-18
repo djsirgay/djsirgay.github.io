@@ -53,6 +53,14 @@
 .djsg-helper-actions{display:flex;flex-wrap:wrap;gap:5px}
 .djsg-helper button{min-height:26px;padding:3px 7px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .djsg-helper button:active{border-color:#404040 #fff #fff #404040}
+.djsg-helper.djsg-helper-inline{
+  position:static;z-index:auto;width:100%;margin:8px 0 0;
+  grid-template-columns:46px minmax(0,1fr);padding:6px;box-shadow:none;
+  animation:none;font-size:10px;
+}
+.djsg-helper-inline .djsg-helper-dog{width:42px;height:42px}
+.djsg-helper-inline .djsg-helper-dog svg{width:35px;height:35px}
+.djsg-helper-inline .djsg-helper-actions button{min-height:23px;padding:2px 5px;font-size:9px}
 
 /* Games live in Start, not on the content desktop. */
 .djsg-game-window{
