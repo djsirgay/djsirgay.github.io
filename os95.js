@@ -74,6 +74,7 @@
       <button type="button" id="os95-solitaire"><span class="os95-menu-glyph">♥</span><span><strong>Solitaire.exe</strong><br>Totally work-related</span></button>
       <a href="https://soundcloud.com/djsirgay" target="_blank" rel="noreferrer"><span class="os95-menu-glyph">▶</span><span>SoundCloud</span></a>
       <a href="https://www.youtube.com/@NostalgAiRec" target="_blank" rel="noreferrer"><span class="os95-menu-glyph">▸</span><span>YouTube</span></a>
+      <a href="https://instagram.com/djsirgay" target="_blank" rel="noreferrer"><span class="os95-menu-glyph">◎</span><span>Instagram</span></a>
       <hr>
       <button type="button" id="os95-shutdown"><span class="os95-menu-glyph">⏻</span><span><strong>Shut Down...</strong></span></button>
     </div>`;

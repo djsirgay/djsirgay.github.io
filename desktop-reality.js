@@ -48,6 +48,7 @@
       mail:'<svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19" fill="#fff" stroke="#000"/><path d="M4 8l12 10L28 8" fill="#c0c0c0" stroke="#000"/></svg>',
       trash:'<svg viewBox="0 0 32 32"><path d="M8 9h17l-2 20H10z" fill="#e7e7e7" stroke="#000"/><rect x="6" y="6" width="21" height="4" fill="#c0c0c0" stroke="#000"/><rect x="12" y="3" width="9" height="3" fill="#808080" stroke="#000"/></svg>',
       music:'<svg viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="22" fill="#303030" stroke="#000"/><rect x="6" y="7" width="20" height="7" fill="#001000"/><rect x="8" y="9" width="12" height="3" fill="#00ff00"/><path d="M10 20h13M10 23h10" stroke="#00ff00"/></svg>'
+      ,instagram:'<svg viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="6" fill="#fff" stroke="#000"/><rect x="8" y="8" width="16" height="16" rx="4" fill="none" stroke="#000080" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="none" stroke="#000080" stroke-width="2"/><circle cx="22" cy="10" r="1.5" fill="#ff0080"/></svg>'
     };
     return map[type] || map.exe;
   };
@@ -141,14 +142,14 @@
 
   /* Vertical Winamp. Six hand-picked local MP3s; no redirects. */
   const tracks = [
-    {title:'Runway × Bring Me Love',artist:'GAGA × DOECHII × MADONNA × SABRINA',file:'/assets/audio/runway-bring-me-love.mp3',duration:'3:05',art:'/assets/madonna-gaga-cover.webp'},
-    {title:'We Found Love × Save Me Tonight',artist:'JENNIFER LOPEZ × RIHANNA',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/we-found-love-artists.webp'},
-    {title:'A Sky Full of Stars × Love Me',artist:'COLDPLAY × ARSEN MUKENDI',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/sky-full-of-stars-artists.webp'},
-    {title:'All The Things She Said × UuUuuU',artist:'t.A.T.u. × FLOYYMENOR',file:'/assets/audio/all-the-things-she-said-uuuuuu.mp3',duration:'3:14',art:'/assets/all-the-things-she-said-artists.webp'},
-    {title:'How Deep Is Your Time — Coachella',artist:'CALVIN HARRIS × HANS ZIMMER × DISCIPLES',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/how-deep-is-your-time-cover.webp'},
-    {title:'Club Song × Like I Love You',artist:'THE PUSSYCAT DOLLS × JUSTIN TIMBERLAKE',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/club-song-artists.webp'}
+    {title:'Runway × Bring Me Love',artist:'GAGA × DOECHII × MADONNA × SABRINA',file:'/assets/audio/runway-bring-me-love.mp3',duration:'3:05',art:'/assets/madonna-gaga-cover.webp',mediaArt:'/assets/media/runway-bring-me-love.jpg'},
+    {title:'We Found Love × Save Me Tonight',artist:'JENNIFER LOPEZ × RIHANNA',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/we-found-love-artists.webp',mediaArt:'/assets/media/we-found-love-save-me-tonight.jpg'},
+    {title:'A Sky Full of Stars × Love Me',artist:'COLDPLAY × ARSEN MUKENDI',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/sky-full-of-stars-artists.webp',mediaArt:'/assets/media/sky-full-of-stars-love-me.jpg'},
+    {title:'All The Things She Said × UuUuuU',artist:'t.A.T.u. × FLOYYMENOR',file:'/assets/audio/all-the-things-she-said-uuuuuu.mp3',duration:'3:14',art:'/assets/all-the-things-she-said-artists.webp',mediaArt:'/assets/media/all-the-things-she-said-uuuuuu.jpg'},
+    {title:'How Deep Is Your Time — Coachella',artist:'CALVIN HARRIS × HANS ZIMMER × DISCIPLES',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/how-deep-is-your-time-cover.webp',mediaArt:'/assets/media/how-deep-is-your-time.jpg'},
+    {title:'Club Song × Like I Love You',artist:'THE PUSSYCAT DOLLS × JUSTIN TIMBERLAKE',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/club-song-artists.webp',mediaArt:'/assets/media/club-song-like-i-love-you.jpg'}
   ];
-  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track">◀◀</button><button type="button" data-wa-play aria-label="Play">▶</button><button type="button" data-wa-pause aria-label="Pause">❚❚</button><button type="button" data-wa-next aria-label="Next track">▶▶</button><button type="button" data-wa-art aria-label="Open cover art">ART</button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="auto" autoplay playsinline></audio>`});
+  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track"><i class="wa-skip wa-prev"></i></button><button type="button" data-wa-play aria-label="Play"><i class="wa-play"></i></button><button type="button" data-wa-pause aria-label="Pause"><i class="wa-pause"></i></button><button type="button" data-wa-next aria-label="Next track"><i class="wa-skip wa-next"></i></button><button type="button" data-wa-art aria-label="Open cover art"><i class="wa-eject"></i></button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="auto" autoplay playsinline></audio>`});
   const album = makeWindow({id:'album',title:'D:\\COVERS\\SELECTED.BMP',className:'dr-album',x:Math.max(520,innerWidth-795),y:Math.max(300,innerHeight-480),hidden:mobile(),html:`<div class="dr-album-artwrap"><img data-album-img alt="Selected release artwork"><div class="dr-album-copy"><small data-album-artist>GAGA × DOECHII × MADONNA × SABRINA</small><strong>DJ SIR GAY</strong><b>MASHUP</b></div></div><div class="dr-album-caption" data-album-caption>Album Art / Preview.bmp</div>`});
 
   const audio = $('[data-wa-audio]', winamp);
@@ -169,7 +170,7 @@
         title: track.title,
         artist: track.artist,
         album: 'DJ Sir Gay — Music Without Limits',
-        artwork: [{src:new URL(track.art,location.href).href,sizes:'1000x1000',type:'image/webp'}]
+        artwork: [{src:new URL(track.mediaArt || track.art,location.href).href,sizes:'1000x1000',type:'image/jpeg'}]
       });
     }
     if(audio.src !== new URL(track.file,location.href).href){audio.src=track.file;seek.value=0;$('[data-wa-elapsed]',winamp).textContent='0:00';$('[data-wa-total]',winamp).textContent=track.duration;}
@@ -261,6 +262,7 @@
   addIcon({type:'paint',label:'SERGEY.BMP',small:'Open in Paint',action:()=>{const t=$('.djsg-app-shortcut[data-app="paint"]')||$('#djsg-paint-launch');t?.click();}});
   addIcon({type:'browser',label:'PUBLIC_RECORD.URL',small:'Yahoo! News',action:()=>show('browser')});
   addIcon({type:'folder',label:'PRESS_KIT',small:'EPK + advance + press',action:()=>show('presskit')});
+  addIcon({type:'instagram',label:'INSTAGRAM.URL',small:'@djsirgay',action:()=>window.open('https://instagram.com/djsirgay','_blank','noopener')});
   addIcon({type:'music',label:'STAY_STRONG.SYS',small:'Live rear-window LED',action:()=>show('stay')});
   addIcon({type:'telegram',label:'DOWNLOADS',small:'Copy to Telegram',action:openDownloads});
   addIcon({type:'mail',label:'BOOK_ME.EXE',small:'Put me in the room',action:()=>show('booking')});
@@ -282,6 +284,7 @@
   const routeTarget = target => {
     if(target==='#fresh'){show('winamp');return true} if(target==='#projects'){show('projects-folder');return true} if(target==='#voice'){show('browser');return true} if(target==='#booking'){show('booking');return true} return false;
   };
+  window.DJSGDesktopOpen = routeTarget;
   document.addEventListener('click',e=>{const link=e.target.closest('[data-os-target]');if(link&&routeTarget(link.dataset.osTarget)){e.preventDefault();e.stopImmediatePropagation();$('#os95-start-menu')?.classList.remove('open');$('#os95-start-btn')?.setAttribute('aria-expanded','false');}},true);
   const task=$$('.os95-task-btn'); if(task[0])task[0].textContent='♫ WINAMP'; if(task[1])task[1].textContent='▣ D:\\PROJECTS'; if(task[2])task[2].textContent='🌐 Yahoo!'; if(task[3])task[3].textContent='✉ BOOK ME';
 

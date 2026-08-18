@@ -17,6 +17,7 @@ A separate approved high-resolution photo selection will be added in a future up
 Listen:
 https://soundcloud.com/djsirgay
 https://www.youtube.com/@djsirgay
+https://instagram.com/djsirgay
 https://t.me/djsirgay
 
 Press / interviews / booking:

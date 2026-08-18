@@ -192,11 +192,13 @@
     if (source) {
       const image = new Image();
       image.onload = () => {
-        const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-        const w = image.width * scale, h = image.height * scale;
         ctx.fillStyle = '#d8dce6';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(image, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+        const cropTop = Math.round(image.height * .15);
+        const sourceHeight = image.height - cropTop;
+        const scale = Math.min(canvas.width / image.width, (canvas.height * .85) / sourceHeight);
+        const w = image.width * scale, h = sourceHeight * scale;
+        ctx.drawImage(image, 0, cropTop, image.width, sourceHeight, (canvas.width - w) / 2, 0, w, h);
         pristine = ctx.getImageData(0,0,canvas.width,canvas.height);
         ready = true;
         canvas.setAttribute('aria-busy', 'false');

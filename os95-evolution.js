@@ -56,6 +56,7 @@
   </svg>`;
 
   const scrollToProgram = selector => {
+    if (typeof window.DJSGDesktopOpen === 'function' && window.DJSGDesktopOpen(selector)) return;
     const node = $(selector);
     if (!node) return;
     const y = node.getBoundingClientRect().top + scrollY - 50;
@@ -64,7 +65,7 @@
 
   const showHelper = () => {
     let dismissed = false;
-    try { dismissed = localStorage.getItem('djsg-help-dog-dismissed') === '1'; } catch (_) {}
+    try { dismissed = localStorage.getItem('djsg-help-dog-dismissed-v2') === '1'; } catch (_) {}
     if (dismissed || $('.djsg-helper')) return;
 
     const helper = document.createElement('aside');
@@ -86,7 +87,7 @@
       if (nav) scrollToProgram(nav.dataset.help);
       if (event.target.closest('[data-help-close]')) {
         helper.remove();
-        try { localStorage.setItem('djsg-help-dog-dismissed', '1'); } catch (_) {}
+        try { localStorage.setItem('djsg-help-dog-dismissed-v2', '1'); } catch (_) {}
       }
     });
   };
