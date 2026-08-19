@@ -122,6 +122,7 @@ body.desktop-reality-on > .signal-boot{display:none!important}
 .dr-welcome h1{margin:0;font:700 clamp(42px,7vw,78px)/.82 var(--dr-pixel);letter-spacing:-.055em}
 .dr-welcome h1 span{color:#000080}
 .dr-brandline{display:flex;align-items:center;gap:16px}.dr-brandline img{width:96px;height:96px;flex:0 0 auto;image-rendering:pixelated}
+.dr-brandline-wordmark{display:block}.dr-brandline-wordmark img{display:block;width:min(100%,620px);height:auto;max-height:142px;object-fit:contain;object-position:left center;image-rendering:auto}.dr-brandline-wordmark .dr-domain{margin-top:8px}
 .dr-domain{display:inline-block;margin-top:7px;color:#000080;font:bold 12px/1 var(--dr-ui);letter-spacing:.11em;text-underline-offset:2px}
 .dr-welcome p{max-width:630px;margin:14px 0 15px;font:13px/1.45 var(--dr-ui)}
 .dr-quick{display:flex;flex-wrap:wrap;gap:5px}
@@ -291,7 +292,7 @@ body.desktop-reality-on > .djsg-helper{display:grid!important;z-index:8800!impor
   .dr-body{max-height:calc(100svh - 69px)}
   .dr-welcome{top:4px!important;height:clamp(222px,35svh,274px)!important;max-height:clamp(222px,35svh,274px)!important}
   .dr-welcome .dr-body{padding:8px;max-height:calc(100% - 38px);overflow:auto}.dr-welcome h1{font-size:36px}.dr-welcome p{margin:6px 0 8px;font-size:9px;line-height:1.32}
-  .dr-brandline{gap:7px}.dr-brandline img{width:56px;height:56px}.dr-brandline h1{font-size:32px}
+  .dr-brandline{gap:7px}.dr-brandline img{width:56px;height:56px}.dr-brandline h1{font-size:32px}.dr-brandline-wordmark img{width:100%;height:auto;max-height:76px}
   .dr-domain{margin-top:4px;font-size:10px}
   .dr-quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.dr-quick .dr-btn:last-child:nth-child(odd){grid-column:1/-1}
   .dr-project .dr-body{grid-template-columns:1fr}.dr-project-media{min-height:180px;max-height:220px}.dr-project-copy{padding:12px}.dr-project-copy h2{font-size:26px}
@@ -308,6 +309,7 @@ body.desktop-reality-on > .djsg-helper{display:grid!important;z-index:8800!impor
 @media(max-width:360px){
   .dr-brandline{gap:7px}
   .dr-brandline img{width:56px;height:56px}
+  .dr-brandline-wordmark img{width:100%;height:auto;max-height:72px}
   .dr-brandline h1{font-size:31px}
 }
 

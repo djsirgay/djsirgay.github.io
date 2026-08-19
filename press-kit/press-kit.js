@@ -86,5 +86,25 @@
     };
     Object.entries(actions).forEach(([action, handler]) => { try { navigator.mediaSession.setActionHandler(action, handler); } catch (_) {} });
   }
+
+  const wmpModal = $('[data-wmp-modal]');
+  const wmpFrame = $('[data-wmp-frame]', wmpModal);
+  const closeWmp = () => {
+    if (!wmpModal || wmpModal.hidden) return;
+    wmpModal.hidden = true;
+    wmpFrame.src = 'about:blank';
+  };
+  $$('[data-wmp]').forEach(button => button.addEventListener('click', () => {
+    const media = button.dataset.wmp;
+    if (!media || !wmpModal) return;
+    $('[data-wmp-heading]', wmpModal).textContent = `Windows Media Player — ${button.dataset.wmpTitle || 'DJ Sir Gay'}`;
+    $('[data-wmp-now]', wmpModal).textContent = (button.dataset.wmpTitle || 'DJ Sir Gay').toUpperCase();
+    wmpFrame.src = `https://www.youtube.com/embed/${media}&autoplay=1&rel=0`;
+    wmpModal.hidden = false;
+    $('[data-wmp-close]', wmpModal).focus();
+  }));
+  $('[data-wmp-close]', wmpModal)?.addEventListener('click', closeWmp);
+  wmpModal?.addEventListener('click', event => { if (event.target === wmpModal) closeWmp(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeWmp(); });
   select(0, false);
 })();
