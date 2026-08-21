@@ -142,29 +142,278 @@
 
   /* Vertical Winamp. Six hand-picked local MP3s; no redirects. */
   const tracks = [
-    {title:'Runway × Bring Me Love',artist:'GAGA × DOECHII × MADONNA × SABRINA',file:'/assets/audio/runway-bring-me-love.mp3',duration:'3:05',art:'/assets/madonna-gaga-cover.webp',mediaArt:'/assets/media/runway-bring-me-love.jpg'},
-    {title:'We Found Love × Save Me Tonight',artist:'JENNIFER LOPEZ × RIHANNA',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/we-found-love-artists.webp',mediaArt:'/assets/media/we-found-love-save-me-tonight.jpg'},
-    {title:'A Sky Full of Stars × Love Me',artist:'COLDPLAY × ARSEN MUKENDI',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/sky-full-of-stars-artists.webp',mediaArt:'/assets/media/sky-full-of-stars-love-me.jpg'},
-    {title:'All The Things She Said × UuUuuU',artist:'t.A.T.u. × FLOYYMENOR',file:'/assets/audio/all-the-things-she-said-uuuuuu.mp3',duration:'3:14',art:'/assets/all-the-things-she-said-artists.webp',mediaArt:'/assets/media/all-the-things-she-said-uuuuuu.jpg'},
-    {title:'How Deep Is Your Time — Coachella',artist:'CALVIN HARRIS × HANS ZIMMER × DISCIPLES',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/how-deep-is-your-time-cover.webp',mediaArt:'/assets/media/how-deep-is-your-time.jpg'},
-    {title:'Club Song × Like I Love You',artist:'THE PUSSYCAT DOLLS × JUSTIN TIMBERLAKE',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/club-song-artists.webp',mediaArt:'/assets/media/club-song-like-i-love-you.jpg'}
+    {title:'Runway × Bring Me Love',artist:'GAGA × DOECHII × MADONNA × SABRINA',file:'/assets/audio/runway-bring-me-love.mp3',duration:'3:05',art:'/assets/madonna-gaga-cover.webp',mediaArt:'/assets/media/runway-bring-me-love.jpg',visualizer:{mode:'alchemy',name:'Alchemy',preset:'Kaleidoscope',tempo:128,colors:['#ff2fc8','#7d52ff','#42efff']}},
+    {title:'We Found Love × Save Me Tonight',artist:'JENNIFER LOPEZ × RIHANNA',file:'/assets/audio/we-found-love-save-me-tonight.mp3',duration:'4:09',art:'/assets/we-found-love-artists.webp',mediaArt:'/assets/media/we-found-love-save-me-tonight.jpg',visualizer:{mode:'ambience',name:'Ambience',preset:'Water',tempo:126,colors:['#00d8ff','#1c54ff','#b8ff50']}},
+    {title:'A Sky Full of Stars × Love Me',artist:'COLDPLAY × ARSEN MUKENDI',file:'/assets/audio/sky-full-of-stars-love-me.mp3',duration:'3:09',art:'/assets/sky-full-of-stars-artists.webp',mediaArt:'/assets/media/sky-full-of-stars-love-me.jpg',visualizer:{mode:'stars',name:'Musical Colors',preset:'Star Power',tempo:125,colors:['#67b7ff','#ffffff','#7064ff']}},
+    {title:'All The Things She Said × UuUuuU',artist:'t.A.T.u. × FLOYYMENOR',file:'/assets/audio/all-the-things-she-said-uuuuuu.mp3',duration:'3:14',art:'/assets/all-the-things-she-said-artists.webp',mediaArt:'/assets/media/all-the-things-she-said-uuuuuu.jpg',visualizer:{mode:'bars',name:'Bars and Waves',preset:'Fire Storm',tempo:136,colors:['#ff392d','#ffb000','#d8ff3f']}},
+    {title:'How Deep Is Your Time — Coachella',artist:'CALVIN HARRIS × HANS ZIMMER × DISCIPLES',file:'/assets/audio/how-deep-is-your-time.mp3',duration:'4:17',art:'/assets/how-deep-is-your-time-cover.webp',mediaArt:'/assets/media/how-deep-is-your-time.jpg',visualizer:{mode:'battery',name:'Battery',preset:'Event Horizon',tempo:122,colors:['#ffb31f','#ffe89a','#ff5d00']}},
+    {title:'Club Song × Like I Love You',artist:'THE PUSSYCAT DOLLS × JUSTIN TIMBERLAKE',file:'/assets/audio/club-song-like-i-love-you.mp3',duration:'2:43',art:'/assets/club-song-artists.webp',mediaArt:'/assets/media/club-song-like-i-love-you.jpg',visualizer:{mode:'particle',name:'Particle',preset:'Rotating Particle',tempo:114,colors:['#f339ff','#4ad9ff','#ff6648']}}
   ];
-  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track"><i class="wa-skip wa-prev"></i></button><button type="button" data-wa-play aria-label="Play"><i class="wa-play"></i></button><button type="button" data-wa-pause aria-label="Pause"><i class="wa-pause"></i></button><button type="button" data-wa-next aria-label="Next track"><i class="wa-skip wa-next"></i></button><button type="button" data-wa-art aria-label="Open cover art"><i class="wa-eject"></i></button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="auto" autoplay playsinline></audio>`});
-  const album = makeWindow({id:'album',title:'D:\\COVERS\\SELECTED.BMP',className:'dr-album',x:Math.max(520,innerWidth-795),y:Math.max(300,innerHeight-480),hidden:mobile(),html:`<div class="dr-album-artwrap"><img data-album-img alt="Selected release artwork"><div class="dr-album-copy"><small data-album-artist>GAGA × DOECHII × MADONNA × SABRINA</small><strong>DJ SIR GAY</strong><b>MASHUP</b></div></div><div class="dr-album-caption" data-album-caption>Album Art / Preview.bmp</div>`});
+  const winamp = makeWindow({id:'winamp',title:'C:\\Program Files\\Winamp\\WINAMP.EXE',className:'dr-winamp',x:Math.max(480,innerWidth-365),y:55,html:`<div class="dr-winamp-display"><small>DJ SIR GAY — WINAMP <em data-wa-mode>READY</em></small><span data-wa-title>LOADING PLAYLIST...</span></div><div class="dr-winamp-controls"><button type="button" data-wa-prev aria-label="Previous track"><i class="wa-skip wa-prev"></i></button><button type="button" data-wa-play aria-label="Play"><i class="wa-play"></i></button><button type="button" data-wa-pause aria-label="Pause"><i class="wa-pause"></i></button><button type="button" data-wa-next aria-label="Next track"><i class="wa-skip wa-next"></i></button><button type="button" data-wa-art aria-label="Open music visualization" title="Open visualization"><i class="wa-visualizer" aria-hidden="true">VIS</i></button></div><div class="dr-seek"><span data-wa-elapsed>0:00</span><input data-wa-seek type="range" min="0" max="100" value="0" aria-label="Track position"><span data-wa-total>0:00</span></div><div class="dr-winamp-eq">${Array.from({length:32},()=>'<i></i>').join('')}</div><div class="dr-playlist" data-wa-list></div><div class="dr-winamp-footer"><span>PLAYLIST</span><span data-wa-count>${tracks.length} FILES</span></div><audio data-wa-audio preload="auto" autoplay playsinline></audio>`});
+  const visualizer = makeWindow({id:'visualizer',title:'C:\\WINDOWS\\MEDIA\\VISUALIZATIONS',className:'dr-album dr-visualizer',x:Math.max(500,innerWidth-780),y:Math.max(315,innerHeight-455),hidden:mobile(),html:`<div class="dr-visualizer-screen"><canvas data-viz-canvas width="250" height="200" aria-hidden="true"></canvas><div class="dr-viz-glass" aria-hidden="true"></div><div class="dr-viz-hud" aria-hidden="true"><span data-viz-preset>ALCHEMY // KALEIDOSCOPE</span><b data-viz-state>READY</b></div></div><div class="dr-viz-panel"><span><small>NOW PLAYING VISUALIZATION</small><strong data-viz-name>ALCHEMY</strong></span><b data-viz-count>01 / 06</b></div><div class="dr-album-caption" data-viz-caption aria-live="polite">Visualization: Alchemy — Runway × Bring Me Love</div>`});
 
   const audio = $('[data-wa-audio]', winamp);
   const list = $('[data-wa-list]', winamp);
   const seek = $('[data-wa-seek]', winamp);
+  const vizCanvas = $('[data-viz-canvas]', visualizer);
+  const vizContext = vizCanvas.getContext('2d', {alpha:false});
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const isiOS = /iP(?:ad|hone|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const TAU = Math.PI * 2;
   let selectedFresh = 0;
+  let vizMode = tracks[0].visualizer.mode;
+  let vizPalette = tracks[0].visualizer.colors;
+  let vizTempo = tracks[0].visualizer.tempo;
+  let vizDirty = true;
+  let vizNeedsFrame = true;
+  let vizLastFrame = 0;
+  let vizPeaks = [];
+  let audioContext = null;
+  let analyser = null;
+  let audioSource = null;
+  let frequencyData = null;
+  let waveformData = null;
+
+  const hash = value => {
+    const n = Math.sin(value * 12.9898) * 43758.5453;
+    return n - Math.floor(n);
+  };
+  const setVizState = value => { $('[data-viz-state]',visualizer).textContent=value; };
+  const ensureAudioGraph = () => {
+    if (isiOS) return null;
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    if (!AudioEngine) return null;
+    try {
+      if (!audioContext) {
+        audioContext = new AudioEngine();
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
+        analyser.smoothingTimeConstant = .84;
+        audioSource = audioContext.createMediaElementSource(audio);
+        audioSource.connect(analyser);
+        analyser.connect(audioContext.destination);
+        frequencyData = new Uint8Array(analyser.frequencyBinCount);
+        waveformData = new Uint8Array(analyser.fftSize);
+      }
+      if (audioContext.state === 'suspended') audioContext.resume().catch(()=>{});
+      return audioContext;
+    } catch (_) {
+      return null;
+    }
+  };
+  const playAudio = (unlock=false) => {
+    if (unlock) ensureAudioGraph();
+    else if (audioContext?.state === 'suspended') audioContext.resume().catch(()=>{});
+    return audio.play().catch(()=>{});
+  };
+  const readSignal = time => {
+    const live = analyser && audioContext?.state === 'running';
+    if (live) {
+      analyser.getByteFrequencyData(frequencyData);
+      analyser.getByteTimeDomainData(waveformData);
+    }
+    const motion = audio.paused ? .22 : 1;
+    const beatPhase = (Math.sin(time * (vizTempo / 60) * TAU - Math.PI / 2) + 1) / 2;
+    const beat = Math.pow(beatPhase, 7) * motion;
+    const freq = ratio => {
+      const r = Math.max(0,Math.min(1,ratio));
+      if (live) return (frequencyData[Math.min(frequencyData.length-1,Math.floor(r * frequencyData.length * .82))] || 0) / 255;
+      const a = (Math.sin(time * (2.2 + r * 3.1) + r * 31 + selectedFresh) + 1) / 2;
+      const b = (Math.sin(time * (5.4 - r * 1.7) - r * 17) + 1) / 2;
+      return Math.min(1,(.09 + a * .34 + b * .18 + beat * (.52 - r * .22)) * motion);
+    };
+    const wave = ratio => {
+      const r = Math.max(0,Math.min(1,ratio));
+      if (live) return ((waveformData[Math.min(waveformData.length-1,Math.floor(r * waveformData.length))] || 128) - 128) / 128;
+      return (Math.sin(r * TAU * 3 + time * 3.1) * .62 + Math.sin(r * TAU * 7 - time * 1.7) * .25) * motion;
+    };
+    let energy = 0;
+    for (let i=0;i<18;i++) energy += freq(i/24);
+    return {freq,wave,energy:energy/18,beat};
+  };
+
+  const clearViz = (color='#000') => {
+    vizContext.globalCompositeOperation='source-over';
+    vizContext.globalAlpha=1;
+    vizContext.shadowBlur=0;
+    vizContext.fillStyle=color;
+    vizContext.fillRect(0,0,vizCanvas.width,vizCanvas.height);
+  };
+  const drawAlchemy = (time,signal) => {
+    if (vizDirty) clearViz('#020005');
+    else {vizContext.fillStyle='rgba(2,0,7,.18)';vizContext.fillRect(0,0,250,200);}
+    vizContext.save();
+    vizContext.translate(125,100);
+    vizContext.globalCompositeOperation='lighter';
+    for(let arm=0;arm<8;arm++){
+      vizContext.save();
+      vizContext.rotate(arm*TAU/8 + time*.055);
+      for(let ribbon=0;ribbon<3;ribbon++){
+        vizContext.beginPath();
+        for(let i=0;i<=46;i++){
+          const p=i/46, f=signal.freq(p*.82), radius=5+p*111;
+          const bend=Math.sin(i*.27+time*(.72+ribbon*.16)+ribbon*2.1)*(3+ribbon*2+f*11)+signal.wave(p)*9;
+          if(i===0)vizContext.moveTo(radius,bend+(ribbon-1)*5);else vizContext.lineTo(radius,bend+(ribbon-1)*5);
+        }
+        vizContext.strokeStyle=vizPalette[(arm+ribbon)%vizPalette.length];
+        vizContext.globalAlpha=.32+signal.energy*.42;
+        vizContext.lineWidth=ribbon===1?1.3:.65;
+        vizContext.shadowColor=vizContext.strokeStyle;vizContext.shadowBlur=5+signal.beat*8;
+        vizContext.stroke();
+      }
+      vizContext.restore();
+    }
+    vizContext.fillStyle=vizPalette[0];vizContext.globalAlpha=.5+signal.beat*.4;
+    vizContext.beginPath();vizContext.arc(0,0,4+signal.energy*14,0,TAU);vizContext.fill();
+    vizContext.restore();
+  };
+  const drawAmbience = (time,signal) => {
+    clearViz('#000512');
+    const glow=vizContext.createRadialGradient(132,94,4,132,94,145);
+    glow.addColorStop(0,'#062b73');glow.addColorStop(.48,'#00182d');glow.addColorStop(1,'#000107');
+    vizContext.fillStyle=glow;vizContext.fillRect(0,0,250,200);
+    vizContext.save();vizContext.globalCompositeOperation='lighter';
+    for(let layer=0;layer<8;layer++){
+      vizContext.beginPath();
+      for(let x=-8;x<=258;x+=4){
+        const p=Math.max(0,Math.min(1,x/250));
+        const y=33+layer*18+Math.sin(p*TAU*(1.15+layer*.08)+time*(.28+layer*.025)+layer*.8)*(8+signal.freq(p)*14)+signal.wave(p)*8;
+        if(x===-8)vizContext.moveTo(x,y);else vizContext.lineTo(x,y);
+      }
+      vizContext.strokeStyle=vizPalette[layer%vizPalette.length];
+      vizContext.globalAlpha=.12+layer*.018+signal.energy*.13;
+      vizContext.lineWidth=4+layer*.7;vizContext.shadowColor=vizContext.strokeStyle;vizContext.shadowBlur=9;
+      vizContext.stroke();
+    }
+    for(let i=0;i<18;i++){
+      const x=hash(i*7.1)*250+Math.sin(time*.25+i)*9;
+      const y=hash(i*3.7+8)*200+Math.cos(time*.2+i)*7;
+      const r=1+hash(i*9.3)*4+signal.freq((i%12)/12)*4;
+      vizContext.fillStyle=vizPalette[i%vizPalette.length];vizContext.globalAlpha=.18+signal.beat*.22;
+      vizContext.beginPath();vizContext.arc(x,y,r,0,TAU);vizContext.fill();
+    }
+    vizContext.restore();
+  };
+  const drawStars = (time,signal) => {
+    clearViz('#00000d');
+    const sky=vizContext.createRadialGradient(125,96,1,125,96,150);
+    sky.addColorStop(0,`rgba(58,86,255,${.2+signal.energy*.35})`);sky.addColorStop(.42,'#071341');sky.addColorStop(1,'#00000a');
+    vizContext.fillStyle=sky;vizContext.fillRect(0,0,250,200);
+    vizContext.save();vizContext.globalCompositeOperation='lighter';
+    for(let i=0;i<120;i++){
+      const phase=(hash(i*4.17)+time*(.025+signal.energy*.035))%1;
+      const angle=hash(i*9.71+3)*TAU+time*.018;
+      const radius=Math.pow(phase,2.15)*168;
+      const x=125+Math.cos(angle)*radius*1.08;
+      const y=96+Math.sin(angle)*radius*.78;
+      const size=.35+phase*1.6+signal.freq((i%40)/40)*1.25;
+      vizContext.fillStyle=vizPalette[i%vizPalette.length];vizContext.globalAlpha=.18+phase*.78;
+      vizContext.fillRect(x,y,size,size);
+    }
+    for(let ring=0;ring<5;ring++){
+      const radius=10+ring*13+signal.energy*17+Math.sin(time*.9+ring)*3;
+      vizContext.strokeStyle=vizPalette[ring%vizPalette.length];vizContext.globalAlpha=.16+signal.beat*.25;
+      vizContext.lineWidth=.7+signal.beat;vizContext.beginPath();vizContext.arc(125,96,radius,0,TAU);vizContext.stroke();
+    }
+    vizContext.restore();
+  };
+  const drawBars = (time,signal) => {
+    clearViz('#080000');
+    vizContext.strokeStyle='rgba(255,92,20,.12)';vizContext.lineWidth=.5;
+    for(let y=20;y<200;y+=20){vizContext.beginPath();vizContext.moveTo(0,y+.5);vizContext.lineTo(250,y+.5);vizContext.stroke();}
+    const count=34, gap=1, width=(250-(count+1)*gap)/count;
+    if(vizPeaks.length!==count)vizPeaks=Array(count).fill(0);
+    const gradient=vizContext.createLinearGradient(0,180,0,18);
+    gradient.addColorStop(0,vizPalette[0]);gradient.addColorStop(.62,vizPalette[1]);gradient.addColorStop(1,vizPalette[2]);
+    vizContext.fillStyle=gradient;
+    for(let i=0;i<count;i++){
+      const value=Math.min(1,signal.freq(i/count*.76)*1.22+signal.beat*(1-i/count)*.18);
+      const height=Math.max(2,value*148);
+      const x=gap+i*(width+gap);
+      vizContext.fillRect(x,181-height,width,height);
+      vizPeaks[i]=Math.max(value,vizPeaks[i]-.012);
+      vizContext.fillStyle=vizPalette[2];vizContext.fillRect(x,178-vizPeaks[i]*148,width,2);vizContext.fillStyle=gradient;
+    }
+    vizContext.save();vizContext.globalCompositeOperation='lighter';vizContext.beginPath();
+    for(let x=0;x<=250;x+=2){const p=x/250,y=35+signal.wave(p)*21+Math.sin(p*TAU*2-time*.8)*3;if(x===0)vizContext.moveTo(x,y);else vizContext.lineTo(x,y);}
+    vizContext.strokeStyle='#fff27a';vizContext.globalAlpha=.72;vizContext.lineWidth=1;vizContext.shadowColor='#ff3a16';vizContext.shadowBlur=5;vizContext.stroke();vizContext.restore();
+  };
+  const drawBattery = (time,signal) => {
+    if(vizDirty) clearViz('#050200');
+    else {vizContext.fillStyle='rgba(5,2,0,.2)';vizContext.fillRect(0,0,250,200);}
+    vizContext.save();vizContext.translate(125,100);vizContext.scale(1,.78);vizContext.globalCompositeOperation='lighter';
+    for(let spoke=0;spoke<28;spoke++){
+      const angle=spoke*TAU/28+time*.075;
+      const power=signal.freq((spoke%18)/18);
+      const inner=13+signal.energy*13,outer=92+power*32;
+      vizContext.strokeStyle=vizPalette[spoke%vizPalette.length];vizContext.globalAlpha=.11+power*.58;
+      vizContext.lineWidth=.6+power*1.4;vizContext.beginPath();vizContext.moveTo(Math.cos(angle)*inner,Math.sin(angle)*inner);vizContext.lineTo(Math.cos(angle+.2*signal.wave(spoke/28))*outer,Math.sin(angle+.2*signal.wave(spoke/28))*outer);vizContext.stroke();
+    }
+    for(let ring=0;ring<11;ring++){
+      const radius=8+((ring*10+time*14)%111);
+      vizContext.strokeStyle=vizPalette[ring%vizPalette.length];vizContext.globalAlpha=.08+(1-radius/125)*.38+signal.beat*.16;
+      vizContext.lineWidth=.7+signal.energy*1.2;vizContext.beginPath();vizContext.arc(0,0,radius,0,TAU);vizContext.stroke();
+    }
+    vizContext.globalCompositeOperation='source-over';vizContext.fillStyle='#000';vizContext.beginPath();vizContext.arc(0,0,8+signal.beat*5,0,TAU);vizContext.fill();
+    vizContext.strokeStyle='#ffdb72';vizContext.globalAlpha=.75;vizContext.lineWidth=1;vizContext.beginPath();vizContext.arc(0,0,10+signal.beat*6,0,TAU);vizContext.stroke();
+    vizContext.restore();
+  };
+  const drawParticle = (time,signal) => {
+    clearViz('#030007');
+    const haze=vizContext.createLinearGradient(0,60,0,200);haze.addColorStop(0,'#170029');haze.addColorStop(1,'#001122');vizContext.fillStyle=haze;vizContext.fillRect(0,0,250,200);
+    vizContext.save();vizContext.translate(125,86);vizContext.rotate(Math.sin(time*.2)*.09);vizContext.translate(-125,-86);vizContext.globalCompositeOperation='lighter';
+    for(let row=0;row<22;row++){
+      const depth=((row/22+time*.075)%1);
+      const y=72+Math.pow(depth,2.1)*143;
+      const spacing=3.2+depth*13.5;
+      const drift=Math.sin(time*.55+row*.42)*7*(1-depth);
+      for(let col=-12;col<=12;col++){
+        const ratio=(col+12)/24;
+        const power=signal.freq((ratio*.58+depth*.42)%1);
+        const x=125+col*spacing+drift;
+        const size=.45+depth*2.6+power*1.8;
+        vizContext.fillStyle=vizPalette[(row+col+24)%vizPalette.length];vizContext.globalAlpha=.12+depth*.48+power*.25;
+        vizContext.fillRect(x-size/2,y-size/2,size,size);
+      }
+    }
+    vizContext.beginPath();
+    for(let x=0;x<=250;x+=3){const p=x/250,y=65+signal.wave(p)*15+Math.sin(p*TAU*2+time)*3;if(x===0)vizContext.moveTo(x,y);else vizContext.lineTo(x,y);}
+    vizContext.strokeStyle=vizPalette[1];vizContext.globalAlpha=.62;vizContext.shadowColor=vizPalette[0];vizContext.shadowBlur=6;vizContext.lineWidth=1;vizContext.stroke();vizContext.restore();
+  };
+  const drawVisualizer = now => {
+    requestAnimationFrame(drawVisualizer);
+    if (document.hidden || visualizer.classList.contains('hidden') || visualizer.classList.contains('minimized')) return;
+    const interval = audio.paused ? Infinity : (reducedMotion.matches ? 500 : 0);
+    if (!vizNeedsFrame && now-vizLastFrame<interval) return;
+    vizLastFrame=now;vizNeedsFrame=false;
+    const time=Number.isFinite(audio.currentTime) ? audio.currentTime : now/1000;
+    const signal=readSignal(time);
+    const painters={alchemy:drawAlchemy,ambience:drawAmbience,stars:drawStars,bars:drawBars,battery:drawBattery,particle:drawParticle};
+    (painters[vizMode]||drawAlchemy)(time,signal);
+    vizDirty=false;
+  };
+  requestAnimationFrame(drawVisualizer);
+  new MutationObserver(()=>{vizNeedsFrame=true;vizDirty=true;}).observe(visualizer,{attributes:true,attributeFilter:['class']});
+  document.addEventListener('visibilitychange',()=>{vizNeedsFrame=true;});
+  reducedMotion.addEventListener?.('change',()=>{vizNeedsFrame=true;vizDirty=true;});
+
+  const applyVisualizer = track => {
+    const preset=track.visualizer;
+    vizMode=preset.mode;vizPalette=preset.colors;vizTempo=preset.tempo;vizPeaks=[];vizDirty=true;vizNeedsFrame=true;
+    visualizer.dataset.vizMode=preset.mode;
+    $('.dr-path',visualizer).textContent=`C:\\WINDOWS\\MEDIA\\VISUALIZATIONS\\${preset.name.toUpperCase()}.VIZ`;
+    $('[data-viz-preset]',visualizer).textContent=`${preset.name.toUpperCase()} // ${preset.preset.toUpperCase()}`;
+    $('[data-viz-name]',visualizer).textContent=`${preset.name} / ${preset.preset}`;
+    $('[data-viz-count]',visualizer).textContent=`${String(selectedFresh+1).padStart(2,'0')} / ${String(tracks.length).padStart(2,'0')}`;
+    $('[data-viz-caption]',visualizer).textContent=`Visualization: ${preset.name} — ${track.title}`;
+  };
   const fmt = seconds => Number.isFinite(seconds) ? `${Math.floor(seconds/60)}:${String(Math.floor(seconds%60)).padStart(2,'0')}` : '0:00';
   list.innerHTML = tracks.map((track,i)=>`<button class="dr-track${i===0?' selected':''}" type="button" data-track="${i}"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(track.title)}</span><time>${track.duration}</time></button>`).join('');
-  const selectFresh = (index, play=false) => {
+  const selectFresh = (index, play=false, unlock=false) => {
     selectedFresh=(index+tracks.length)%tracks.length; const track=tracks[selectedFresh];
     $$('.dr-track',winamp).forEach((row,i)=>row.classList.toggle('selected',i===selectedFresh));
     $('[data-wa-title]',winamp).textContent=track.title.toUpperCase();
-    $('[data-album-img]',album).src=track.art;
-    $('[data-album-artist]',album).textContent=track.artist;
-    $('[data-album-caption]',album).textContent=`${track.title} / Preview.bmp`;
+    applyVisualizer(track);
     if ('mediaSession' in navigator && 'MediaMetadata' in window) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: track.title,
@@ -174,17 +423,17 @@
       });
     }
     if(audio.src !== new URL(track.file,location.href).href){audio.src=track.file;seek.value=0;$('[data-wa-elapsed]',winamp).textContent='0:00';$('[data-wa-total]',winamp).textContent=track.duration;}
-    if(play) audio.play().catch(()=>{});
+    if(play) playAudio(unlock);
   };
   selectFresh(0,false);
-  list.addEventListener('click',e=>{const row=e.target.closest('[data-track]');if(row)selectFresh(Number(row.dataset.track),true)});
-  $('[data-wa-prev]',winamp).addEventListener('click',()=>selectFresh(selectedFresh-1,true));
-  $('[data-wa-next]',winamp).addEventListener('click',()=>selectFresh(selectedFresh+1,true));
-  $('[data-wa-play]',winamp).addEventListener('click',()=>audio.play().catch(()=>{}));
+  list.addEventListener('click',e=>{const row=e.target.closest('[data-track]');if(row)selectFresh(Number(row.dataset.track),true,true)});
+  $('[data-wa-prev]',winamp).addEventListener('click',()=>selectFresh(selectedFresh-1,true,true));
+  $('[data-wa-next]',winamp).addEventListener('click',()=>selectFresh(selectedFresh+1,true,true));
+  $('[data-wa-play]',winamp).addEventListener('click',()=>playAudio(true));
   $('[data-wa-pause]',winamp).addEventListener('click',()=>audio.pause());
-  $('[data-wa-art]',winamp).addEventListener('click',()=>show('album'));
-  audio.addEventListener('play',()=>{winamp.classList.add('is-playing');$('[data-wa-mode]',winamp).textContent='PLAYING';if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';});
-  audio.addEventListener('pause',()=>{winamp.classList.remove('is-playing');$('[data-wa-mode]',winamp).textContent=audio.currentTime ? 'PAUSED' : 'READY';if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';});
+  $('[data-wa-art]',winamp).addEventListener('click',()=>{show('visualizer');vizNeedsFrame=true;vizDirty=true;});
+  audio.addEventListener('play',()=>{winamp.classList.add('is-playing');$('[data-wa-mode]',winamp).textContent='PLAYING';setVizState('PLAYING');vizNeedsFrame=true;if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';});
+  audio.addEventListener('pause',()=>{winamp.classList.remove('is-playing');$('[data-wa-mode]',winamp).textContent=audio.currentTime ? 'PAUSED' : 'READY';setVizState(audio.currentTime?'PAUSED':'READY');vizNeedsFrame=true;if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';});
   audio.addEventListener('timeupdate',()=>{
     seek.value=audio.duration?String(audio.currentTime/audio.duration*100):'0';
     $('[data-wa-elapsed]',winamp).textContent=fmt(audio.currentTime);
@@ -197,7 +446,7 @@
   seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=Number(seek.value)/100*audio.duration;});
   if ('mediaSession' in navigator) {
     const actions = {
-      play:()=>audio.play().catch(()=>{}),
+      play:()=>playAudio(false),
       pause:()=>audio.pause(),
       previoustrack:()=>selectFresh(selectedFresh-1,true),
       nexttrack:()=>selectFresh(selectedFresh+1,true),
@@ -207,9 +456,9 @@
     };
     Object.entries(actions).forEach(([action,handler])=>{try{navigator.mediaSession.setActionHandler(action,handler);}catch(_){}});
   }
-  const autoplay = () => audio.play().catch(()=>{});
+  const autoplay = () => playAudio(false);
   setTimeout(autoplay,350);
-  document.addEventListener('pointerdown',autoplay,{once:true,capture:true});
+  document.addEventListener('pointerdown',()=>{ensureAudioGraph();autoplay();},{once:true,capture:true});
 
   const videoEmbed = value => {
     if(!value)return '';

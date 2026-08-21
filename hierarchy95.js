@@ -43,7 +43,7 @@
     }
     if (!document.querySelector('script[data-desktop-polish]')) {
       const js = document.createElement('script');
-      js.src = '/desktop-polish.js?v=20260814-5';
+      js.src = '/desktop-polish.js?v=20260821-1';
       js.dataset.desktopPolish = '1';
       document.body.appendChild(js);
     }
@@ -53,13 +53,13 @@
     if (!document.querySelector('link[data-desktop-reality]')) {
       const css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = '/desktop-reality.css?v=20260819-1';
+      css.href = '/desktop-reality.css?v=20260821-1';
       css.dataset.desktopReality = '1';
       document.head.appendChild(css);
     }
     if (!document.querySelector('script[data-desktop-reality]')) {
       const js = document.createElement('script');
-      js.src = '/desktop-reality.js?v=20260819-1';
+      js.src = '/desktop-reality.js?v=20260821-1';
       js.dataset.desktopReality = '1';
       js.addEventListener('load', loadPolish, { once:true });
       document.body.appendChild(js);

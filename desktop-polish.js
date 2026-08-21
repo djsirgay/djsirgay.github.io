@@ -12,6 +12,7 @@
   const labelOf = win => {
     const raw = titleOf(win);
     if (/WINAMP/i.test(raw)) return '♫ WINAMP';
+    if (/VISUALIZATIONS/i.test(raw)) return '✺ Visualizer';
     if (/Media Player/i.test(raw)) return '▶ Media Player';
     if (/BOOKING|PUT_ME_IN/i.test(raw)) return '✉ BOOK ME';
     if (/Yahoo|Internet Explorer/i.test(raw)) return '🌐 Browser';
