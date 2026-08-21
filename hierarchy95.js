@@ -53,7 +53,7 @@
     if (!document.querySelector('link[data-desktop-reality]')) {
       const css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = '/desktop-reality.css?v=20260821-4';
+      css.href = '/desktop-reality.css?v=20260821-5';
       css.dataset.desktopReality = '1';
       document.head.appendChild(css);
     }
