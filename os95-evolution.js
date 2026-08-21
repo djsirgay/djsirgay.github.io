@@ -47,12 +47,12 @@
   }
 
   const dogSvg = `<svg viewBox="0 0 32 32" aria-hidden="true">
-    <rect x="8" y="8" width="16" height="15" fill="#d9b38c" stroke="#000"/>
-    <rect x="5" y="6" width="7" height="10" fill="#8a5b3c" stroke="#000"/>
-    <rect x="20" y="6" width="7" height="10" fill="#8a5b3c" stroke="#000"/>
-    <rect x="11" y="12" width="3" height="3" fill="#000"/><rect x="19" y="12" width="3" height="3" fill="#000"/>
-    <rect x="15" y="16" width="3" height="3" fill="#000"/><rect x="13" y="20" width="7" height="2" fill="#7b0000"/>
-    <rect x="9" y="23" width="5" height="5" fill="#d9b38c" stroke="#000"/><rect x="19" y="23" width="5" height="5" fill="#d9b38c" stroke="#000"/>
+    <g class="djsg-dog-tail"><rect x="23" y="19" width="7" height="3" fill="#8a5b3c" stroke="#000"/></g>
+    <rect class="djsg-dog-body" x="8" y="8" width="16" height="15" fill="#d9b38c" stroke="#000"/>
+    <g class="djsg-dog-ears"><rect x="5" y="6" width="7" height="10" fill="#8a5b3c" stroke="#000"/><rect x="20" y="6" width="7" height="10" fill="#8a5b3c" stroke="#000"/></g>
+    <g class="djsg-dog-eyes"><rect x="11" y="12" width="3" height="3" fill="#000"/><rect x="19" y="12" width="3" height="3" fill="#000"/></g>
+    <rect x="15" y="16" width="3" height="3" fill="#000"/><rect class="djsg-dog-mouth" x="13" y="20" width="7" height="2" fill="#7b0000"/>
+    <g class="djsg-dog-paws"><rect x="9" y="23" width="5" height="5" fill="#d9b38c" stroke="#000"/><rect x="19" y="23" width="5" height="5" fill="#d9b38c" stroke="#000"/></g>
   </svg>`;
 
   const scrollToProgram = selector => {
@@ -65,13 +65,13 @@
 
   const showHelper = () => {
     let dismissed = false;
-    try { dismissed = localStorage.getItem('djsg-help-dog-dismissed-v2') === '1'; } catch (_) {}
+    try { dismissed = localStorage.getItem('djsg-help-dog-dismissed-v3') === '1'; } catch (_) {}
     if (dismissed || $('.djsg-helper')) return;
 
     const helper = document.createElement('aside');
     helper.className = 'djsg-helper';
     helper.setAttribute('aria-label', 'HELP.DOG assistant');
-    helper.innerHTML = `<div class="djsg-helper-dog">${dogSvg}</div><div>
+    helper.innerHTML = `<div class="djsg-helper-dog">${dogSvg}</div><div class="djsg-helper-bubble">
       <strong>HELP.DOG</strong>
       <p>Hi. I was hired to help. I mostly know where the music is.</p>
       <div class="djsg-helper-actions">
@@ -80,20 +80,15 @@
         <button type="button" data-help-close>Leave me alone</button>
       </div>
     </div>`;
-    const safeHome = document.querySelector('#djsg-desktop .dr-welcome .dr-body');
-    if (safeHome) {
-      helper.classList.add('djsg-helper-inline');
-      safeHome.append(helper);
-    } else {
-      document.body.append(helper);
-    }
+    // Microsoft Agent belongs to the desktop, never inside an application window.
+    document.body.append(helper);
 
     helper.addEventListener('click', event => {
       const nav = event.target.closest('[data-help]');
       if (nav) scrollToProgram(nav.dataset.help);
       if (event.target.closest('[data-help-close]')) {
         helper.remove();
-        try { localStorage.setItem('djsg-help-dog-dismissed-v2', '1'); } catch (_) {}
+        try { localStorage.setItem('djsg-help-dog-dismissed-v3', '1'); } catch (_) {}
       }
     });
   };

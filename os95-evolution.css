@@ -37,31 +37,36 @@
 /* HELP.DOG: useful once, ignorable forever. */
 .djsg-helper{
   position:fixed;z-index:6200;right:12px;bottom:51px;
-  width:min(320px,calc(100vw - 24px));
-  display:grid;grid-template-columns:58px 1fr;gap:8px;
-  padding:8px;background:#ffffd8;color:#000;
-  border:2px solid;border-color:#fff #404040 #404040 #fff;
-  box-shadow:3px 3px 0 rgba(0,0,0,.3);
+  width:min(340px,calc(100vw - 24px));
+  display:grid;grid-template-columns:62px minmax(0,1fr);gap:8px;align-items:end;
+  padding:0;background:transparent;color:#000;
   font:12px/1.35 Tahoma,"MS Sans Serif",Arial,sans-serif;
   animation:djsgHelperIn .18s steps(2,end) both;
 }
 @keyframes djsgHelperIn{from{transform:translateY(12px);opacity:0}}
-.djsg-helper-dog{display:grid;place-items:center;width:54px;height:54px;background:#c0c0c0;border:2px solid;border-color:#808080 #fff #fff #808080}
-.djsg-helper-dog svg{width:45px;height:45px;shape-rendering:crispEdges;image-rendering:pixelated}
+.djsg-helper-bubble{position:relative;padding:8px;background:#ffffd8;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:3px 3px 0 rgba(0,0,0,.3)}
+.djsg-helper-bubble:before{content:"";position:absolute;left:-7px;bottom:18px;width:10px;height:10px;background:#ffffd8;border-left:2px solid #fff;border-bottom:2px solid #404040;transform:rotate(45deg)}
+.djsg-helper-dog{position:relative;display:grid;place-items:end center;width:60px;height:64px;background:transparent;border:0}
+.djsg-helper-dog svg{width:45px;height:45px;shape-rendering:crispEdges;image-rendering:pixelated;transform-origin:50% 100%;animation:djsgDogBob 2.8s steps(4,end) infinite}
+.djsg-dog-eyes,.djsg-dog-ears,.djsg-dog-tail,.djsg-dog-mouth,.djsg-dog-paws{transform-box:fill-box;transform-origin:center}
+.djsg-dog-eyes{animation:djsgDogBlink 4.6s steps(1,end) infinite}
+.djsg-dog-ears{animation:djsgDogEars 2.8s steps(2,end) infinite}
+.djsg-dog-tail{transform-origin:left center;animation:djsgDogTail .72s steps(2,end) infinite}
+.djsg-dog-mouth{animation:djsgDogTalk 3.7s steps(1,end) infinite}
+.djsg-dog-paws{animation:djsgDogPaws 2.8s steps(2,end) infinite}
+.djsg-helper-dog:after{content:"!";position:absolute;right:1px;top:0;padding:0 2px;background:#ffffd8;color:#000080;border:1px solid #000;font:bold 9px/12px Tahoma,sans-serif;opacity:0;animation:djsgDogIdea 7s steps(1,end) infinite}
+@keyframes djsgDogBob{0%,58%,100%{transform:translateY(0)}64%{transform:translateY(-3px)}70%{transform:translateY(0)}76%{transform:translateY(-2px)}}
+@keyframes djsgDogBlink{0%,43%,47%,100%{transform:scaleY(1)}44%,46%{transform:scaleY(.12)}}
+@keyframes djsgDogEars{0%,58%,100%{transform:rotate(0)}64%{transform:rotate(-5deg)}70%{transform:rotate(5deg)}}
+@keyframes djsgDogTail{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+@keyframes djsgDogTalk{0%,66%,72%,100%{transform:scaleY(1)}68%,70%{transform:scaleY(2)}}
+@keyframes djsgDogPaws{0%,58%,100%{transform:translateY(0)}64%,76%{transform:translateY(-1px)}}
+@keyframes djsgDogIdea{0%,82%,100%{opacity:0;transform:translateY(2px)}84%,94%{opacity:1;transform:translateY(0)}}
 .djsg-helper strong{display:block;margin-bottom:3px;color:#000080}
 .djsg-helper p{margin:0 0 7px}
 .djsg-helper-actions{display:flex;flex-wrap:wrap;gap:5px}
 .djsg-helper button{min-height:26px;padding:3px 7px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .djsg-helper button:active{border-color:#404040 #fff #fff #404040}
-.djsg-helper.djsg-helper-inline{
-  position:static;z-index:auto;width:100%;margin:8px 0 0;
-  grid-template-columns:46px minmax(0,1fr);padding:6px;box-shadow:none;
-  animation:none;font-size:10px;
-}
-.djsg-helper-inline .djsg-helper-dog{width:42px;height:42px}
-.djsg-helper-inline .djsg-helper-dog svg{width:35px;height:35px}
-.djsg-helper-inline .djsg-helper-actions button{min-height:23px;padding:2px 5px;font-size:9px}
-
 /* Games live in Start, not on the content desktop. */
 .djsg-game-window{
   position:fixed;z-index:7000;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -88,6 +93,6 @@
   .djsg-led{height:29px;font-size:20px;line-height:25px}
 }
 @media(prefers-reduced-motion:reduce){
-  .djsg-boot-bar,.djsg-led-track,.djsg-helper{animation:none!important}
+  .djsg-boot-bar,.djsg-led-track,.djsg-helper,.djsg-helper-dog svg,.djsg-helper-dog:after,.djsg-dog-eyes,.djsg-dog-ears,.djsg-dog-tail,.djsg-dog-mouth,.djsg-dog-paws{animation:none!important}
   .djsg-boot-bar{width:100%}
 }

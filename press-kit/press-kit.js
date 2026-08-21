@@ -106,5 +106,6 @@
   $('[data-wmp-close]', wmpModal)?.addEventListener('click', closeWmp);
   wmpModal?.addEventListener('click', event => { if (event.target === wmpModal) closeWmp(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeWmp(); });
+  $('[data-dog-close]')?.addEventListener('click', () => $('.help-dog')?.remove());
   select(0, false);
 })();
