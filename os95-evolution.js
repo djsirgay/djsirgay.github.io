@@ -73,11 +73,11 @@
     helper.setAttribute('aria-label', 'HELP.DOG assistant');
     helper.innerHTML = `<div class="djsg-helper-dog">${dogSvg}</div><div class="djsg-helper-bubble">
       <strong>HELP.DOG</strong>
-      <p>Hi. I was hired to help. I mostly know where the music is.</p>
+      <p>Music, files or silence?</p>
       <div class="djsg-helper-actions">
-        <button type="button" data-help="#fresh">Play something</button>
-        <button type="button" data-help="#projects">Project files</button>
-        <button type="button" data-help-close>Leave me alone</button>
+        <button type="button" data-help="#fresh" aria-label="Play music">Play</button>
+        <button type="button" data-help="#projects" aria-label="Open project files">Files</button>
+        <button type="button" data-help-close aria-label="Hide HELP.DOG">Hide</button>
       </div>
     </div>`;
     // Microsoft Agent belongs to the desktop, never inside an application window.

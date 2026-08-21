@@ -22,8 +22,12 @@
 .project-wmp-screen{width:100%;height:100%;background:#000}
 .project-wmp-screen iframe{display:block;width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border:2px solid #000!important;background:#000!important}
 .project-wmp-controls{display:grid;grid-template-columns:32px 32px 32px minmax(0,1fr);gap:4px;align-items:center;padding:5px 0 0}
-.project-wmp-controls button{height:29px;background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff;font:bold 11px Arial}
+.project-wmp-controls button{height:29px;display:grid;place-items:center;background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff;font:bold 11px Arial}
 .project-wmp-controls button:active{border-color:#404040 #fff #fff #404040;transform:translate(1px,1px)}
+.project-wmp-icon{position:relative;display:block;width:14px;height:12px;color:#111;filter:drop-shadow(1px 1px #fff)}
+.project-wmp-play:before{content:"";position:absolute;left:3px;top:1px;border-left:10px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.project-wmp-pause:before,.project-wmp-pause:after{content:"";position:absolute;top:1px;width:4px;height:10px;background:currentColor}.project-wmp-pause:before{left:2px}.project-wmp-pause:after{right:2px}
+.project-wmp-stop:before{content:"";position:absolute;left:2px;top:1px;width:10px;height:10px;background:currentColor}
 .project-wmp-controls strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:10px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .copy:before{content:"File information";display:block;margin-bottom:8px;color:#000080;font:bold 11px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .copy .eyebrow{margin-bottom:8px!important}

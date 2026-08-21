@@ -291,7 +291,8 @@
   function openSolitaire() {
     const { content } = makeApp('Solitaire.exe', 'solitaire-window');
     content.innerHTML = `<div class="djsg-menubar"><span>Game</span><span>Help</span></div>
-      <div class="sol-toolbar"><button type="button" data-sol-new>New game</button><button type="button" data-sol-hint>Hint</button><span class="sol-status">Build down alternating colors. Aces go home.</span></div>
+      <div class="sol-toolbar"><button type="button" data-sol-new>New game</button><button type="button" data-sol-hint>Hint</button><span class="sol-status">Click or drag a card to move it.</span></div>
+      <div class="sol-instructions" role="note"><strong>HOW TO MOVE:</strong> Tap a card, then tap where it should go — or drag it. Double-tap sends a card to its suit pile. Build down in alternating colors; only Kings enter empty columns.</div>
       <div class="solitaire-board">
         <div class="sol-top"><div class="sol-pile stock" data-sol-stock></div><div class="sol-pile waste" data-sol-waste></div><div></div>${[0,1,2,3].map(i=>`<div class="sol-pile foundation" data-sol-foundation="${i}"></div>`).join('')}</div>
         <div class="sol-tableau">${[0,1,2,3,4,5,6].map(i=>`<div class="sol-column" data-sol-column="${i}"></div>`).join('')}</div>
@@ -299,11 +300,12 @@
 
     const suits = ['♠','♥','♦','♣'];
     const foundationSuit = ['♠','♥','♦','♣'];
-    let stock, waste, foundations, tableau, selection, won;
+    let stock, waste, foundations, tableau, selection, won, dragState=null, suppressClickUntil=0;
     const status = $('.sol-status', content);
 
     const colorOf = suit => (suit === '♥' || suit === '♦') ? 'red' : 'black';
     const rankText = rank => ({1:'A',11:'J',12:'Q',13:'K'})[rank] || String(rank);
+    const cardText = card => `${rankText(card.rank)}${card.suit}`;
     const makeDeck = () => suits.flatMap(suit => Array.from({length:13},(_,i)=>({suit,rank:i+1,faceUp:false,id:`${suit}${i+1}-${Math.random().toString(36).slice(2)}`})));
     const shuffle = deck => { for(let i=deck.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [deck[i],deck[j]]=[deck[j],deck[i]]; } return deck; };
 
@@ -316,7 +318,7 @@
         }
       }
       stock = deck.map(card => ({...card,faceUp:false})); waste=[]; foundations=[[],[],[],[]]; selection=null; won=false;
-      status.textContent='Build down alternating colors. Aces go home.'; render();
+      status.textContent='Click or drag a card to move it.'; render();
     };
 
     const selectedCards = () => {
@@ -345,13 +347,13 @@
     };
     const moveToTableau = col => {
       const cards=selectedCards(); if (!cards.length || !canTableau(cards[0],col) || (selection.source==='tableau' && selection.col===col)) return false;
-      tableau[col].push(...takeSelection()); selection=null; afterMove(); return true;
+      const label=cardText(cards[0]); tableau[col].push(...takeSelection()); selection=null; status.textContent=`Moved ${label}.`; afterMove(); return true;
     };
     const moveToFoundation = pile => {
       const cards=selectedCards();
       if (cards.length!==1 || !canFoundation(cards[0],pile)) return false;
       if (selection.source==='tableau' && selection.index!==tableau[selection.col].length-1) return false;
-      foundations[pile].push(takeSelection()[0]); selection=null; afterMove(); return true;
+      const label=cardText(cards[0]); foundations[pile].push(takeSelection()[0]); selection=null; status.textContent=`Moved ${label} home.`; afterMove(); return true;
     };
     const afterMove = () => {
       if (foundations.every(f=>f.length===13)) { won=true; status.textContent='You won. Productivity has been permanently disabled.'; if (!reducedMotion) document.body.classList.add('os95-glitch'); setTimeout(()=>document.body.classList.remove('os95-glitch'),500); }
@@ -359,7 +361,7 @@
     };
     const autoFoundation = sel => {
       selection=sel; const cards=selectedCards(); if(cards.length!==1) return clearSelection();
-      const pile=foundationSuit.indexOf(cards[0].suit); if(!moveToFoundation(pile)) clearSelection();
+      const pile=foundationSuit.indexOf(cards[0].suit); if(!moveToFoundation(pile)){status.textContent=`${cardText(cards[0])} cannot go home yet.`;clearSelection();}
     };
 
     const cardHtml = (card, attrs='') => {
@@ -384,6 +386,7 @@
     }
 
     content.addEventListener('click', event => {
+      if (performance.now() < suppressClickUntil) return;
       const target=event.target.closest('button,.sol-pile,.sol-column'); if(!target || won) return;
       if (target.matches('[data-sol-new]')) return newGame();
       if (target.matches('[data-sol-hint]')) {
@@ -393,31 +396,73 @@
       if (target.dataset.action==='stock' || target.closest('[data-sol-stock]')) {
         if(stock.length){ const card=stock.pop(); card.faceUp=true; waste.push(card); }
         else if(waste.length){ stock=waste.reverse().map(card=>({...card,faceUp:false})); waste=[]; }
-        selection=null; render(); return;
+        selection=null; status.textContent=stock.length ? `${stock.length} cards remain in the stock.` : 'Tap the empty stock to recycle the waste.'; render(); return;
       }
       const foundation=target.closest('[data-sol-foundation]');
-      if(foundation && !target.dataset.source){ if(selection) moveToFoundation(Number(foundation.dataset.solFoundation)); return; }
+      if(foundation && !target.dataset.source){ if(selection && !moveToFoundation(Number(foundation.dataset.solFoundation))) status.textContent='That card cannot go to this suit pile yet.'; return; }
       const column=target.closest('[data-sol-column]');
-      if(column && !target.dataset.source){ if(selection) moveToTableau(Number(column.dataset.solColumn)); return; }
+      if(column && !target.dataset.source){ if(selection && !moveToTableau(Number(column.dataset.solColumn))) status.textContent='Only a King can move to an empty column.'; return; }
 
-      if(target.dataset.source==='waste') { selection = selection?.source==='waste' ? null : {source:'waste'}; render(); return; }
-      if(target.dataset.source==='foundation') { const pile=Number(target.dataset.pile); selection = selection?.source==='foundation'&&selection.pile===pile ? null : {source:'foundation',pile}; render(); return; }
+      if(target.dataset.source==='waste') { if(selection?.source==='waste') return autoFoundation({source:'waste'}); selection={source:'waste'}; status.textContent=`Selected ${cardText(waste[waste.length-1])}. Tap a destination.`; render(); return; }
+      if(target.dataset.source==='foundation') { const pile=Number(target.dataset.pile); selection = selection?.source==='foundation'&&selection.pile===pile ? null : {source:'foundation',pile}; status.textContent=selection?`Selected ${cardText(foundations[pile][foundations[pile].length-1])}. Tap a column.`:'Selection cleared.'; render(); return; }
       if(target.dataset.source==='tableau') {
         const col=Number(target.dataset.col), index=Number(target.dataset.index), card=tableau[col][index];
-        if(!card.faceUp){ if(index===tableau[col].length-1){ card.faceUp=true; selection=null; render(); } return; }
-        if(selection){ if(moveToTableau(col)) return; }
-        selection = selection?.source==='tableau'&&selection.col===col&&selection.index===index ? null : {source:'tableau',col,index}; render();
+        if(!card.faceUp){ if(index===tableau[col].length-1){ card.faceUp=true; selection=null; status.textContent=`Revealed ${cardText(card)}.`; render(); } return; }
+        if(selection?.source==='tableau'&&selection.col===col&&selection.index===index){ if(index===tableau[col].length-1) return autoFoundation({source:'tableau',col,index}); selection=null; status.textContent='Selection cleared.'; render(); return; }
+        if(selection){ if(moveToTableau(col)) return; if(!(selection.source==='tableau'&&selection.col===col&&selection.index===index)){status.textContent='That move is not allowed. Build down in alternating colors.';return;} }
+        selection={source:'tableau',col,index}; render();
+        status.textContent=`Selected ${cardText(card)}. Tap a destination or drag it.`;
       }
     });
 
-    content.addEventListener('dblclick', event => {
-      const target=event.target.closest('.sol-card[data-source]'); if(!target || won) return;
-      if(target.dataset.source==='waste') return autoFoundation({source:'waste'});
-      if(target.dataset.source==='tableau') {
+    const sourceFromCard = target => {
+      if (!target?.dataset.source) return null;
+      if (target.dataset.source==='waste') return {source:'waste'};
+      if (target.dataset.source==='foundation') return {source:'foundation',pile:Number(target.dataset.pile)};
+      if (target.dataset.source==='tableau') {
         const col=Number(target.dataset.col), index=Number(target.dataset.index);
-        if(index===tableau[col].length-1 && tableau[col][index].faceUp) autoFoundation({source:'tableau',col,index});
+        if (!tableau[col]?.[index]?.faceUp) return null;
+        return {source:'tableau',col,index};
       }
+      return null;
+    };
+    const cleanDrag = () => { dragState?.ghost?.remove(); dragState=null; };
+    content.addEventListener('pointerdown', event => {
+      const target=event.target.closest('.sol-card[data-source]');
+      const source=sourceFromCard(target);
+      if (!source || won) return;
+      const rect=target.getBoundingClientRect();
+      dragState={source,target,pointerId:event.pointerId,startX:event.clientX,startY:event.clientY,offsetX:event.clientX-rect.left,offsetY:event.clientY-rect.top,width:rect.width,height:rect.height,dragging:false,ghost:null};
+      target.setPointerCapture?.(event.pointerId);
     });
+    content.addEventListener('pointermove', event => {
+      if (!dragState || dragState.pointerId!==event.pointerId) return;
+      const distance=Math.hypot(event.clientX-dragState.startX,event.clientY-dragState.startY);
+      if (!dragState.dragging && distance>7) {
+        dragState.dragging=true;
+        const ghost=dragState.target.cloneNode(true); ghost.classList.add('sol-drag-ghost'); ghost.classList.remove('selected'); ghost.removeAttribute('data-source'); ghost.tabIndex=-1; ghost.setAttribute('aria-hidden','true'); ghost.style.width=`${dragState.width}px`; ghost.style.height=`${dragState.height}px`; document.body.append(ghost); dragState.ghost=ghost;
+      }
+      if (!dragState.dragging) return;
+      event.preventDefault();
+      dragState.ghost.style.left=`${event.clientX-dragState.offsetX}px`; dragState.ghost.style.top=`${event.clientY-dragState.offsetY}px`;
+    });
+    content.addEventListener('pointerup', event => {
+      if (!dragState || dragState.pointerId!==event.pointerId) return;
+      if (!dragState.dragging) return cleanDrag();
+      suppressClickUntil=performance.now()+350;
+      dragState.ghost?.remove();
+      const destination=document.elementFromPoint(event.clientX,event.clientY);
+      selection=dragState.source;
+      let moved=false;
+      const foundation=destination?.closest?.('[data-sol-foundation]');
+      const column=destination?.closest?.('[data-sol-column]');
+      if (foundation) moved=moveToFoundation(Number(foundation.dataset.solFoundation));
+      else if (column) moved=moveToTableau(Number(column.dataset.solColumn));
+      if (!moved) { selection=null; status.textContent='That card cannot move there. Try another pile.'; render(); }
+      dragState=null;
+      event.preventDefault();
+    });
+    content.addEventListener('pointercancel', cleanDrag);
 
     newGame();
   }

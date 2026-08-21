@@ -39,6 +39,7 @@
 .dog i:nth-child(5){z-index:2;animation:dogPaws 2.8s steps(2,end) infinite reverse}
 .dog-actions button{min-height:27px;display:inline-flex;align-items:center;justify-content:center;padding:4px 9px;background:var(--gray);border:2px solid;border-color:#fff #444 #444 #fff;color:#000;font:bold 10px var(--ui);cursor:pointer}
 .dog-actions button:active{border-color:#444 #fff #fff #444;transform:translate(1px,1px)}
+.help-dog-bubble>strong{display:inline;margin-right:4px}.help-dog-bubble>p{display:inline;margin:0}.dog-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-top:6px}.dog-actions a,.dog-actions button{min-width:0;padding:3px 5px}
 @keyframes dogIn{from{transform:translateY(12px);opacity:0}}
 @keyframes dogBob{0%,58%,100%{transform:translateY(0)}64%{transform:translateY(-3px)}70%{transform:translateY(0)}76%{transform:translateY(-2px)}}
 @keyframes dogBlink{0%,43%,47%,100%{transform:scaleY(1)}44%,46%{transform:scaleY(.12)}}

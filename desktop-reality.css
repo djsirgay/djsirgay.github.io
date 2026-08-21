@@ -182,7 +182,11 @@ body.desktop-reality-on > .signal-boot{display:none!important}
 .dr-wmp-screen{aspect-ratio:16/9;background:#000;border:2px solid;border-color:#808080 #fff #fff #808080}
 .dr-wmp-screen iframe{display:block;width:100%;height:100%;border:0}
 .dr-wmp-controls{display:grid;grid-template-columns:32px 32px 32px minmax(0,1fr);gap:4px;align-items:center;padding:5px 0 0}
-.dr-wmp-controls>button{height:28px;border:2px solid;border-color:#fff #444 #444 #fff;background:#c0c0c0}
+.dr-wmp-controls>button{height:28px;display:grid;place-items:center;border:2px solid;border-color:#fff #444 #444 #fff;background:#c0c0c0}
+.dr-media-icon{position:relative;display:block;width:14px;height:12px;color:#111;filter:drop-shadow(1px 1px #fff)}
+.dr-media-play:before{content:"";position:absolute;left:3px;top:1px;border-left:10px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.dr-media-pause:before,.dr-media-pause:after{content:"";position:absolute;top:1px;width:4px;height:10px;background:currentColor}.dr-media-pause:before{left:2px}.dr-media-pause:after{right:2px}
+.dr-media-stop:before{content:"";position:absolute;left:2px;top:1px;width:10px;height:10px;background:currentColor}
 .dr-wmp-now{min-width:0;padding-left:4px;font:10px var(--dr-ui)}
 .dr-wmp-now strong{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .dr-wmp-bar{height:8px;margin-top:4px;border:1px solid #808080;background:#fff;overflow:hidden}

@@ -37,7 +37,7 @@
 /* HELP.DOG: useful once, ignorable forever. */
 .djsg-helper{
   position:fixed;z-index:6200;right:12px;bottom:51px;
-  width:min(340px,calc(100vw - 24px));
+  width:min(320px,calc(100vw - 24px));
   display:grid;grid-template-columns:62px minmax(0,1fr);gap:8px;align-items:end;
   padding:0;background:transparent;color:#000;
   font:12px/1.35 Tahoma,"MS Sans Serif",Arial,sans-serif;
@@ -62,10 +62,10 @@
 @keyframes djsgDogTalk{0%,66%,72%,100%{transform:scaleY(1)}68%,70%{transform:scaleY(2)}}
 @keyframes djsgDogPaws{0%,58%,100%{transform:translateY(0)}64%,76%{transform:translateY(-1px)}}
 @keyframes djsgDogIdea{0%,82%,100%{opacity:0;transform:translateY(2px)}84%,94%{opacity:1;transform:translateY(0)}}
-.djsg-helper strong{display:block;margin-bottom:3px;color:#000080}
-.djsg-helper p{margin:0 0 7px}
-.djsg-helper-actions{display:flex;flex-wrap:wrap;gap:5px}
-.djsg-helper button{min-height:26px;padding:3px 7px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif}
+.djsg-helper strong{display:inline;margin:0 4px 0 0;color:#000080}
+.djsg-helper p{display:inline;margin:0}
+.djsg-helper-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-top:6px}
+.djsg-helper button{min-width:0;min-height:25px;padding:2px 4px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;font:10px Tahoma,"MS Sans Serif",Arial,sans-serif}
 .djsg-helper button:active{border-color:#404040 #fff #fff #404040}
 /* Games live in Start, not on the content desktop. */
 .djsg-game-window{

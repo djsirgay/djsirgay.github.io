@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/mobile-overflow.css?v=20260730-3" />
   <link rel="stylesheet" href="/project-extras.css?v=20260730-3" />
   <link rel="stylesheet" href="/project-dramaturgy.css?v=20260810-4" />
-  <link rel="stylesheet" href="/project-direct.css?v=20260810-4" />
+  <link rel="stylesheet" href="/project-direct.css?v=20260821-5" />
 </head>
 <body>
   <header class="header"><div class="header-in"><a class="wordmark" href="/">DJ SIR GAY.exe</a><a class="back" href="/">← Back to Desktop</a></div></header>
@@ -120,7 +120,7 @@
     document.getElementById('direct-project').innerHTML=`<div class="direct-icon">♫</div><div class="direct-copy"><small>${p.eyebrow}</small><h1>${p.title}</h1><h2>${p.subtitle}</h2></div><div class="direct-actions"><button class="play" id="direct-play" type="button">▶ PLAY PROJECT</button><a class="btn" href="${p.youtube}" target="_blank" rel="noreferrer">YouTube ↗</a><a class="btn" href="/">Desktop</a></div>`;
     const player=document.getElementById('player');
     player.dataset.playerTitle=`Windows Media Player — ${p.title}`;
-    player.innerHTML=`<div class="project-wmp-screen"><iframe src="${embedUrl(false)}" title="Listen to ${p.title}: ${p.subtitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="project-wmp-controls"><button type="button" data-pwmp="play">▶</button><button type="button" data-pwmp="pause">Ⅱ</button><button type="button" data-pwmp="stop">■</button><strong>${p.title}</strong></div>`;
+    player.innerHTML=`<div class="project-wmp-screen"><iframe src="${embedUrl(false)}" title="Listen to ${p.title}: ${p.subtitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="project-wmp-controls"><button type="button" data-pwmp="play" aria-label="Play"><i class="project-wmp-icon project-wmp-play" aria-hidden="true"></i></button><button type="button" data-pwmp="pause" aria-label="Pause"><i class="project-wmp-icon project-wmp-pause" aria-hidden="true"></i></button><button type="button" data-pwmp="stop" aria-label="Stop"><i class="project-wmp-icon project-wmp-stop" aria-hidden="true"></i></button><strong>${p.title}</strong></div>`;
     document.getElementById('visual').innerHTML=`<img src="${p.img}" alt="${p.title} — ${p.subtitle}">`;
     document.getElementById('copy').innerHTML=`<div><div class="eyebrow">FILE INFO / ${fileName}</div><div class="meta">${p.meta.map(item=>`<span>${item}</span>`).join('')}</div><p class="summary">${p.short}</p></div><div class="actions"><a class="btn" href="${p.soundcloud}" target="_blank" rel="noreferrer">SoundCloud ↗</a><a class="btn" href="/#booking">Book this signal</a></div>`;
     document.getElementById('story').innerHTML=p.story.map(text=>`<article class="log"><p>${text}</p></article>`).join('');
